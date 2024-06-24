@@ -13,3 +13,79 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Statut{
+  available
+  reserve
+  borrowed
+}
+
+model User {
+  userId          String    @map("ID")  @id @default(uuid())
+  name       String @map("Nom")
+  firstname        String @map("Prénom")
+  photo            String?  @map("Photo de profil")
+  email            String  @map("Email") @unique
+  password         String @map("Mot de passe")
+  number         String @map("Numero de téléphone") @unique
+  address         String? @map("Adresse")
+  registrationDate DateTime @default(now()) @map("Date d'enregistrement")
+  subscriptionDate  DateTime? @map("Date d'abonnement")
+  subscriptionEndDate  DateTime? @map("Date de fin d'abonnement")
+  status Boolean @map("Statut")
+  categoriesId Int @map("#id_categories")
+  category          Category  @relation(fields: [categoriesId], references: [id])
+  loan Loan[]
+}
+
+model Category {
+  id Int       @map("ID")  @id @default(autoincrement())
+  name     String @map("Nom")
+  description     String? @map("Description")
+  subcategories SubCategory[]
+  user    User[]
+}
+
+model SubCategory {
+  id Int    @map("ID") @id @default(autoincrement())
+  name           String @map("Sous-Categorie")
+  description           String? @map("Description")
+  categoryId       Int @map("#id_catégorie")
+  category          Category  @relation(fields: [categoryId], references: [id])
+  books          Book[]
+}
+
+model Book {
+  id            Int     @map("ID") @id @default(autoincrement())
+  subcategoryId     Int @map("#id_sous_catégorie")
+  authorId            Int @map("#id_auteur")
+  title              String @map("Titre")
+  cover              String @map("Cover")
+  publicationYear   Int @map("Année de publication")
+  numberOfPage   Int @map("Nombre des pages")
+  code               String   @map("Code du livre") @unique
+  edition               String   @map("Maison d'édition") @unique
+  statut               Statut   @map("Statut")
+  subcategory        SubCategory @relation(fields: [subcategoryId], references: [id])
+  author        Author @relation(fields: [authorId], references: [id])
+  loan Loan[]
+}
+
+model Author {
+  id   Int     @map("ID") @id @default(autoincrement())
+  name String @map("Nom")
+  firstname String? @map("Prénom")
+  photo String? @map("Photo de Profile")
+  description String? @map("A propos")
+  Books Book[]
+}
+
+model Loan {
+  id   String      @id @default(uuid())
+  userId   String @map("#id_user")
+  bookId   Int @map("#id_book")
+  reservationDate DateTime @default(now()) @map("Date de réservation")
+  loanDate DateTime? @map("Date de prêt")
+  returnDate DateTime? @map("Date de retour")
+  user      User     @relation(fields: [userId], references: [userId])
+  book      Book     @relation(fields: [bookId], references: [id])
+}

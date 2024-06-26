@@ -6,7 +6,7 @@ export async function GET(req: Request) {
       message: "Bienvenue sur notre API REST de l'Application LibraryWare",
       documentation: "",
     });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ error: error.message });
   }
 }

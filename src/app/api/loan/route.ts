@@ -8,7 +8,7 @@ export async function GET(req: Request) {
       message: "Voici la liste de livres pretés",
       data: loans,
     });
-  } catch (error) {
+  } catch (error: any) {
     NextResponse.json({ error: error.message });
   }
 }

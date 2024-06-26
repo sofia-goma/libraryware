@@ -8,7 +8,7 @@ export async function GET(req: Request) {
       message: "Voici les utilisateur du bibliotheque",
       data: users,
     });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ error: error.message });
   }
 }

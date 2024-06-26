@@ -8,7 +8,7 @@ export async function GET(req: Request) {
       message: "Voici la liste des auteurs disponibles",
       data: authors,
     });
-  } catch (error) {
+  } catch (error: any) {
     NextResponse.json({ error: error.message });
   }
 }

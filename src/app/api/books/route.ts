@@ -8,7 +8,7 @@ export async function GET(req: Request) {
       message: "Voici les livres de notre bibliotheque",
       data: books,
     });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ error: error.message });
   }
 }

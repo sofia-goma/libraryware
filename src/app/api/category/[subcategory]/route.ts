@@ -17,7 +17,7 @@ export async function GET(req: Request, { params }: RouteParams) {
       message: `Voici les sous categories de ${id}  de notre bibliotheque`,
       data: subCategory,
     });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ error: error.message });
   }
 }

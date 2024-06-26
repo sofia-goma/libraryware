@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma.config";
 
 export async function GET(req: Request) {
   try {
+    const books = await prisma.book.findMany();
     return NextResponse.json({
-      message: "Bienvenue sur notre API REST de l'Application LibraryWare",
-      documentation: "",
+      message: "Voici les livres de notre bibliotheque",
+      data: books,
     });
   } catch (error) {
     return NextResponse.json({ error: error.message });

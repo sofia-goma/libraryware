@@ -89,3 +89,13 @@ model Loan {
   user      User     @relation(fields: [userId], references: [userId])
   book      Book     @relation(fields: [bookId], references: [id])
 }
+
+model Admin {
+  name String
+  firstName String
+  email String @id
+  password String
+  phone String
+  photo String
+  title String
+}

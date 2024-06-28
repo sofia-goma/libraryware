@@ -3,12 +3,12 @@ import prisma from "@/lib/prisma.config";
 
 export async function GET(req: Request) {
   try {
-    const authors = await prisma.author.findMany();
+    const authors = await prisma.author.findMany({ include: { books: true } });
     return NextResponse.json({
       message: "Voici la liste des auteurs disponibles",
       data: authors,
     });
   } catch (error: any) {
-    NextResponse.json({ error: error.message });
+    return NextResponse.json({ error: error.message });
   }
 }

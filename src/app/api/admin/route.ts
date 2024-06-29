@@ -1,9 +1,20 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma.config";
 import bcrypt from "bcrypt";
+import { middleware } from "../../../../middleware";
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   try {
+    const response = await middleware(req);
+    if (response) {
+      return response;
+    }
+
+    const role = (req as any).locals.role;
+
+    if (role !== "admin") {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 403 });
+    }
     const admin = await prisma.admin.findMany();
     return NextResponse.json({
       message: "Here is admins list",

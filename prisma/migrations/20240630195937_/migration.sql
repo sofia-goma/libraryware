@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Book" ALTER COLUMN "Statut" DROP NOT NULL;

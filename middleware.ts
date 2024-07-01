@@ -16,7 +16,6 @@ export async function middleware(request: NextRequest) {
       userId: number;
       role: string;
     };
-    console.log(decoded);
     (request as any).locals = { userId: decoded.userId, role: decoded.role }; // Utilisation de request.locals pour stocker les données utilisateur
   } catch (error) {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });

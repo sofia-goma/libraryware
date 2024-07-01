@@ -38,16 +38,16 @@ model User {
   password             String       @map("Mot de passe")
   number               String       @map("Numero de téléphone") @unique
   address              String?      @map("Adresse")
-  registrationDate     DateTime?     @map("Date d'enregistrement") @default(now()) 
+  registrationDate     DateTime?    @map("Date d'enregistrement") @default(now()) 
   subscriptionDate     DateTime?    @map("Date d'abonnement")
   subscriptionEndDate  DateTime?    @map("Date de fin d'abonnement")
-  status               Boolean?      @map("Statut") @default(false)
+  status               Boolean?     @map("Statut") @default(false)
   category             Category[]   @relation("UserCategory")
   loan                 Loan[]
 }
 
 model Book {
-  id                   Int          @map("ID") @id @default(autoincrement())
+  id                   Int       @map("ID") @id @default(autoincrement())
   categoryId           Int          @map("#id_sous_catégorie")
   authorId             Int          @map("#id_auteur")
   title                String       @map("Titre")
@@ -55,8 +55,8 @@ model Book {
   publicationYear      Int          @map("Année de publication")
   numberOfPage         Int          @map("Nombre des pages")
   code                 String       @map("Code du livre") @unique
-  edition              String?      @map("Maison d'édition") @unique
-  statut               Statut       @map("Statut") @default(available)
+  edition              String       @map("Maison d'édition")
+  statut               Statut?       @map("Statut") @default(available)
   category             Category     @relation(fields: [categoryId], references: [id])
   author               Author       @relation(fields: [authorId], references: [id])
   loan                 Loan[]
@@ -85,7 +85,7 @@ model Author {
 model Loan {
   id                   String       @id @default(uuid())
   userId               String       @map("#id_user")
-  bookId               Int          @map("#id_book")
+  bookId               Int       @map("#id_book")
   reservationDate      DateTime     @default(now()) @map("Date de réservation")
   loanDate             DateTime?    @map("Date de prêt")
   returnDate           DateTime?    @map("Date de retour")

@@ -11,8 +11,12 @@ type Body = {
 export async function POST(req: Request) {
   try {
     const { email, password }: Body = await req.json();
-
-    if (!email || !password) throw new Error("Invalid email or password");
+    console.log(req.json());
+    if (!email || !password)
+      return NextResponse.json(
+        { message: "Invalid email or password" },
+        { status: 401 }
+      );
 
     const user = await prisma.user.findFirst({ where: { email } });
 
@@ -22,7 +26,10 @@ export async function POST(req: Request) {
       (!user || !(await bcrypt.compare(password, user.password))) &&
       (!admin || !(await bcrypt.compare(password, admin.password)))
     )
-      throw new Error("Invalid email or password");
+      return NextResponse.json(
+        { message: "Invalid email or password" },
+        { status: 401 }
+      );
 
     const tokenSecret = process.env.TOKEN_SECRET;
 
@@ -52,6 +59,6 @@ export async function POST(req: Request) {
       token: token,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

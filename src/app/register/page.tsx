@@ -22,23 +22,23 @@ export default function Page({}: Props) {
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    // try {
-    //   const response = await axios.post("/api/signin", data);
-    //   if (response.status === 200) {
-    //     router.push("/user/dashboard");
-    //   }
-    // } catch (error) {
-    //   toast.error("Email ou mot de passe incorrect", {
-    //     position: "top-center",
-    //     autoClose: 3000,
-    //     hideProgressBar: true,
-    //     closeOnClick: true,
-    //     pauseOnHover: false,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light",
-    //   });
-    // }
+    try {
+      const response = await axios.post("/api/signin", data);
+      if (response.status === 200) {
+        router.push("/user/dashboard");
+      }
+    } catch (error) {
+      toast.error("Email ou mot de passe incorrect", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   const onError = (errors: FieldValues) => {
@@ -96,21 +96,13 @@ export default function Page({}: Props) {
           onSubmit={handleSubmit(onSubmit, onError)}
         >
           <Input
-            text="Nom"
-            type="text"
-            placeholder="ex:Landry"
+            text="Email"
+            type="email"
+            placeholder="ex:libraryware@gmail.com"
             register={register}
             required={"Email obligatoire"}
             errors={errors}
-            typedata="name"
-          />
-          <Input
-            text="Prénom"
-            type="text"
-            placeholder="ex:Bitege"
-            register={register}
-            errors={errors}
-            typedata="firstname"
+            typedata="email"
           />
 
           <Input

@@ -5,16 +5,6 @@ import { Children } from "react";
 
 export async function GET(req: NextRequest) {
   try {
-    const response = await middleware(req);
-    if (response) {
-      return response;
-    }
-
-    const role = (req as any).locals.role;
-
-    if (role !== "admin" && role !== "user") {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 403 });
-    }
     const categories = await prisma.category.findMany({
       where: { parentId: null },
       include: { children: true, user: true },
@@ -44,8 +34,8 @@ export async function POST(req: NextRequest) {
 
     if (!name) throw new Error("Invalid data");
 
-    const verifyName = await prisma.category.findFirst({ where: { name } })
-    if(verifyName) throw new Error("Category already exists");
+    const verifyName = await prisma.category.findFirst({ where: { name } });
+    if (verifyName) throw new Error("Category already exists");
 
     const category = await prisma.category.create({
       data: {

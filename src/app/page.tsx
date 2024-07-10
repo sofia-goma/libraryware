@@ -12,7 +12,9 @@ export default function Home() {
         <Link href={"/login"}>
           <Button text={"Connexion"} active={true} />
         </Link>
-        <Button text={"Register"} active={false} />
+        <Link href={"/register"}>
+          <Button text={"Register"} active={false} />
+        </Link>
       </div>
     </main>
   );

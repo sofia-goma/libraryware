@@ -6,12 +6,12 @@ import jwt from "jsonwebtoken";
 type Body = {
   email: string;
   password: string;
+  remember?: boolean;
 };
 
 export async function POST(req: Request) {
   try {
     const { email, password }: Body = await req.json();
-    console.log(req.json());
     if (!email || !password)
       return NextResponse.json(
         { message: "Invalid email or password" },

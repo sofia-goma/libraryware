@@ -41,7 +41,7 @@ export default function Input({
     >
       <label
         htmlFor={name}
-        className={`my-2 ${
+        className={`my-1 ${
           type === "checkbox" ? "text-[0.7rem]" : "text-sm"
         } text-white`}
       >
@@ -54,10 +54,23 @@ export default function Input({
           className={`${
             type === "checkbox"
               ? ""
-              : "w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#2D7DC4] focus:border-[#2D7DC4]"
+              : "w-full p-[0.3rem] border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#2D7DC4] focus:border-[#2D7DC4]"
           }`}
           placeholder={placeholder}
-          {...register(typedata, { required })}
+          {...register(typedata, {
+            required,
+            ...(type === "password" && {
+              minLength: {
+                value: 8,
+                message: "Le mot de passe doit comporter au moins 8 caractères",
+              },
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                message:
+                  "Le mot de passe doit contenir au moins une lettre et un chiffre",
+              },
+            }),
+          })}
         />
 
         {type === "password" && (

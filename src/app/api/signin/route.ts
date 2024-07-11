@@ -57,6 +57,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       message: `Authorisation ${user ? "user" : "admin"}`,
       token: token,
+      id: user ? user.userId : admin ? admin.email : "",
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

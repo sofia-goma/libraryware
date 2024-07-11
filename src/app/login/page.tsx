@@ -25,6 +25,13 @@ export default function Page({}: Props) {
     try {
       const response = await axios.post("/api/signin", data);
       if (response.status === 200) {
+        if (data.remember) {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("id", response.data.id);
+        } else if (!data.remember) {
+          sessionStorage.setItem("token", response.data.token);
+          sessionStorage.setItem("id", response.data.id);
+        }
         router.push("/user/dashboard");
       }
     } catch (error) {

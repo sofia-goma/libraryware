@@ -2,6 +2,7 @@
 
 import { createContext, useState } from "react";
 import useFetch from "./fetch";
+import useAxios from "./axios.fetch";
 
 type Props = {
   children: React.ReactNode;
@@ -19,8 +20,17 @@ export const Context = ({ children }: Props) => {
   const { data: category, isLoading } = useFetch(
     "http://localhost:3000/api/category"
   );
+  let id;
+  if (localStorage.getItem("id") !== undefined) {
+    id = localStorage.getItem("id");
+  } else if (sessionStorage.getItem("id") !== undefined) {
+    id = sessionStorage.getItem("id");
+  }
+
+  const { data: user } = useAxios(`http://localhost:3000/api/users/${id}`);
+
   return (
-    <MyContext.Provider value={{ state, setState, category, isLoading }}>
+    <MyContext.Provider value={{ state, setState, category, isLoading, user }}>
       {children}
     </MyContext.Provider>
   );

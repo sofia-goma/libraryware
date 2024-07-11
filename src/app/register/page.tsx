@@ -3,18 +3,24 @@
 import Button from "@/ui/button";
 import Input from "@/ui/input";
 import Logo from "@/ui/logo";
-import React from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-import { BsDatabaseAdd } from "react-icons/bs";
+import { MyContext } from "@/lib/context";
 
 type Props = {};
 
 export default function Page({}: Props) {
+  const { setState }: { setState?: Dispatch<SetStateAction<object>> } =
+    useContext(MyContext);
+
+  if (!setState) {
+    throw new Error("setState is not defined in MyContext");
+  }
+
   const router = useRouter();
   const {
     register,
@@ -23,7 +29,23 @@ export default function Page({}: Props) {
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    try {
+      if (data.password !== data.confirmpassword)
+        throw new Error("Les mots de passe sont incoherent");
+      setState(data);
+      router.push("/register/category");
+    } catch (error) {
+      toast.error((error as any).message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   const onError = (errors: FieldValues) => {
@@ -57,23 +79,25 @@ export default function Page({}: Props) {
           method=""
           onSubmit={handleSubmit(onSubmit, onError)}
         >
-          <Input
-            text="Prénom"
-            type="text"
-            placeholder="ex:Landry"
-            register={register}
-            errors={errors}
-            typedata="firstname"
-          />
-          <Input
-            text="Nom"
-            type="text"
-            placeholder="ex:Bitege"
-            register={register}
-            required={"Votre nom et obligatoire"}
-            errors={errors}
-            typedata="name"
-          />
+          <div className="flex gap-2">
+            <Input
+              text="Prénom"
+              type="text"
+              placeholder="ex:Landry"
+              register={register}
+              errors={errors}
+              typedata="firstname"
+            />
+            <Input
+              text="Nom"
+              type="text"
+              placeholder="ex:Bitege"
+              register={register}
+              required={"Votre nom et obligatoire"}
+              errors={errors}
+              typedata="name"
+            />
+          </div>
           <Input
             text="Email"
             type="email"
@@ -83,7 +107,15 @@ export default function Page({}: Props) {
             errors={errors}
             typedata="email"
           />
-
+          <Input
+            text="Téléphone"
+            type="tel"
+            placeholder="ex:+243987654321"
+            register={register}
+            required={"Téléphone obligatoire"}
+            errors={errors}
+            typedata="number"
+          />
           <Input
             text="Mot de passe"
             type="password"
@@ -100,7 +132,7 @@ export default function Page({}: Props) {
             register={register}
             required={"Mot de passe obligatoire"}
             errors={errors}
-            typedata="password"
+            typedata="confirmpassword"
           />
           <div className=" flex items-center justify-between w-full">
             <Input
@@ -108,7 +140,6 @@ export default function Page({}: Props) {
               type={"checkbox"}
               name="checkbox"
               register={register}
-              required={"La confirmation du mot de passe obligatoire"}
               errors={errors}
               typedata="remember"
             />

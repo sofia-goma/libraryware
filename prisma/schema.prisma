@@ -57,8 +57,8 @@ model Book {
   code                 String       @map("Code du livre") @unique
   edition              String       @map("Maison d'édition")
   statut               Statut?       @map("Statut") @default(available)
-  category             Category     @relation(fields: [categoryId], references: [id])
-  author               Author       @relation(fields: [authorId], references: [id])
+  category             Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  author               Author       @relation(fields: [authorId], references: [id], onDelete: SetDefault)
   loan                 Loan[]
 }
 
@@ -67,7 +67,7 @@ model Category {
   name                 String       @map("Nom")
   description          String?      @map("Description")
   parentId             Int?         @map("Sous-catégorie de")
-  parent               Category?    @relation("CategoryToCategorie", fields: [parentId], references: [id])
+  parent               Category?    @relation("CategoryToCategorie", fields: [parentId], references: [id], onDelete: Cascade)
   children             Category[]   @relation("CategoryToCategorie")
   user                 User[]       @relation("UserCategory")
   book                 Book[]

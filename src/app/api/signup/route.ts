@@ -25,27 +25,40 @@ export async function POST(req: Request) {
       !number ||
       !Array.isArray(category)
     ) {
-      throw new Error("Invalid data");
+      return NextResponse.json({ message: "Invalid data" }, { status: 422 });
     }
 
     const userVerifyMail = await prisma.user.findFirst({
       where: { email },
     });
 
-    if (userVerifyMail) throw new Error("Email already exist");
+    console.log(userVerifyMail);
+
+    if (userVerifyMail)
+      return NextResponse.json(
+        { message: "Email already exist" },
+        { status: 409 }
+      );
 
     const userVerifyNumber = await prisma.user.findFirst({
       where: { number },
     });
 
-    if (userVerifyNumber) throw new Error("Number already exist");
+    if (userVerifyNumber)
+      return NextResponse.json(
+        { message: "Number already exist" },
+        { status: 409 }
+      );
 
     const categories = await prisma.category.findMany({
       where: { name: { in: category } },
     });
 
     if (categories.length !== category.length)
-      throw new Error("Some categories not found");
+      return NextResponse.json(
+        { message: "Some categories not found" },
+        { status: 404 }
+      );
 
     const passwordHash = await bcrypt.hash(password, 10);
 
@@ -77,6 +90,6 @@ export async function POST(req: Request) {
       token,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

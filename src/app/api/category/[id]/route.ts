@@ -115,6 +115,15 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
 
     if (!verifyId) throw new Error(`${id} category not found`);
 
+    await prisma.category.update({
+      where: { id },
+      data: { user: { set: [] } },
+    });
+
+    await prisma.category.deleteMany({
+      where: { parentId: id },
+    });
+
     const category = await prisma.category.delete({
       where: { id },
     });
@@ -123,6 +132,6 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
       data: category,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

@@ -65,9 +65,16 @@ export default function Input({
                 message: "Le mot de passe doit comporter au moins 8 caractères",
               },
               pattern: {
-                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                value:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                 message:
                   "Le mot de passe doit contenir au moins une lettre et un chiffre",
+              },
+            }),
+            ...(type === "tel" && {
+              pattern: {
+                value: /^\+?[1-9]\d{1,12}$/,
+                message: "Veuillez entrer un numéro de téléphone valide.",
               },
             }),
           })}

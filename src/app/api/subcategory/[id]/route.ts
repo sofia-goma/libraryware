@@ -9,13 +9,18 @@ type RouteParams = {
 export async function GET(req: Request, { params }: RouteParams) {
   try {
     const id = params.id;
-    const subcategories = await prisma.category.findMany({
-      where: { parentId: Number(id) },
+    console.log(id);
+    const subcategories = await prisma.category.findUnique({
+      where: {
+        id: Number(id),
+        parentId: { not: null },
+        children: { none: {} },
+      },
       include: { book: true },
     });
-    if (subcategories.length == 0) throw new Error("No category");
+    if (!subcategories) throw new Error("No Subcategory");
     return NextResponse.json({
-      message: "Here is the categories of our library",
+      message: "Here is the subcategorie",
       data: subcategories,
     });
   } catch (error: any) {

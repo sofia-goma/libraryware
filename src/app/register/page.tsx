@@ -6,10 +6,10 @@ import Logo from "@/ui/logo";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import { MyContext } from "@/lib/context";
+import { toastError } from "@/lib/toast";
 
 type Props = {};
 
@@ -34,32 +34,14 @@ export default function Page({}: Props) {
         throw new Error("Les mots de passe sont incoherent");
       setState(data);
       router.push("/register/category");
-    } catch (error) {
-      toast.error((error as any).message, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+    } catch (error: any) {
+      toastError(error.message);
     }
   };
 
   const onError = (errors: FieldValues) => {
     Object.values(errors).forEach((error) => {
-      toast.error((error as any).message, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toastError(error.message);
     });
   };
   return (
@@ -67,7 +49,7 @@ export default function Page({}: Props) {
       <div className="m-[3%]">
         <Logo />
       </div>
-      <div className="bg-[#576980] h-[90vh] p-[4%] rounded-[30px] w-[30vw]">
+      <div className="bg-[#576980] h-auto p-[4%] rounded-[30px] w-[30vw]">
         <div className="flex flex-col items-center text-white gap-2 mb-3">
           <h1 className="text-lg text-[#2D7DC4]">
             Bienvenue dans à LibraryWare !
@@ -146,18 +128,17 @@ export default function Page({}: Props) {
           </div>
           <Button submit={true} text={"S'enregister"} active={true} />
           <div className=" flex items-center justify-between w-full pt-2">
-            <a
-              href="#"
+            <Link
+              href="/login"
               className="text-[0.8rem] text-white hover:text-[#2D7DC4]"
             >
               Vous avez un compte? Cnnectez-vous
-            </a>
+            </Link>
             <Link href="/" className="text-sm text-white hover:text-[#F4555A]">
               Quitter
             </Link>
           </div>
         </form>
-        <ToastContainer />
       </div>
     </main>
   );

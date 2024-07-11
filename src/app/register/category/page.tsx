@@ -5,11 +5,11 @@ import Logo from "@/ui/logo";
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Link from "next/link";
 import { MyContext } from "@/lib/context";
 import Badge from "@/ui/badge";
+import { toastError } from "@/lib/toast";
+import Loading from "./loading";
 
 type Props = {};
 
@@ -20,10 +20,12 @@ export default function Page({}: Props) {
     category,
     state: data,
     setState,
+    isLoading,
   }: {
     category?: any;
     state?: any;
     setState?: React.Dispatch<React.SetStateAction<any>>;
+    isLoading?: boolean;
   } = useContext(MyContext);
 
   if (!category) {
@@ -38,29 +40,25 @@ export default function Page({}: Props) {
     router.push("/register");
   }
 
-  const onClick = async () => {
+  const onClick = async (str: string) => {
     try {
-      if (choice.length === 0)
-        throw new Error("Choisisez au moins une catégorie");
+      if (str === "valide" && choice.length === 0)
+        throw new Error("Choisisez au moins une catégorie ou  passer");
 
-      data.category = choice;
+      if (str === "passe") data.category = [];
+
+      if (str === "valide") data.category = choice;
 
       const response = await axios.post("/api/signup", data);
+
+      console.log(response);
 
       if (response.status === 200) {
         router.push("/user/dashboard");
       }
-    } catch (error) {
-      toast.error((error as any).message, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+    } catch (error: any) {
+      if (!error.response) toastError(error.message);
+      else toastError(error.response.data.message);
     }
   };
 
@@ -76,6 +74,7 @@ export default function Page({}: Props) {
           </h1>
         </div>
         <div className="flex flex-wrap gap-4">
+          {isLoading && <Loading />}
           {category.data.map((category: any, i: number) => (
             <Badge
               text={category.name}
@@ -85,18 +84,17 @@ export default function Page({}: Props) {
             />
           ))}
         </div>
-        <div className="text-center pt-5" onClick={onClick}>
+        <div className="text-center pt-5" onClick={() => onClick("valide")}>
           <Button text={"Valider"} active={true} />
         </div>
         <div className=" flex items-center justify-between w-full pt-2">
-          <Link
-            href="#"
+          <div
+            onClick={() => onClick("passe")}
             className="text-sm text-white hover:text-[#F4555A] text-right w-full"
           >
             Passer
-          </Link>
+          </div>
         </div>
-        <ToastContainer />
       </div>
     </main>
   );

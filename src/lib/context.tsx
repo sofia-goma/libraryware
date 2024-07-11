@@ -16,9 +16,11 @@ export const MyContext = createContext({});
 
 export const Context = ({ children }: Props) => {
   const [state, setState] = useState();
-  const { data: category } = useFetch("http://localhost:3000/api/category");
+  const { data: category, isLoading } = useFetch(
+    "http://localhost:3000/api/category"
+  );
   return (
-    <MyContext.Provider value={{ state, setState, category }}>
+    <MyContext.Provider value={{ state, setState, category, isLoading }}>
       {children}
     </MyContext.Provider>
   );

@@ -23,12 +23,15 @@ export default function Page({}: Props) {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await axios.post("/api/signin", data);
-      if (response.status === 200) {
-        router.push("/user/dashboard");
-      }
-    } catch (error) {
-      toastError("Email ou mot de passe incorrect");
+      // const response = await axios.post("/api/signin", data);
+      // if (data.remember) {
+      //   localStorage.setItem("token", response.data.token);
+      // }
+      // if (response.status === 200) {
+      //   router.push("/user/dashboard");
+      // }
+    } catch (error: any) {
+      toastError(error.message);
     }
   };
 
@@ -66,10 +69,9 @@ export default function Page({}: Props) {
               strokeLinejoin="round"
             />
           </svg>
-          <h1 className="text-lg text-[#2D7DC4]">Content de te revoir !</h1>
-          <p className="text-sm text-center">
-            Connectez-vous pour accéder à notre bibliothèque
-          </p>
+          <h1 className="text-center text-lg text-[#2D7DC4]">{`T'inquiete pas, tout le monde oublie le mot de passe !`}</h1>
+          <p className="text-sm text-center">{`Entrer votre email, on vous enverra le code par mail pour confirmer
+            l'appartenance du compte`}</p>
         </div>
         <form
           className="flex flex-col items-center"
@@ -78,7 +80,7 @@ export default function Page({}: Props) {
           onSubmit={handleSubmit(onSubmit, onError)}
         >
           <Input
-            text="Email"
+            text=" Votre Email"
             type="email"
             placeholder="ex:libraryware@gmail.com"
             register={register}
@@ -86,39 +88,13 @@ export default function Page({}: Props) {
             errors={errors}
             typedata="email"
           />
-
-          <Input
-            text="Mot de passe"
-            type="password"
-            placeholder=""
-            register={register}
-            required={"Mot de passe obligatoire"}
-            errors={errors}
-            typedata="password"
-          />
-          <div className=" flex items-center justify-between w-full">
-            <Input
-              text="Souviens-toi de moi"
-              type={"checkbox"}
-              name="checkbox"
-              register={register}
-              errors={errors}
-              typedata="remember"
-            />
-            <Link
-              href="/login/forget"
-              className="text-[0.7rem] text-white hover:text-[#2D7DC4]"
-            >
-              Mot de passe oublié?
-            </Link>
-          </div>
           <Button submit={true} text={"Connexion"} active={true} />
           <div className=" flex items-center justify-between w-full pt-2">
             <Link
-              href="/register"
+              href="/login"
               className="text-[0.8rem] text-white hover:text-[#2D7DC4]"
             >
-              Nouvel utilisateur? Inscrivez-vous
+              Tu te rappelles de ton mot de passe? Retour
             </Link>
             <Link href="/" className="text-sm text-white hover:text-[#F4555A]">
               Quitter

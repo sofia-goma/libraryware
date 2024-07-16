@@ -13,10 +13,13 @@ export async function middleware(request: NextRequest) {
 
   try {
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET as string) as {
-      userId: number;
+      userId: string;
       role: string;
     };
-    (request as any).locals = { userId: decoded.userId, role: decoded.role }; // Utilisation de request.locals pour stocker les données utilisateur
+    (request as any).locals = {
+      userId: decoded.userId,
+      role: decoded.role,
+    };
   } catch (error) {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });
   }

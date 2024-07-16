@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma.config";
 import { middleware } from "../../../../middleware";
-import { Children } from "react";
 
 export async function GET(req: NextRequest) {
   try {

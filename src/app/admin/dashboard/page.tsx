@@ -1,6 +1,8 @@
 "use client";
 
 import useAxios from "@/lib/axios.fetch";
+import Statistique from "@/ui/statistique";
+import Tab from "@/ui/tab";
 import React, { useEffect, useState } from "react";
 
 type Props = {};
@@ -17,10 +19,15 @@ export default function Page({}: Props) {
     setUserId(id);
   }, []);
 
-  const { data } = useAxios(`http://localhost:3000/api/users/${userId}`);
+  const { data } = useAxios(`http://localhost:3000/api/admins/${userId}`);
 
   if (!data) {
-    console.log("Request ...");
+    return <div>Loadind...</div>;
   }
-  return <div>Dasboard User</div>;
+
+  return (
+    <div className="mx-[5%] mt-[2%] w-[80%] h-[50px]">
+      <Statistique />
+    </div>
+  );
 }

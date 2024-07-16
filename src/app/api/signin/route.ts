@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     }
     if (admin) {
       token = jwt.sign(
-        { email: admin.email, role: "admin" },
+        { userId: admin.email, role: "admin" },
         tokenSecret as string,
         {
           expiresIn: "24h",
@@ -58,6 +58,7 @@ export async function POST(req: Request) {
       message: `Authorisation ${user ? "user" : "admin"}`,
       token: token,
       id: user ? user.userId : admin ? admin.email : "",
+      role: user ? "user" : admin ? "admin" : "",
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

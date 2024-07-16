@@ -67,8 +67,6 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
     const role = (req as any).locals.role;
     const userId = (req as any).locals.userId;
 
-    console.log(role, userId);
-
     if (role !== "admin" || userId !== email) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 403 });
     }
@@ -79,14 +77,6 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
 
     const adminVerifyMail = await prisma.admin.findFirst({
       where: { email },
-      select: {
-        email: true,
-        name: true,
-        firstName: true,
-        phone: true,
-        photo: true,
-        title: true,
-      },
     });
 
     if (!adminVerifyMail) throw new Error(`Admin ${email} not found`);

@@ -3,27 +3,24 @@ import Sidebar from "@/ui/sidebar";
 import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineForum, MdOutlineWorkspaces } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { TbBook } from "react-icons/tb";
+import { RiContactsLine } from "react-icons/ri";
 
 const links = [
   {
     name: "Tableau de bord",
-    href: "/user/dashboard",
+    href: "/admin/dashboard",
     icon: <IoHomeOutline size={"24px"} />,
   },
   {
-    name: "Mon Espace",
-    href: "/user/space",
-    icon: <MdOutlineWorkspaces size={"24px"} />,
+    name: "Nos livres",
+    href: "/admin/books",
+    icon: <TbBook size={"24px"} />,
   },
   {
-    name: "Forum",
-    href: "/user/forum",
-    icon: <MdOutlineForum size={"24px"} />,
-  },
-  {
-    name: "Notification",
-    href: "/user/notification",
-    icon: <IoIosNotificationsOutline size={"24px"} />,
+    name: "Membres",
+    href: "/admin/members",
+    icon: <RiContactsLine size={"24px"} />,
   },
   {
     name: "Setting",
@@ -40,7 +37,7 @@ export default function RootLayout({
   return (
     <main className="bg-white w-screen h-screen bg-opacity-70">
       <NavBar />
-      <div className="flex">
+      <div className="flex w-screen">
         <Sidebar links={links} />
         {children}
       </div>

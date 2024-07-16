@@ -32,7 +32,12 @@ export default function Page({}: Props) {
           sessionStorage.setItem("token", response.data.token);
           sessionStorage.setItem("id", response.data.id);
         }
-        router.push("/user/dashboard");
+
+        response.data.role === "user"
+          ? router.push("/user/dashboard")
+          : response.data.role === "admin"
+          ? router.push("/admin/dashboard")
+          : console.error("Ereur lors du login");
       }
     } catch (error) {
       toastError("Email ou mot de passe incorrect");

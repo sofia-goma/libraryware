@@ -6,7 +6,7 @@ type Props = {};
 
 export default function NavBar({}: Props) {
   return (
-    <div className="w-screen h-14 bg-[#F5F5F5] flex items-center justify-between shadow-sm">
+    <div className="w-screen h-[10vh] bg-[#F5F5F5] flex items-center justify-between shadow-sm">
       <h1 className="text-xl font-black px-4">
         <span className="text-[#F4555A]">Library</span>
         <span className="text-[#2D7DC4]">Ware</span>
@@ -17,7 +17,7 @@ export default function NavBar({}: Props) {
           className="py-2 px-4 focus:outline-none w-full rounded-l-[40px] border-r border-gray-300"
           placeholder="Rechercher un livre..."
         />
-        <button className=" px-4 py-2 text-white hover:bg-[#F4555A]">
+        <button className=" px-4 py-2 text-white">
           <IoMdSearch color="#F4555A" />
         </button>
       </div>

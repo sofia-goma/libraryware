@@ -17,22 +17,21 @@ export default function Page({}: Props) {
   const [choice, setChoice] = useState<string[]>([]);
   const router = useRouter();
   const {
-    category,
-    state: data,
+    categories,
+    state,
     setState,
-    isLoading,
   }: {
-    category?: any;
+    categories?: any;
     state?: any;
     setState?: React.Dispatch<React.SetStateAction<any>>;
-    isLoading?: boolean;
   } = useContext(MyContext);
 
-  if (!category) {
+  if (!categories) {
     router.push("/register");
   }
-
-  if (!data) {
+  console.log(categories);
+  const { data, isLoading, error: isError } = categories;
+  if (!state) {
     router.push("/register");
   }
 
@@ -45,11 +44,11 @@ export default function Page({}: Props) {
       if (str === "valide" && choice.length === 0)
         throw new Error("Choisisez au moins une catégorie ou  passer");
 
-      if (str === "passe") data.category = [];
+      if (str === "passe") state.category = [];
 
-      if (str === "valide") data.category = choice;
+      if (str === "valide") state.category = choice;
 
-      const response = await axios.post("/api/signup", data);
+      const response = await axios.post("/api/signup", state);
 
       console.log(response);
 
@@ -58,7 +57,7 @@ export default function Page({}: Props) {
       }
     } catch (error: any) {
       if (!error.response) toastError(error.message);
-      else toastError(error.response.data.message);
+      else toastError(error.response.state.message);
     }
   };
 
@@ -75,14 +74,15 @@ export default function Page({}: Props) {
         </div>
         <div className="flex flex-wrap gap-4">
           {isLoading && <Loading />}
-          {category.data.map((category: any, i: number) => (
-            <Badge
-              text={category.name}
-              key={i}
-              choice={choice}
-              setChoice={setChoice}
-            />
-          ))}
+          {data &&
+            data.data.map((category: any, i: number) => (
+              <Badge
+                text={category.name}
+                key={i}
+                choice={choice}
+                setChoice={setChoice}
+              />
+            ))}
         </div>
         <div className="text-center pt-5" onClick={() => onClick("valide")}>
           <Button text={"Valider"} active={true} />

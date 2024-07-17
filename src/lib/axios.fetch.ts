@@ -17,13 +17,13 @@ export default function useAxios(url: string) {
       setIsLoading(true);
       try {
         const response = await axios.get(url);
-        console.log(response);
         setData(response.data);
       } catch (error: any) {
         setError(error.message);
       } finally {
         setIsLoading(false);
       }
+      //L@ndry11
     };
 
     fetchData();

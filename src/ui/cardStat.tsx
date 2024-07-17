@@ -14,7 +14,7 @@ const CardChart = ({ title, count, percent }: Props) => {
     labels: ["Completed", "Remaining"],
     datasets: [
       {
-        data: [50, 50],
+        data: [percent, percent - 100],
         backgroundColor: ["#3b82f6", "#e5e7eb"],
         hoverBackgroundColor: ["#2563eb", "#d1d5db"],
       },

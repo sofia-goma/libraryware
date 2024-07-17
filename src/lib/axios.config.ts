@@ -2,12 +2,11 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 
 axios.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-    let token: string | null;
-    if (localStorage.getItem("token") !== undefined)
-      token = localStorage.getItem("token");
-    else if (sessionStorage.getItem("token") !== undefined)
-      token = sessionStorage.getItem("token");
-    else token = "";
+    let token = localStorage.getItem("token")
+      ? localStorage.getItem("token")
+      : sessionStorage.getItem("token")
+      ? sessionStorage.getItem("token")
+      : "";
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

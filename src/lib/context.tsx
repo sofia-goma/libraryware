@@ -21,20 +21,16 @@ export const Context = ({ children }: Props) => {
     let id: string | null = sessionStorage.getItem("token")
       ? sessionStorage.getItem("id")
       : localStorage.getItem("id");
-    console.log(id);
     setUserId(id);
   }, []);
-
-  const { data } = useAxios(`http://localhost:3000/api/admins/${userId}`);
-
-  console.log(data);
 
   const [state, setState] = useState();
   const categories = useFetch("http://localhost:3000/api/category");
   const books = useAxios(`http://localhost:3000/api/books`);
+  const users = useAxios(`http://localhost:3000/api/users`);
 
   return (
-    <MyContext.Provider value={{ state, setState, categories, books, data }}>
+    <MyContext.Provider value={{ state, setState, categories, books, users }}>
       {children}
     </MyContext.Provider>
   );

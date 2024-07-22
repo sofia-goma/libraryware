@@ -1,13 +1,18 @@
-import useAxios from "@/lib/axios.fetch";
-import { MyContext } from "@/lib/context";
 import { toastError } from "@/lib/toast";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useContext } from "react";
 
-type Props = {};
+type Props = {
+  title: string;
+  books: {
+    data: { data: unknown[] };
+    isLoading: boolean;
+    error: string | null;
+  };
+};
 
-export default function CardBook({}: Props) {
-  const { books }: { books?: any } = useContext(MyContext);
+export default function CardBook({ books, title }: Props) {
   !books && toastError("Pas de livres");
   const {
     data,
@@ -16,9 +21,18 @@ export default function CardBook({}: Props) {
   }: { data: { data: any[] }; isLoading: boolean; error: string | null } =
     books;
   const style = "w-1/6 px-1";
+
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-slate-800"></div>
+      </div>
+    );
+
   if (data)
     return data.data.map((el, i) => (
-      <div
+      <Link
+        href={`/admin/book/${el.id}`}
         className="bg-white shadow-lg rounded-xl flex justify-between items-center p-4 my-2"
         key={i}
       >
@@ -29,7 +43,21 @@ export default function CardBook({}: Props) {
         <p className={style}>{el.title}</p>
         <p className={style}>{el.category.name}</p>
         <p className={style}>{el.statut}</p>
-        <p className={style}>.2days</p>
-      </div>
+        {title === "Overdue" || title === "Borrowed" ? (
+          <p
+            className={`${style} ${
+              title === "Overdue" ? "text-[#F4555A]" : ""
+            }${title === "Borrowed" ? "text-[#2D7DC4]" : ""}`}
+          >
+            .2days
+          </p>
+        ) : title === "Reserve" ? (
+          <p className={`${style} `}>Annuler</p>
+        ) : title === "Available" ? (
+          <p className={`${style} `}>Reserve</p>
+        ) : (
+          <p className=""></p>
+        )}
+      </Link>
     ));
 }

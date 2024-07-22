@@ -1,15 +1,14 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type Props = {};
+type Props = {
+  items: { title: string; href: string }[];
+};
 
-const items = [
-  { title: "Livres", href: "/admin/dashboard" },
-  { title: "Membres", href: "/admin/dashboard/members" },
-];
-
-export default function Tab({}: Props) {
+export default function Tab({ items }: Props) {
   const pathname = usePathname();
   return (
     <>
@@ -19,9 +18,9 @@ export default function Tab({}: Props) {
           key={i}
           className={`${
             pathname === t.href
-              ? "text-[#F4555A] p-3 border-b-2 border-[#F4555A]"
+              ? "text-[#F4555A] border-b-2 border-[#F4555A]"
               : ""
-          } text-base font-bold `}
+          } text-base font-bold p-3 `}
         >
           {t.title}
         </Link>

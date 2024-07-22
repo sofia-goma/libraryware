@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "@/lib/axios.config";
+import { toastError } from "./toast";
 
 interface UseFetchResult<T> {
   data: T | null;
@@ -20,10 +21,10 @@ export default function useAxios(url: string) {
         setData(response.data);
       } catch (error: any) {
         setError(error.message);
+        toastError(error.message);
       } finally {
         setIsLoading(false);
       }
-      //L@ndry11
     };
 
     fetchData();

@@ -16,7 +16,7 @@ export default function NavLinks({ links }: { links: any[] }) {
             className={clsx(
               "flex h-[48px] grow gap-3 items-center rounded-md px-3 py-4 text-sm w-full font-medium hover:bg-[#E0E0E0] hover:text-slate-900",
               {
-                "bg-[#E0E0E0] text-slate-900": pathname === link.href,
+                "bg-[#E0E0E0] text-slate-900": link.href.includes(pathname),
               }
             )}
           >

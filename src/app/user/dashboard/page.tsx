@@ -2,6 +2,7 @@
 
 import useAxios from "@/lib/axios.fetch";
 import React, { useEffect, useState } from "react";
+import Citation from "../../../ui/citations";
 
 type Props = {};
 
@@ -22,5 +23,9 @@ export default function Page({}: Props) {
   if (!data) {
     console.log("Request ...");
   }
-  return <div>Dasboard User</div>;
+  return (
+    <div className="mx-[5%] pt-[2vh] w-[80%] h-[88vh] overflow-y-scroll scrollbar-none  scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+      <Citation />
+    </div>
+  );
 }

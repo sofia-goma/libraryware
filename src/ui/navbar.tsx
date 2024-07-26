@@ -1,10 +1,22 @@
-import React from "react";
+"use client";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { FaRegBell } from "react-icons/fa6";
 import { IoIosContact, IoMdSearch } from "react-icons/io";
 
 type Props = {};
 
 export default function NavBar({}: Props) {
+  const [pop, setPop] = useState<boolean>(false);
+  const router = useRouter();
+  const handler = () => {
+    setPop(!pop);
+  };
+  const handleDeconnect = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    router.push("/");
+  };
   return (
     <div className="w-screen h-[10vh] bg-[#f2f8ff] flex items-center justify-between shadow-sm">
       <h1 className="text-xl font-black px-4">
@@ -23,8 +35,20 @@ export default function NavBar({}: Props) {
       </div>
       <div className="flex items-center gap-6 mr-6">
         <FaRegBell size={"20px"} color="#574c4a" />
-        <IoIosContact size={"24px"} color="#574c4a" />
+        <button onClick={handler}>
+          <IoIosContact size={"24px"} color="#574c4a" />
+        </button>
       </div>
+      {pop && (
+        <div className="absolute right-0 top-[10vh] bg-white border border-gray-400 z-10 p-3 rounded-xl">
+          <button
+            onClick={handleDeconnect}
+            className="text-[#F4555A] font-semibold"
+          >
+            Déconnexion
+          </button>
+        </div>
+      )}
     </div>
   );
 }

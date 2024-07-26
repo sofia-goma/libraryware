@@ -6,14 +6,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const items = [
-    { title: "Total Livres", href: "/admin/books" },
-    { title: "Livres retarder", href: "/admin/books/overdue" },
-    { title: "Livres utiliser", href: "/admin/books/borrowed" },
-    { title: "Livres disponible", href: "/admin/books/available" },
-    { title: "Livres reserver", href: "/admin/books/reserve" },
+    { title: "Total", href: "/admin/books" },
+    { title: "Ajournement", href: "/admin/books/overdue" },
+    { title: "En Lecture", href: "/admin/books/borrowed" },
+    { title: "Disponible", href: "/admin/books/available" },
+    { title: "Réservés", href: "/admin/books/reserve" },
   ];
   return (
-    <div className="mx-[5%] mt-[2vh] w-[80%] h-[88vh] overflow-y-scroll scrollbar-none  scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+    <div className="mx-[5%] pt-[2vh] w-[80%] h-[88vh] overflow-y-scroll scrollbar-none  scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
       <div>
         <Tab items={items} />
       </div>

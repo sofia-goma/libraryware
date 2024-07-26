@@ -45,7 +45,7 @@ export default function CardUser({ users, title, all }: Props) {
     return usersData.map((el, i) => (
       <Link
         href={`/admin/book/${el.userId}`}
-        className="bg-[#f2efdd] shadow-lg rounded-xl flex justify-between items-center p-4 my-2"
+        className="bg-white shadow-lg rounded-xl flex justify-between items-center p-4 my-2"
         key={el.userId}
       >
         <p className={`${style}`}>{`${el.userId.slice(0, 8)}...`}</p>

@@ -2,16 +2,22 @@
 
 import NavBar from "@/ui/navbar";
 import Sidebar from "@/ui/sidebar";
-import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
-import { TbBook } from "react-icons/tb";
-import { RiContactsLine } from "react-icons/ri";
-import useAuth from "@/lib/auth";
+import {
+  IoBook,
+  IoBookOutline,
+  IoHome,
+  IoHomeOutline,
+  IoSettings,
+  IoSettingsOutline,
+} from "react-icons/io5";
+import { RiContactsFill, RiContactsLine } from "react-icons/ri";
 
 const links = [
   {
     name: "Tableau de bord",
     href: ["/admin/dashboard", "/admin/dashboard/members"],
     icon: <IoHomeOutline size={"24px"} />,
+    icons: <IoHome size={"24px"} color="white" />,
   },
   {
     name: "Nos livres",
@@ -22,7 +28,8 @@ const links = [
       "/admin/books/available",
       "/admin/books/reserve",
     ],
-    icon: <TbBook size={"24px"} />,
+    icon: <IoBookOutline size={"24px"} />,
+    icons: <IoBook size={"24px"} color="white" />,
   },
   {
     name: "Membres",
@@ -34,11 +41,13 @@ const links = [
       "/admin/membres/reserve",
     ],
     icon: <RiContactsLine size={"24px"} />,
+    icons: <RiContactsFill size={"24px"} color="white" />,
   },
   {
-    name: "Setting",
-    href: ["/user/setting"],
+    name: "Paramètres",
+    href: ["#"],
     icon: <IoSettingsOutline size={"24px"} />,
+    icons: <IoSettings size={"24px"} color="white" />,
   },
 ];
 
@@ -48,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="bg-slate-100 w-screen h-screen">
+    <main className="bg-[#3c596822] w-screen h-screen">
       <NavBar />
       <div className="flex w-screen">
         <Sidebar links={links} />

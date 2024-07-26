@@ -9,18 +9,18 @@ type Props = {
 export default function Statistique({ books }: Props) {
   const chart = books
     ? [
-        { title: "Total des livres", count: 2000 },
-        { title: "Livres preté", count: 600 },
-        { title: "Livres disponible", count: 1000 },
-        { title: "Livres reservé", count: 400 },
-        { title: "Retard en remise", count: 200 },
+        { title: "Total", count: 2000 },
+        { title: "En Lecture", count: 600 },
+        { title: "Disponibles", count: 1000 },
+        { title: "Réservés", count: 400 },
+        { title: "Ajournés", count: 200 },
       ]
     : [
         { title: "Utilisateurs", count: 1000 },
-        { title: "Retardateurs", count: 300 },
+        { title: "Retardataires", count: 300 },
         { title: "Lecteurs", count: 500 },
-        { title: "Reservé", count: 200 },
-        { title: "No-Abonnés", count: 100 },
+        { title: "Réservataire", count: 200 },
+        { title: "Sans Abonnement", count: 100 },
       ];
   const total = chart[0].count;
   const items = [

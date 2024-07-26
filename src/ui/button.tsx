@@ -10,10 +10,10 @@ export default function Button({ text, active, submit }: Props) {
   return (
     <button
       type={submit ? "submit" : "button"}
-      className={`px-4 py-2 m-2 rounded-2xl font-bold text-lg border border-[#2D7DC4] box-border ${
+      className={`hover:transition px-4 py-2 m-2 rounded-2xl font-bold text-lg border border-[#3c5968] box-border ${
         active
-          ? "bg-[#2D7DC4] text-white hover:bg-white hover:text-[#2D7DC4]"
-          : "bg-white text-[#2D7DC4] hover:bg-[#2D7DC4] hover:text-white "
+          ? "bg-[#3c5968] text-[#f2f8ff] hover:bg-[#f2f8ff] hover:text-[#3c5968]"
+          : "bg-[#f2f8ff] text-[#3c5968] hover:bg-[#3c5968] hover:text-[#f2f8ff] "
       }`}
     >
       {text}

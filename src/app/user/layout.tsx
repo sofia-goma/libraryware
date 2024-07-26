@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="bg-white w-screen h-screen bg-opacity-70">
+    <main className="bg-[#f2efdd] w-screen h-screen bg-opacity-70">
       <NavBar />
       <div className="flex">
         <Sidebar links={links} />

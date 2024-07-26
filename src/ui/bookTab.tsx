@@ -3,7 +3,7 @@ import CardBook from "./cardBook";
 
 type Props = {
   headers: string[];
-  title: string;
+  title?: string;
   books: {
     data: { data: unknown[] };
     isLoading: boolean;
@@ -14,7 +14,9 @@ type Props = {
 export default function BookTab({ title, headers, books }: Props) {
   return (
     <div>
-      <h1 className="text-2xl font-medium m-2">{`${title} Books`}</h1>
+      {title && (
+        <h1 className="text-2xl font-medium m-2">{`${title} Books`}</h1>
+      )}
       <div className="flex justify-between px-4">
         {headers.map((header, i) => (
           <p className="text-lg font-normal w-1/6" key={i}>

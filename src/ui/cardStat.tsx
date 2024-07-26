@@ -32,7 +32,7 @@ const CardChart = ({ title, count, percent }: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-1 items-center justify-center bg-white shadow-lg m-2 py-2 px-6 w-1/5">
+    <div className="flex flex-col gap-1 items-center justify-center bg-[#f2efdd] shadow-lg m-2 py-2 px-6 w-1/5">
       <h2>{title}</h2>
       <div className="relative w-24 h-24">
         <Doughnut data={data} options={options} />

@@ -12,7 +12,7 @@ export default function NavLinks({ links }: { links: any[] }) {
         return (
           <Link
             key={link.name}
-            href={link.href}
+            href={link.href[0]}
             className={clsx(
               "flex h-[48px] grow gap-3 items-center rounded-md px-3 py-4 text-sm w-full font-medium hover:bg-[#E0E0E0] hover:text-slate-900",
               {

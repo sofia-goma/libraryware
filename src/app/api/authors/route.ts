@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 403 });
     }
     const author = await prisma.author.findMany({
-      include: {books : true}
+      include: { books: true },
     });
     return NextResponse.json({
       message: "Here is author list",

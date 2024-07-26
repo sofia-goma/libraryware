@@ -21,7 +21,6 @@ export default function useAxios(url: string) {
         setData(response.data);
       } catch (error: any) {
         setError(error.message);
-        toastError(error.message);
       } finally {
         setIsLoading(false);
       }

@@ -1,10 +1,11 @@
 import { toastError } from "@/lib/toast";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 
 type Props = {
-  title: string;
+  title?: string;
   books: {
     data: { data: unknown[] };
     isLoading: boolean;
@@ -14,6 +15,7 @@ type Props = {
 
 export default function CardBook({ books, title }: Props) {
   !books && toastError("Pas de livres");
+  const router = useRouter();
   const {
     data,
     isLoading,
@@ -21,7 +23,11 @@ export default function CardBook({ books, title }: Props) {
   }: { data: { data: any[] }; isLoading: boolean; error: string | null } =
     books;
   const style = "w-1/6 px-1";
-
+  // if (error && error.includes("401")) {
+  //   router.push("/login");
+  //   toastError("Vous devez vous connecter pour accéder à cette page");
+  //   return;
+  // }
   if (isLoading)
     return (
       <div className="flex justify-center items-center">
@@ -33,7 +39,7 @@ export default function CardBook({ books, title }: Props) {
     return data.data.map((el, i) => (
       <Link
         href={`/admin/book/${el.id}`}
-        className="bg-white shadow-lg rounded-xl flex justify-between items-center p-4 my-2"
+        className="bg-[#f2efdd] shadow-lg rounded-xl flex justify-between items-center p-4 my-2"
         key={i}
       >
         <p className={style}>{el.code}</p>

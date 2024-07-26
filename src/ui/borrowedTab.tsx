@@ -4,9 +4,9 @@ import { MyContext } from "@/lib/context";
 import BookTab from "./bookTab";
 import UserTab from "./userTab";
 
-type Props = { val: boolean };
+type Props = { val: boolean; all: boolean };
 
-export default function BorrowedTab({ val }: Props) {
+export default function BorrowedTab({ val, all }: Props) {
   const headers = val
     ? ["ID", "Cover", "Titre", "Catégorie", "Statut", "Jours"]
     : ["ID", "Profile", "Nom", "Prénom", "Info", "Jours"];
@@ -20,7 +20,7 @@ export default function BorrowedTab({ val }: Props) {
   else
     return (
       <div className="my-4">
-        <UserTab headers={headers} title="Borrowed" users={users} />
+        <UserTab headers={headers} title="Borrowed" users={users} all={all} />
       </div>
     );
 }

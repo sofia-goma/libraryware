@@ -21,7 +21,7 @@ export default function Badge({ text, choice, setChoice }: Props) {
     <div
       onClick={handleClick}
       className={`flex gap-2 cursor-pointer ${
-        valid ? "text-slate-950 bg-white" : "text-white bg-[#F4555A]"
+        valid ? "text-slate-950 bg-[#f2efdd]" : "text-[#f2efdd] bg-[#3c5968]"
       }  items-center py-2 px-3 rounded-2xl`}
     >
       <h3 className="text-xl">{text}</h3>

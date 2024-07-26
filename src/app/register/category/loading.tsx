@@ -9,7 +9,7 @@ const Skeleton: React.FC = () => {
         <Logo />
       </div>
       <div className="bg-[#576980] h-auto p-[4%] rounded-[30px] w-[30vw]">
-        <div className="flex flex-col items-center text-white gap-2 mb-3">
+        <div className="flex flex-col items-center text-[#f2efdd] gap-2 mb-3">
           <h1 className="text-lg text-[#2D7DC4]">
             Choisisez vos tendances préferés!
           </h1>

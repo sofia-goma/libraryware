@@ -15,12 +15,24 @@ const links = [
   },
   {
     name: "Nos livres",
-    href: ["/admin/books"],
+    href: [
+      "/admin/books",
+      "/admin/books/overdue",
+      "/admin/books/borrowed",
+      "/admin/books/available",
+      "/admin/books/reserve",
+    ],
     icon: <TbBook size={"24px"} />,
   },
   {
     name: "Membres",
-    href: ["/admin/members"],
+    href: [
+      "/admin/membres",
+      "/admin/membres/overdue",
+      "/admin/membres/borrowed",
+      "/admin/membres/available",
+      "/admin/membres/reserve",
+    ],
     icon: <RiContactsLine size={"24px"} />,
   },
   {
@@ -35,7 +47,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useAuth();
   return (
     <main className="bg-slate-100 w-screen h-screen">
       <NavBar />

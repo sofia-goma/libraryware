@@ -13,10 +13,10 @@ export default function Page({}: Props) {
   return (
     <div className="mx-[5%] mt-[2vh] w-[80%] h-[88vh] overflow-y-scroll scrollbar-none  scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
       <Statistique books={false} />
-      <OverdueTab val={false} />
-      <BorrowedTab val={false} />
-      <ReserveTab val={false} />
-      <AvailableTab val={false} />
+      <OverdueTab val={false} all={false} />
+      <BorrowedTab val={false} all={false} />
+      <ReserveTab val={false} all={false} />
+      <AvailableTab val={false} all={false} />
     </div>
   );
 }

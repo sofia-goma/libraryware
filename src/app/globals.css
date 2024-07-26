@@ -17,9 +17,13 @@
 }
 
 @layer base {
-  body {
+  .loading {
     @apply bg-cover bg-fixed bg-no-repeat;
-    background-image: url("/background.png");
+    background-image: url("/background1.jpg");
+  }
+  .form {
+    @apply bg-cover bg-fixed bg-no-repeat;
+    background-image: url("/background2.jpg");
   }
 }
 

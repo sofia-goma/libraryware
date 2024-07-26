@@ -10,6 +10,7 @@ import { MyContext } from "@/lib/context";
 import Badge from "@/ui/badge";
 import { toastError } from "@/lib/toast";
 import Loading from "./loading";
+import { GrLinkNext } from "react-icons/gr";
 
 type Props = {};
 
@@ -62,13 +63,13 @@ export default function Page({}: Props) {
   };
 
   return (
-    <main className="flex items-center h-[100vh] gap-[8%]">
-      <div className="m-[3%]">
-        <Logo />
+    <main className="flex items-center h-[100vh] w-screen form">
+      <div className="m-[4vw] w-1/2">
+        <Logo active={false} />
       </div>
-      <div className="bg-[#576980] h-auto p-[4%] rounded-[30px] w-[30vw]">
-        <div className="flex flex-col items-center text-white gap-2 mb-3">
-          <h1 className="text-lg text-[#2D7DC4]">
+      <div className="bg-[#3c596899] h-auto p-[4vw] rounded-[30px] w-[40vw]">
+        <div className="flex flex-col items-center text-[#f2efdd] gap-2 mb-3">
+          <h1 className="text-lg text-[#f2efdd]">
             Choisisez vos tendances préferés!
           </h1>
         </div>
@@ -90,9 +91,11 @@ export default function Page({}: Props) {
         <div className=" flex items-center justify-between w-full pt-2">
           <div
             onClick={() => onClick("passe")}
-            className="text-sm text-white hover:text-[#F4555A] text-right w-full"
+            className="text-sm text-[#f2efdd] flex justify-end items-center gap-2 hover:gap-0 hover:transition-all hover:pr-1 w-full cursor-pointer"
           >
-            Passer
+            <span>Passer</span>
+
+            <GrLinkNext />
           </div>
         </div>
       </div>

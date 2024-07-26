@@ -6,9 +6,10 @@ import UserTab from "./userTab";
 
 type Props = {
   val: boolean;
+  all: boolean;
 };
 
-export default function ReserveTab({ val }: Props) {
+export default function ReserveTab({ val, all }: Props) {
   const headers = val
     ? ["ID", "Cover", "Titre", "Catégorie", "Statut", ""]
     : ["ID", "Profile", "Nom", "Prénom", "Info", "Jours"];
@@ -22,7 +23,7 @@ export default function ReserveTab({ val }: Props) {
   else
     return (
       <div className="my-4">
-        <UserTab headers={headers} title="Reserve" users={users} />
+        <UserTab headers={headers} title="Reserve" users={users} all={all} />
       </div>
     );
 }

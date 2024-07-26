@@ -43,7 +43,7 @@ export default function Input({
         htmlFor={name}
         className={`my-1 ${
           type === "checkbox" ? "text-[0.7rem]" : "text-sm"
-        } text-white`}
+        } text-[#f2efdd]`}
       >
         {text}
       </label>

@@ -29,9 +29,7 @@ export default function Statistique({ books }: Props) {
   ];
   return (
     <div>
-      <div className="text-md mx-2 flex gap-6 items-center h-full  bg-white shadow-slate-800 drop-shadow-lg border-t border-l">
-        <Tab items={items} />
-      </div>
+      <Tab items={items} />
       <div className="flex justify-between">
         {chart.map((el, i) => (
           <CartChart

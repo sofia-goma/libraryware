@@ -11,13 +11,13 @@ export default function NavBar({}: Props) {
         <span className="text-[#F4555A]">Library</span>
         <span className="text-[#2D7DC4]">Ware</span>
       </h1>
-      <div className="bg-white rounded-[40px] w-[30%] h-8 shadow-sm flex">
+      <div className="bg-[#f2efdd] rounded-[40px] w-[30%] h-8 shadow-sm flex">
         <input
           type="text"
           className="py-2 px-4 focus:outline-none w-full rounded-l-[40px] border-r border-gray-300"
           placeholder="Rechercher un livre..."
         />
-        <button className=" px-4 py-2 text-white">
+        <button className=" px-4 py-2 text-[#f2efdd]">
           <IoMdSearch color="#F4555A" />
         </button>
       </div>

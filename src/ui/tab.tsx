@@ -11,7 +11,7 @@ type Props = {
 export default function Tab({ items }: Props) {
   const pathname = usePathname();
   return (
-    <>
+    <div className="text-md mx-2 flex gap-6 items-center h-full  bg-[#f2efdd] shadow-slate-800 drop-shadow-lg border-t border-l">
       {items.map((t, i) => (
         <Link
           href={t.href}
@@ -25,6 +25,6 @@ export default function Tab({ items }: Props) {
           {t.title}
         </Link>
       ))}
-    </>
+    </div>
   );
 }

@@ -5,9 +5,10 @@ import UserTab from "./userTab";
 
 type Props = {
   val: boolean;
+  all: boolean;
 };
 
-export default function OverdueTab({ val }: Props) {
+export default function OverdueTab({ val, all }: Props) {
   const headers = val
     ? ["ID", "Cover", "Titre", "Catégorie", "Statut", "Jours"]
     : ["ID", "Profile", "Nom", "Prénom", "Info", "Jours"];
@@ -21,7 +22,7 @@ export default function OverdueTab({ val }: Props) {
   else
     return (
       <div className="my-4">
-        <UserTab headers={headers} title="Overdue" users={users} />
+        <UserTab headers={headers} title="Overdue" users={users} all={all} />
       </div>
     );
 }

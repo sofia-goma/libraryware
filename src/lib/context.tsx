@@ -28,9 +28,12 @@ export const Context = ({ children }: Props) => {
   const categories = useFetch("http://localhost:3000/api/category");
   const books = useAxios(`http://localhost:3000/api/books`);
   const users = useAxios(`http://localhost:3000/api/users`);
+  const user = useAxios(`http://localhost:3000/api/users/${userId}`);
 
   return (
-    <MyContext.Provider value={{ state, setState, categories, books, users }}>
+    <MyContext.Provider
+      value={{ state, setState, categories, books, users, user }}
+    >
       {children}
     </MyContext.Provider>
   );

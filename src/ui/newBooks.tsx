@@ -15,12 +15,15 @@ export default function NewBook({}: Props) {
       <div className="bg-[#3c596899] h-full flex justify-center items-center rounded-l-[21px] w-12 shadow">
         <h1 className="text-2xl rotate-[-90deg]">Nouveautés</h1>
       </div>
-      <div className=" overflow-x-scroll scrollbar-none  scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
-        <div className="flex gap-3 mr-3">
-        {[...books.data.data, ...books.data.data].map((el: any, i: number) => (
-          <UserBook cover={el.cover} id={el.id} key={i} />
-        ))}
-      </div></div>
+      <div className="overflow-x-scroll scrollbar-none rounded-r-2xl scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+        <div className="flex gap-3 h-[23vh]">
+          {[...books.data.data, ...books.data.data].map(
+            (el: any, i: number) => (
+              <UserBook cover={el.cover} id={el.id} key={i} />
+            )
+          )}
+        </div>
+      </div>
     </div>
   );
 }

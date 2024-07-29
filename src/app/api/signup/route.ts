@@ -87,7 +87,9 @@ export async function POST(req: Request) {
     return NextResponse.json({
       message: "Successfully added user",
       data: newUser,
-      token,
+      token: token,
+      id: newUser.userId,
+      role: "user",
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

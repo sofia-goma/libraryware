@@ -6,7 +6,7 @@ const Skeleton: React.FC = () => {
   return (
     <main className="flex items-center h-[100vh] gap-[8%]">
       <div className="m-[3%]">
-        <Logo />
+        <Logo active={false} />
       </div>
       <div className="bg-[#576980] h-auto p-[4%] rounded-[30px] w-[30vw]">
         <div className="flex flex-col items-center text-[#f2efdd] gap-2 mb-3">

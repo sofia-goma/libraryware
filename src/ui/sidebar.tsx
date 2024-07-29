@@ -7,7 +7,7 @@ type Props = {
 
 export default function Sidebar({ links }: Props) {
   return (
-    <div className=" bg-[#f2f8ff] h-[90vh] w-[20%] shadow-sm">
+    <div className=" bg-[#f2f8ff] h-[90vh] w-[20vw] shadow-sm">
       <NavLinks links={links} />
     </div>
   );

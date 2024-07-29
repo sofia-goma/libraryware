@@ -54,6 +54,13 @@ export default function Page({}: Props) {
       console.log(response);
 
       if (response.status === 200) {
+        if (state.remember) {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("id", response.data.id);
+        } else if (!state.remember) {
+          sessionStorage.setItem("token", response.data.token);
+          sessionStorage.setItem("id", response.data.id);
+        }
         router.push("/user/dashboard");
       }
     } catch (error: any) {

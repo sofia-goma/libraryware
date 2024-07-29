@@ -35,7 +35,7 @@ const Citation = () => {
   };
 
   return (
-    <div className="bg-[#3c596899] text-xl text-slate-100 p-5 w-[30vw] h-[25vh] rounded-3xl">
+    <div className="bg-[#3c596899] text-xl text-slate-100 p-5 w-[30vw] h-[25vh] rounded-3xl shadow-md">
       <p className="text-center h-16">{citations[currentIndex].text}</p>
       <p className="text-center italic">{`- ${citations[currentIndex].author}`}</p>
       <div className="flex gap-2 justify-end items-end">

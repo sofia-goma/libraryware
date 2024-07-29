@@ -3,6 +3,7 @@
 import useAxios from "@/lib/axios.fetch";
 import React, { useEffect, useState } from "react";
 import Citation from "../../../ui/citations";
+import NewBook from "@/ui/newBooks";
 
 type Props = {};
 
@@ -24,8 +25,9 @@ export default function Page({}: Props) {
     console.log("Request ...");
   }
   return (
-    <div className="mx-[5%] pt-[2vh] w-[80%] h-[88vh] overflow-y-scroll scrollbar-none  scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+    <div className="flex gap-[5vw] mx-[5vw] pt-[2vh] w-[80%] h-[88vh] overflow-y-scroll scrollbar-none  scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
       <Citation />
+      <NewBook />
     </div>
   );
 }

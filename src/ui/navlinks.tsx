@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import clsx from "clsx";
 
 export default function NavLinks({ links }: { links: any[] }) {
   const pathname = usePathname();

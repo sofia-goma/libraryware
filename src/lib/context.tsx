@@ -13,7 +13,7 @@ interface MyContextProps {
   setState: React.Dispatch<React.SetStateAction<object>>;
 }
 
-export const MyContext = createContext({});
+export const  MyContext = createContext({});
 
 export const Context = ({ children }: Props) => {
   const [userId, setUserId] = useState<string | null>();

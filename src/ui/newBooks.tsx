@@ -6,7 +6,6 @@ type Props = {};
 
 export default function NewBook({}: Props) {
   const { books }: { books?: any } = useContext(MyContext);
-  console.log(books);
   if (!books.data) {
     return;
   }

@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     if (role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 403 });
     }
-    const { name } = await req.json();
+    const { name, description } = await req.json();
 
     if (!name) throw new Error("Invalid data");
 
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     const category = await prisma.category.create({
       data: {
         name,
-        description: null,
+        description,
       },
       select: {
         id: true,

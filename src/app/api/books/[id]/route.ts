@@ -4,7 +4,7 @@ import { middleware } from "../../../../../middleware";
 
 type Book = {
   categoryId?: number;
-  authorId?: number;
+  author?: number;
   title?: string;
   cover?: string;
   publicationYear?: number;
@@ -37,7 +37,7 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
 
     const book = await prisma.book.findFirst({
       where: { id },
-      include: { category: true, author: true, loan: true },
+      include: { category: true, loan: true },
     });
 
     if (!book) throw new Error("Book not found");
@@ -67,7 +67,7 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
 
     const body = await req.json();
 
-    const { categoryId, authorId, code, statut }: Book = body;
+    const { categoryId, author, code, statut }: Book = body;
 
     const verifyBook = await prisma.book.findFirst({
       where: { id },
@@ -86,13 +86,6 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
         where: { id: categoryId },
       });
       if (!verifyCategory) throw new Error(`${categoryId} category  not exist`);
-    }
-
-    if (authorId) {
-      const verifyAuthor = await prisma.author.findFirst({
-        where: { id: authorId },
-      });
-      if (!verifyAuthor) throw new Error(`${authorId} author  not exist`);
     }
 
     if (code) {
@@ -115,7 +108,7 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
       data: {
         ...body,
       },
-      include: { category: true, author: true, loan: true },
+      include: { category: true, loan: true },
     });
     return NextResponse.json({
       message: "Book update successfully",

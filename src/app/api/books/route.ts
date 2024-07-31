@@ -4,7 +4,7 @@ import { middleware } from "../../../../middleware";
 
 type Book = {
   categoryId: number;
-  authorId: number;
+  author: number;
   title: string;
   cover: string;
   publicationYear: number;
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 403 });
     }
     const books = await prisma.book.findMany({
-      include: { category: true, author: true, loan: true },
+      include: { category: true, loan: true },
     });
     return NextResponse.json({
       message: "Here is books list",
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     }
     const {
       categoryId,
-      authorId,
+      author,
       title,
       cover,
       publicationYear,
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
 
     // if (
     //   !categoryId ||
-    //   !authorId ||
+    //   !author ||
     //   !title ||
     //   !cover ||
     //   !publicationYear ||
@@ -78,12 +78,6 @@ export async function POST(req: NextRequest) {
 
     if (!verifyCategory) throw new Error("Category not found");
 
-    const verifyAuthor = await prisma.author.findFirst({
-      where: { id: authorId },
-    });
-
-    if (!verifyAuthor) throw new Error("Author not found");
-
     const verifyCode = await prisma.book.findFirst({
       where: { code },
     });
@@ -93,7 +87,7 @@ export async function POST(req: NextRequest) {
     const book = await prisma.book.create({
       data: {
         categoryId,
-        authorId,
+        author,
         title,
         cover,
         publicationYear,

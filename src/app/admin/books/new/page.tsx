@@ -31,7 +31,7 @@ const Page = ({}: Props) => {
     if (selectedValue) {
       const response = await axios.post("/api/books", {
         categoryId: Number(selectedValue),
-        authorId: state.author || 1,
+        author: state.author || 1,
         title: state.details.title,
         cover: `https://covers.openlibrary.org/b/id/${state.details.covers[0]}-L.jpg`,
         publicationYear: Number(state.details.publish_date) || 0,

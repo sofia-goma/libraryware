@@ -14,9 +14,9 @@ datasource db {
 }
 
 enum Statut{
-  available
-  reserve
-  borrowed
+  Disponible
+  Reserve
+  Lecture
 }
 
 model Admin {
@@ -49,16 +49,15 @@ model User {
 model Book {
   id                   Int       @map("ID") @id @default(autoincrement())
   categoryId           Int          @map("#id_sous_catégorie")
-  authorId             Int          @map("#id_auteur")
-  title                String       @map("Titre")
-  cover                String       @map("Cover")
-  publicationYear      Int          @map("Année de publication")
-  numberOfPage         Int          @map("Nombre des pages")
-  code                 String       @map("Code du livre") @unique
-  edition              String       @map("Maison d'édition")
-  statut               Statut?       @map("Statut") @default(available)
+  author               Int?          @map("#id_auteur")
+  title                String?       @map("Titre")
+  cover                String?       @map("Cover")
+  publicationYear      Int?          @map("Année de publication")
+  numberOfPage         Int?          @map("Nombre des pages")
+  code                 String?       @map("Code du livre") @unique
+  edition              String?       @map("Maison d'édition")
+  statut               Statut?       @map("Statut") @default(Disponible)
   category             Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  author               Author       @relation(fields: [authorId], references: [id], onDelete: SetDefault)
   loan                 Loan[]
 }
 
@@ -66,20 +65,8 @@ model Category {
   id                   Int          @map("ID")  @id @default(autoincrement())
   name                 String       @map("Nom")
   description          String?      @map("Description")
-  parentId             Int?         @map("Sous-catégorie de")
-  parent               Category?    @relation("CategoryToCategorie", fields: [parentId], references: [id], onDelete: Cascade)
-  children             Category[]   @relation("CategoryToCategorie")
   user                 User[]       @relation("UserCategory")
   book                 Book[]
-}
-
-model Author {
-  id                   Int          @map("ID") @id @default(autoincrement())
-  name                 String       @map("Nom")
-  firstname            String?      @map("Prénom")
-  photo                String?      @map("Photo de Profile")
-  description          String?      @map("A propos")
-  books                Book[]
 }
 
 model Loan {

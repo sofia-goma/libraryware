@@ -5,8 +5,7 @@ import { middleware } from "../../../../middleware";
 export async function GET(req: NextRequest) {
   try {
     const categories = await prisma.category.findMany({
-      where: { parentId: null },
-      include: { children: true, user: true },
+      include: { user: true },
     });
     return NextResponse.json({
       message: "Here is the categories of our library",
@@ -40,7 +39,6 @@ export async function POST(req: NextRequest) {
       data: {
         name,
         description: null,
-        parentId: null,
       },
       select: {
         id: true,

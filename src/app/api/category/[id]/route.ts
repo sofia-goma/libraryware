@@ -28,8 +28,8 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
     const id = Number(params.id);
 
     const category = await prisma.category.findFirst({
-      where: { id, description: null, parent: null },
-      include: { user: true, children: true },
+      where: { id },
+      include: { user: true },
     });
 
     if (!category) throw new Error("Category not found");
@@ -83,7 +83,7 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
       data: {
         ...body,
       },
-      include: { children: true, user: true },
+      include: { user: true },
     });
     return NextResponse.json({
       message: "Category update successfully",
@@ -118,10 +118,6 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
     await prisma.category.update({
       where: { id },
       data: { user: { set: [] } },
-    });
-
-    await prisma.category.deleteMany({
-      where: { parentId: id },
     });
 
     const category = await prisma.category.delete({

@@ -5,7 +5,7 @@ import axios from "axios";
 
 type Book = {
   categoryId: number;
-  authorId: number;
+  author: number;
   title: string;
   cover: string;
   publicationYear: number;

@@ -6,7 +6,6 @@ import Logo from "@/ui/logo";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import { MyContext } from "@/lib/context";
 import { toastError } from "@/lib/toast";

@@ -5,7 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 type Props = {
   type: string;
-  text: string;
+  text?: string;
   name?: string;
   placeholder?: string;
   register: UseFormRegister<FieldValues>;

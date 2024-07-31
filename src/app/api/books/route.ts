@@ -60,17 +60,17 @@ export async function POST(req: NextRequest) {
       edition,
     }: Book = await req.json();
 
-    if (
-      !categoryId ||
-      !authorId ||
-      !title ||
-      !cover ||
-      !publicationYear ||
-      !numberOfPage ||
-      !code ||
-      !edition
-    )
-      throw new Error("Invalid data");
+    // if (
+    //   !categoryId ||
+    //   !authorId ||
+    //   !title ||
+    //   !cover ||
+    //   !publicationYear ||
+    //   !numberOfPage ||
+    //   !code ||
+    //   !edition
+    // )
+    // throw new Error("Invalid data");
 
     const verifyCategory = await prisma.category.findFirst({
       where: { id: categoryId },

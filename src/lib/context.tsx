@@ -13,7 +13,7 @@ interface MyContextProps {
   setState: React.Dispatch<React.SetStateAction<object>>;
 }
 
-export const  MyContext = createContext({});
+export const MyContext = createContext({});
 
 export const Context = ({ children }: Props) => {
   const [userId, setUserId] = useState<string | null>();
@@ -28,7 +28,7 @@ export const Context = ({ children }: Props) => {
   const categories = useFetch("http://localhost:3000/api/category");
   const books = useAxios(`http://localhost:3000/api/books`);
   const users = useAxios(`http://localhost:3000/api/users`);
-  const user = useAxios(`http://localhost:3000/api/users/${userId}`);
+  const user = useAxios(`http://localhost:3000/api/users/${userId && userId}`);
 
   return (
     <MyContext.Provider

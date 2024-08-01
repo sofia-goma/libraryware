@@ -25,10 +25,10 @@ export const Context = ({ children }: Props) => {
   }, []);
 
   const [state, setState] = useState();
-  const categories = useFetch("http://localhost:3000/api/category");
-  const books = useAxios(`http://localhost:3000/api/books`);
-  const users = useAxios(`http://localhost:3000/api/users`);
-  const user = useAxios(`http://localhost:3000/api/users/${userId && userId}`);
+  const categories = useFetch("/api/category");
+  const books = useAxios(`/api/books`);
+  const users = useAxios(`/api/users`);
+  const user = useAxios(`/api/users/${userId && userId}`);
 
   return (
     <MyContext.Provider

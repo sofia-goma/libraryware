@@ -11,11 +11,11 @@ const options: Options = {
     },
     servers: [
       {
-        url: "http://localhost:3000", // change this to your server URL
+        url: "https://libraryware.onrender.com/",
       },
     ],
   },
-  apis: ["./src/app/api/**/*.ts", "./src/app/**/*.ts"], // path to the API docs
+  apis: ["./src/app/api/**/*.ts", "./src/app/**/*.ts"],
 };
 
 const swaggerSpec = swaggerJSDoc(options);

@@ -38,7 +38,7 @@ export default function CardBook({ books, title }: Props) {
   if (data)
     return data.data.reverse().map((el, i) => (
       <Link
-        href={`/admin/book/${el.id}`}
+        href={`#`}
         className="bg-white shadow-lg rounded-xl flex justify-between items-center p-4 my-2"
         key={i}
       >

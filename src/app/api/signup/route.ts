@@ -32,8 +32,6 @@ export async function POST(req: Request) {
       where: { email },
     });
 
-    console.log(userVerifyMail);
-
     if (userVerifyMail)
       return NextResponse.json(
         { message: "Email already exist" },

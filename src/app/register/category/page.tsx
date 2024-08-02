@@ -30,7 +30,6 @@ export default function Page({}: Props) {
   if (!categories) {
     router.push("/register");
   }
-  console.log(categories);
   const { data, isLoading, error: isError } = categories;
   if (!state) {
     router.push("/register");
@@ -50,8 +49,6 @@ export default function Page({}: Props) {
       if (str === "valide") state.category = choice;
 
       const response = await axios.post("/api/signup", state);
-
-      console.log(response);
 
       if (response.status === 200) {
         if (state.remember) {

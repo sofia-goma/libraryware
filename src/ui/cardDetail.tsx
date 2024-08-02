@@ -4,7 +4,6 @@ import React from "react";
 type Props = { book: any };
 
 function CardDetail({ book }: Props) {
-  console.log(book);
   return (
     <div className="flex gap-3 bg-slate-50 p-5 shadow-md rounded-md">
       <Image

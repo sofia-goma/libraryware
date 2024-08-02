@@ -9,6 +9,10 @@ import { toast } from "react-toastify";
 type Props = {};
 
 const Page = ({}: Props) => {
+  const back = () => {
+    router.push("/admin/books");
+  };
+
   const {
     state,
     categories,
@@ -16,11 +20,20 @@ const Page = ({}: Props) => {
   }: { state?: any; categories?: any; setState?: any } = useContext(MyContext);
   const router = useRouter();
   const [selectedValue, setSelectedValue] = useState("");
-  if (!state) return;
-
-  const back = () => {
-    router.push("/admin/books");
-  };
+  if (!state)
+    return (
+      <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center backdrop-blur-sm z-50">
+        <div className="bg-white p-6 relative rounded-lg shadow-lg w-96">
+          <h2 className="text-2xl font-bold mb-4">Pas de livre pour cet ISN</h2>
+          <button
+            onClick={back}
+            className="px-4 py-2 rounded-xl bg-red-300 m-2"
+          >
+            Annuler
+          </button>
+        </div>
+      </div>
+    );
 
   const handleSelectChange = (event: any) => {
     setSelectedValue(event.target.value);
@@ -33,7 +46,9 @@ const Page = ({}: Props) => {
         categoryId: Number(selectedValue),
         author: state.author || 1,
         title: state.details.title,
-        cover: `https://covers.openlibrary.org/b/id/${state.details.covers[0]}-L.jpg`,
+        cover: state.details.covers
+          ? `https://covers.openlibrary.org/b/id/${state.details.covers[0]}-L.jpg`
+          : null,
         publicationYear: Number(state.details.publish_date) || 0,
         numberOfPage: Number(state.details.number_of_pages) || 0,
         code: state.bib_key,
@@ -52,20 +67,23 @@ const Page = ({}: Props) => {
       window.location.href = "/admin/books";
     }
   };
-
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center backdrop-blur-sm z-50">
       <div className="bg-white p-6 relative rounded-lg shadow-lg w-96">
         <form onSubmit={handleSubmit}>
           <h2 className="text-2xl font-bold mb-4">Les infos du livre</h2>
           <div className="flex gap-2">
-            <div className="">
-              <Image
-                src={`https://covers.openlibrary.org/b/id/${state.details.covers[0]}-L.jpg`}
-                alt="alt"
-                width={150}
-                height={150}
-              />
+            <div className="flex justify-center items-center">
+              {state.details.covers ? (
+                <Image
+                  src={`https://covers.openlibrary.org/b/id/${state.details.covers[0]}-L.jpg`}
+                  alt="alt"
+                  width={150}
+                  height={150}
+                />
+              ) : (
+                <h1 className="">{"PAS D'IMAGE"}</h1>
+              )}
             </div>
             <div>
               <h1 className="text-2xl font-semibold">{state.details.title}</h1>

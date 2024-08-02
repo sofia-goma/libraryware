@@ -39,6 +39,12 @@ export async function GET(req: NextRequest) {
     const books = await axios.get(
       `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=details`
     );
+    if (!books) {
+      return NextResponse.json(
+        { message: "Pas de livre correspondant à cet ISN" },
+        { status: 400 }
+      );
+    }
     return NextResponse.json({
       message: "Here is books list",
       data: books.data,

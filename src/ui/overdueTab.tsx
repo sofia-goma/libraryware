@@ -13,6 +13,7 @@ export default function OverdueTab({ val, all }: Props) {
     ? ["ID", "Cover", "Titre", "Catégorie", "Statut", "Jours"]
     : ["ID", "Profile", "Nom", "Prénom", "Info", "Jours"];
   const { books, users }: { books?: any; users?: any } = useContext(MyContext);
+  if (!books || !users) return;
   if (val)
     return (
       <div className="my-4">

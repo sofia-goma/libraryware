@@ -42,7 +42,7 @@ export default function CardUser({ users, title, all }: Props) {
 
   if (data) {
     const usersData = all ? data.data : data.data.filter((el, i) => i < 3);
-    return usersData.map((el, i) => (
+    return usersData.reverse().map((el, i) => (
       <Link
         href={`#`}
         className="bg-white shadow-lg rounded-xl flex justify-between items-center p-4 my-2"

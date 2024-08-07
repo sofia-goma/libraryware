@@ -16,11 +16,9 @@ export default function NewBook({}: Props) {
       </div>
       <div className="overflow-x-scroll scrollbar-none rounded-r-2xl scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
         <div className="flex gap-3 h-[23vh]">
-          {[...books.data.data, ...books.data.data].map(
-            (el: any, i: number) => (
-              <UserBook cover={el.cover} id={el.id} key={i} />
-            )
-          )}
+          {books.data.data.reverse().map((el: any, i: number) => (
+            <UserBook cover={el.cover} id={el.id} key={i} />
+          ))}
         </div>
       </div>
     </div>

@@ -61,8 +61,13 @@ export default function Page({}: Props) {
         router.push("/user/dashboard");
       }
     } catch (error: any) {
-      if (!error.response) toastError(error.message);
-      else toastError(error.response.state.message);
+      if (!error.response) toastError(error.message ? error.message : null);
+      else
+        toastError(
+          error?.response?.state?.message
+            ? error?.response?.state?.message
+            : null
+        );
     }
   };
 

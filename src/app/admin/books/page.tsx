@@ -10,7 +10,7 @@ type Props = {};
 
 export default function Page({}: Props) {
   const headers = ["ID", "Cover", "Titre", "Catégorie", "Statut"];
-  const { books }: { books?: any } = useContext(MyContext);
+  // const { books }: { books?: any } = useContext(MyContext);
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const onclose = () => setShow(false);
@@ -22,7 +22,7 @@ export default function Page({}: Props) {
         </button>
         <PopUp show={show} onClose={onclose} />
       </div>
-      <BookTab headers={headers} books={books} />
+      {/* <BookTab headers={headers}} /> */}
     </div>
   );
 }

@@ -13,12 +13,12 @@ import { toastError } from "@/lib/toast";
 type Props = {};
 
 export default function Page({}: Props) {
-  const { setState }: { setState?: Dispatch<SetStateAction<object>> } =
-    useContext(MyContext);
+  // const { setState }: { setState?: Dispatch<SetStateAction<object>> } =
+  //   useContext(MyContext);
 
-  if (!setState) {
-    throw new Error("setState is not defined in MyContext");
-  }
+  // if (!setState) {
+  //   throw new Error("setState is not defined in MyContext");
+  // }
 
   const router = useRouter();
   const {
@@ -31,7 +31,7 @@ export default function Page({}: Props) {
     try {
       if (data.password !== data.confirmpassword)
         throw new Error("Les mots de passe sont incoherent");
-      setState(data);
+      // setState(data);
       router.push("/register/category");
     } catch (error: any) {
       toastError(error.message);
@@ -55,12 +55,7 @@ export default function Page({}: Props) {
               Bienvenue dans à LibraryWare !
             </h1>
           </div>
-          <form
-            className="flex flex-col items-center"
-            action=""
-            method=""
-            onSubmit={handleSubmit(onSubmit, onError)}
-          >
+          <form className="flex flex-col items-center" action="" method="">
             <div className="flex gap-2">
               <Input
                 text="Prénom"

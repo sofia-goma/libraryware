@@ -319,7 +319,7 @@ export default function Home() {
                 </g>
               </svg>
               <h3 className="text-gray-800 text-xl font-semibold mb-3">
-                Communication
+                Communications
               </h3>
               <p className="text-gray-600 text-sm">
                 Tailor our product to suit your needs Seamless communication for

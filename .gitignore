@@ -42,3 +42,4 @@ docker-compose.yml
 #pnpm file
 pnpm-lock.yaml
 .env.local
+.env

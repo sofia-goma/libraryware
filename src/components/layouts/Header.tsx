@@ -1,29 +1,41 @@
+"use client";
+import Router from "next/navigation";
 import Searchbar from "../ui/Searchbar";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
+import Logo from "../ui/Logo";
+
+
 export default function Header() {
+  // const router = Router();
+  const goTodasboard = () => {
+    // // Router.redirect('/register/');
+    // const navigate = Router.useRouter();
+    // navigate.push('/register');
+    console.log('going to dashboard...');
+  }
   return (
-    <header className="border-b font-[sans-serif] tracking-wide z-50 sticky top-0">
-      <section className="py-2 bg-[#31abe7] text-white text-center px-10">
+    <header className="tracking-wide z-50 sticky top-0">
+      <section className="py-2 bg-blue-500 text-white text-center px-10">
         <p className="text-sm">Summer sale: Save up to 40%</p>
       </section>
 
       <nav className="bg-white w-full border-b border-gray-200">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="https://flowbite.com/"
+        <div className="flex flex-wrap items-center justify-between mx-auto p-4 container">
+          <Link
+            href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              className="h-8"
-              alt="Flowbite Logo"
-            />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <Logo />
+            {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               LibraryWave
-            </span>
-          </a>
+            </span> */}
+          </Link>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <Button title="Get started" />
+            <Button
+              title="Get started"
+              handleClick={goTodasboard}
+            />
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"

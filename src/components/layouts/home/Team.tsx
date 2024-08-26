@@ -2,8 +2,8 @@ import TeamCard from "@/components/ui/TeamCard";
 
 export default function Team() {
   return (
-    <div className="font-[sans-serif]">
-      <div className="max-w-2xl mx-auto text-center">
+    <div className="container">
+      <div className="text-center">
         <h2 className="text-gray-800 text-4xl font-extrabold">Meet our team</h2>
         <p className="text-gray-800 text-sm mt-4 leading-relaxed">
           Meet our team of professionals to serve you.

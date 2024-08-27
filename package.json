@@ -12,13 +12,17 @@
     "@auth/core": "^0.34.2",
     "@convex-dev/auth": "^0.0.60",
     "@prisma/client": "5.15.1",
+    "@radix-ui/react-slot": "^1.1.0",
     "@types/react-toastify": "^4.1.0",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "chart.js": "^4.4.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "convex": "^1.14.0",
     "json-web-token": "^3.2.0",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.436.0",
     "next": "14.2.4",
     "prisma": "^5.15.1",
     "react": "^18",
@@ -29,7 +33,9 @@
     "react-toastify": "^10.0.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "tailwind-scrollbar": "^3.1.0"
+    "tailwind-merge": "^2.5.2",
+    "tailwind-scrollbar": "^3.1.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

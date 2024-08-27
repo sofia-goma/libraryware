@@ -1,7 +1,6 @@
-import Button from "@/components/ui/Button"
+import { Button } from "@/components/ui/button";
 
 export default function Banner() {
-  const color = '[#B06AB3]'
     return (
         <div className="bg-gradient-to-r from-white to-blue-white  px-6 py-12 md:py-24">
           <div className="container mx-auto flex flex-col justify-center items-center text-center">
@@ -12,10 +11,7 @@ export default function Banner() {
               Elevate your style with our latest arrivals. Shop now and enjoy
               exclusive discounts!
             </p>
-
-            <Button 
-              title="show more"
-            />
+            <Button>SHOW MORE</Button>
           </div>
         </div>
 

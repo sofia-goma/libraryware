@@ -1,7 +1,8 @@
 "use client";
 import Router from "next/navigation";
+import { Button } from '@/components/ui/button';
 import Searchbar from "../ui/Searchbar";
-import Button from "@/components/ui/Button";
+
 import Link from "next/link";
 import Logo from "../ui/Logo";
 
@@ -32,10 +33,7 @@ export default function Header() {
             </span> */}
           </Link>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <Button
-              title="Get started"
-              handleClick={goTodasboard}
-            />
+            <Button>GET STARTED</Button>
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"

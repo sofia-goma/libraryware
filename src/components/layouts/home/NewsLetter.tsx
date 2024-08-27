@@ -1,4 +1,4 @@
-import Button from "@/components/ui/Button";
+import { Button } from "@/components/ui/button"
 
 export default function NewsLetter() {
     return (
@@ -19,10 +19,7 @@ export default function NewsLetter() {
               placeholder="Enter your email"
               className="w-full outline-none bg-transparent text-sm text-gray-800 px-4 py-3"
             />
-            <Button 
-              title="Submit"
-              className="rounded-full bg-red-500"
-            />
+            <Button>SUBMIT</Button>
             {/* <button
               type="button"
               className="bg-gray-700 hover:bg-gray-800 transition-all text-white font-semibold text-sm rounded-full px-6 py-3"

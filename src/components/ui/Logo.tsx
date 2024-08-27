@@ -1,8 +1,14 @@
+import Link from 'next/link';
+
 export default function Logo() {
     return (
-        <div className="border-2 border-blue-500 py-1">
-            <span>L</span>
-            <span>ibraryWave</span>
-        </div>
+        <Link className="text-white" href="/login">
+            <p className="text-lg font-light">
+                <span className=" mr-1 bg-background font-semibold text-lg py-1 px-2 rounded text-white">
+                    L
+                </span>
+                ibraryWave
+            </p>
+        </Link>
     )
 }

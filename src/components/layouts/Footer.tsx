@@ -1,15 +1,16 @@
 import NewsLetter from "./home/NewsLetter";
-
+import Logo from "../ui/Logo";
 export default function Footer() {
   return (
     <footer className="py-12">
       <NewsLetter />
       <div className="w-full container pt-6">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="border border-gray-200 bg-white p-4">
+          <Logo />
+          {/* <div className="border border-gray-200 bg-white p-4">
             <span>L</span>
             <span>ibraryWave</span>
-          </div>
+          </div> */}
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0">
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">

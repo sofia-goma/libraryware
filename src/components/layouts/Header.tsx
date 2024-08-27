@@ -1,8 +1,8 @@
 "use client";
+import { Separator } from '@/components/ui/separator';
 import Router from "next/navigation";
 import { Button } from '@/components/ui/button';
 import Searchbar from "../ui/Searchbar";
-
 import Link from "next/link";
 import Logo from "../ui/Logo";
 
@@ -17,8 +17,8 @@ export default function Header() {
   }
   return (
     <header className="tracking-wide z-50 sticky top-0">
-      <section className="py-2 bg-blue-500 text-white text-center px-10">
-        <p className="text-sm">Summer sale: Save up to 40%</p>
+      <section className="py-2 bg-primary text-white text-center px-10">
+        <p className="text-sm">Find Your Summer Escape with Our Exclusive Book Deals!</p>
       </section>
 
       <nav className="bg-white w-full border-b border-gray-200">
@@ -27,13 +27,18 @@ export default function Header() {
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
+            {/* <div className="glass-logo bg-green-400 max-[770px]:self-start  flex px-5 items-center justify-center py-2  p-4 z-20">
+              <Logo />
+            </div> */}
             <Logo />
             {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               LibraryWave
             </span> */}
           </Link>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <Button>GET STARTED</Button>
+            <Link href='/login'>
+              <Button>GET STARTED</Button>
+            </Link>
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
@@ -64,6 +69,7 @@ export default function Header() {
           </div>
         </div>
       </nav>
+      <Separator />
     </header>
   );
 }

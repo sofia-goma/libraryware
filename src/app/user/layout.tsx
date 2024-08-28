@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode } from "react";
-import Link from "next/link"
+import Link from "next/link";
 import {
   Bell,
   CircleUser,
@@ -17,19 +17,19 @@ import {
   Bookmark,
   WorkflowIcon,
   Workflow,
-  User
-} from "lucide-react"
+  User,
+} from "lucide-react";
 import Citation from "@/ui/citations";
 import NewBook from "@/ui/newBooks";
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,11 +37,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import Logo from '@/components/shared/Logo';
-
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import React, { useContext } from "react";
+import { MyAuth0Context } from "@/lib/oauth";
+import Logo from "@/components/shared/Logo";
 
 import {
   IoHome,
@@ -98,6 +99,7 @@ export default function UserLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const { logout } = useContext(MyAuth0Context) as IAuth0;
   return (
     <html lang="en">
       <body>
@@ -105,13 +107,19 @@ export default function UserLayout({
           <div className="hidden border-r bg-muted/40 md:block">
             <div className="flex h-full max-h-screen flex-col gap-2">
               <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-                <Link href="/" className="flex items-center gap-2 font-semibold">
-
+                <Link
+                  href="/"
+                  className="flex items-center gap-2 font-semibold"
+                >
                   {/* <Package2 className="h-6 w-6" /> */}
                   {/* <span className="">Acme Inc</span> */}
                   <Logo />
                 </Link>
-                <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="ml-auto h-8 w-8"
+                >
                   <Bell className="h-4 w-4" />
                   <span className="sr-only">Toggle notifications</span>
                 </Button>
@@ -177,8 +185,8 @@ export default function UserLayout({
                   <CardHeader className="p-2 pt-0 md:p-4">
                     <CardTitle>Upgrade to Pro</CardTitle>
                     <CardDescription>
-                      Unlock all features and get unlimited access to our support
-                      team.
+                      Unlock all features and get unlimited access to our
+                      support team.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
@@ -283,7 +291,11 @@ export default function UserLayout({
               </div>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="secondary" size="icon" className="rounded-full">
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="rounded-full"
+                  >
                     <CircleUser className="h-5 w-5" />
                     <span className="sr-only">Toggle user menu</span>
                   </Button>
@@ -294,18 +306,16 @@ export default function UserLayout({
                   <DropdownMenuItem>Settings</DropdownMenuItem>
                   <DropdownMenuItem>Support</DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                  <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </header>
             {/* children */}
             <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-
               {children}
             </main>
 
             {/* children */}
-
           </div>
         </div>
       </body>

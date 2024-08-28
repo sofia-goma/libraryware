@@ -4,11 +4,11 @@
  */
 export const teamMembersData = [
   {
-    name: "Mark Adair",
-    job: "Software Engineer",
-    githubLink: "https://github.com/markadair",
-    linkedinLink: "https://www.linkedin.com/in/markadair/",
-    twitterLink: "https://twitter.com/markadair",
+    name: "Nganduli valivambene firmin",
+    job: "full stack Software Engineer",
+    githubLink: "https://github.com/firminfinva",
+    linkedinLink: "#",
+    twitterLink: "#",
     imageSrc: "https://readymadeui.com/team-2.webp",
   },
   {

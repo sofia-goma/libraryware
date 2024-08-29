@@ -1,11 +1,10 @@
 "use client";
-import { Separator } from '@/components/ui/separator';
+import { Separator } from "@/components/ui/separator";
 import Router from "next/navigation";
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import Searchbar from "../ui/Searchbar";
 import Link from "next/link";
 import Logo from "../ui/Logo";
-
 
 export default function Header() {
   // const router = Router();
@@ -13,12 +12,14 @@ export default function Header() {
     // // Router.redirect('/register/');
     // const navigate = Router.useRouter();
     // navigate.push('/register');
-    console.log('going to dashboard...');
-  }
+    console.log("going to dashboard...");
+  };
   return (
     <header className="tracking-wide z-50 sticky top-0">
       <section className="py-2 bg-primary text-white text-center px-10">
-        <p className="text-sm">Find Your Summer Escape with Our Exclusive Book Deals!</p>
+        <p className="text-sm">
+          Find Your Summer Escape with Our Exclusive Book Deals!
+        </p>
       </section>
 
       <nav className="bg-white w-full border-b border-gray-200">
@@ -36,7 +37,7 @@ export default function Header() {
             </span> */}
           </Link>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <Link href='/login'>
+            <Link href="/login">
               <Button>GET STARTED</Button>
             </Link>
             <button

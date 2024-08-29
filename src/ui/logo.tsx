@@ -7,7 +7,7 @@ type Props = {
 export default function Logo({ active }: Props) {
   return (
     <>
-      <h1 className="text-center w-full text-8xl leading-35">
+      <h1 className="text-center h-full w-full text-[30px] leading-35">
         <span className="text-[#3c5968] font-thin">Library</span>
         <span className="text-[#574c4a] font-black">Ware</span>
       </h1>

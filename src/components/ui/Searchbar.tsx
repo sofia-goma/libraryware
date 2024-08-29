@@ -1,6 +1,6 @@
 export default function Searchbar() {
   return (
-    <div className="flex rounded-full border-2 border-blue-500 overflow-hidden max-w-md mx-auto font-[sans-serif] w-full h-10">
+    <div className="flex rounded-full border-2 border-blue-500 overflow-hidden max-w-[100%] mx-auto font-[sans-serif] w-full h-10">
       <input
         type="email"
         placeholder="Search Something..."

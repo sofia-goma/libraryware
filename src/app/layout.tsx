@@ -2,17 +2,21 @@ import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
-import { Inter as FontSans } from "next/font/google";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import AuthProvider from "@/lib/authProvider";
 import MyAuth0Provider from "@/lib/oauth";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+// const fontSans = FontSans({
+//   subsets: ["latin"],
+//   variable: "--font-sans",
+// });
+
+// className={cn(
+//   "min-h-screen bg-background font-sans antialiased",
+//   fontSans.variable
+// )}
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,10 +34,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <AuthProvider>
         <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
-          )}
+          className={inter.className}
         >
           <ConvexAuthNextjsServerProvider>
             <MyAuth0Provider>{children}</MyAuth0Provider>

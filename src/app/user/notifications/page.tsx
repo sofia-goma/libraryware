@@ -27,13 +27,13 @@ const notifications = [
     },
 ];
 
-type CardProps = React.ComponentProps<typeof Card>
+// type CardProps = React.ComponentProps<typeof Card>
 
 
-export default function Notifications({ className, ...props }: CardProps) {
+export default function Notifications() {
     return (
         <>
-            <Card className={cn("w-[380px]", className)} {...props}>
+            <Card className={"w-[380px]"}>
                 <CardHeader>
                     <CardTitle>Notifications</CardTitle>
                     <CardDescription>You have 3 unread messages.</CardDescription>

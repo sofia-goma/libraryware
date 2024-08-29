@@ -12,12 +12,12 @@ export const teamMembersData = [
     imageSrc: "https://readymadeui.com/team-2.webp",
   },
   {
-    name: "Simon Konecki",
-    job: "Web Designer",
-    githubLink: "",
-    linkedinLink: "https://www.linkedin.com/in/simonkonecki/",
-    twitterLink: "https://twitter.com/simonkonecki",
-    imageSrc: "https://readymadeui.com/team-3.webp",
+    name: "Birusha Ndegeya",
+    job: "Software Developer",
+    githubLink: "https://github.com/BirushaNdegeya/",
+    linkedinLink: "https://www.linkedin.com/in/birusha-ndegeya-243b032a9",
+    twitterLink: "https://www.linkedin.com/in/birusha-ndegeya-243b032a9",
+    imageSrc: "https://avatars.githubusercontent.com/u/142086785?v=4",
   },
   {
     name: "Sophia",

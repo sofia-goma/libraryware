@@ -41,8 +41,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React, { useContext } from "react";
-import { MyAuth0Context } from "@/lib/oauth";
+import { AuthContext } from "@/lib/authProvider";
 import Logo from "@/components/shared/Logo";
+import isAuth from "@/lib/isAuth";
 
 import {
   IoHome,
@@ -93,13 +94,12 @@ const links = [
     icons: <IoSettings size={"24px"} color="white" />,
   },
 ];
-
-export default function UserLayout({
+function UserLayout({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const { logout } = useContext(MyAuth0Context) as IAuth0;
+  const { logout } = useContext(AuthContext) as IAuth0;
   return (
     <html lang="en">
       <body>
@@ -322,3 +322,7 @@ export default function UserLayout({
     </html>
   );
 }
+
+// export default isAuth(UserLayout); //To use once we're done
+
+export default UserLayout;

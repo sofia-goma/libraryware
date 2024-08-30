@@ -1,38 +1,80 @@
 "use client";
 
-import React from "react";
-import { Auth0Provider } from "@auth0/auth0-react";
-import { ConvexReactClient } from "convex/react";
-import { ConvexProviderWithAuth0 } from "convex/react-auth0";
+import React, {
+  useMemo,
+  useCallback,
+  createContext,
+  useEffect,
+  useState,
+} from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useMutation } from "convex/react";
+import type { Context, PropsWithChildren } from "react";
+import { api } from "../../convex/_generated/api";
 
-const address = process.env.NEXT_PUBLIC_CONVEX_URL;
-if (!address) throw new Error("Convex URL not found");
-const convex = new ConvexReactClient(address);
+export const AuthContext = createContext(null) as Context<IAuth0 | null>;
 
-const authDomain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN as string;
-const authClient = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string;
-if (!authDomain) throw new Error("Auth domain not found");
-if (!authClient) throw new Error("Auth client not found");
+export default function AuthProvider({ children }: PropsWithChildren) {
+  const {
+    loginWithRedirect: auth0Login,
+    logout: auth0Logout,
+    user,
+    isAuthenticated,
+    isLoading,
+  } = useAuth0();
 
-function AuthProvider({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <>
-      <Auth0Provider
-        domain={authDomain}
-        clientId={authClient}
-        useRefreshTokens={true}
-        cacheLocation="localstorage"
-      >
-        <ConvexProviderWithAuth0 client={convex}>
-          {children}
-        </ConvexProviderWithAuth0>
-      </Auth0Provider>
-    </>
+  const logout = useCallback(
+    () =>
+      auth0Logout({ logoutParams: { returnTo: `${window.location.origin}/` } }),
+    [auth0Logout]
   );
-}
 
-export default AuthProvider;
+  const login = useCallback(
+    (connection?: string) =>
+      auth0Login({
+        authorizationParams: {
+          connection: connection,
+          redirect_uri: `${window.location.origin}/user`,
+        },
+      }),
+    [auth0Login]
+  );
+
+  const auth0 = useMemo(
+    () =>
+      ({
+        login,
+        logout,
+        user: user,
+      }) as IAuth0,
+    [login, logout, user]
+  );
+
+  const checkOrCreateUserMutation = useMutation(api.user.checkOrCreateUser);
+
+  useEffect(() => {
+    if (!isAuthenticated || !user) {
+      return;
+    }
+
+    const syncUser = async () => {
+      try {
+        if (!user.sub || !user.email) {
+          throw Error("id or email not define");
+        }
+        const tuser = await checkOrCreateUserMutation({
+          user: {
+            sub: user.sub,
+            email: user.email,
+            name: user.name || "Anomynous",
+          },
+        });
+      } catch (error) {
+        return;
+      }
+    };
+    syncUser();
+  }, [isAuthenticated, checkOrCreateUserMutation, user]);
+
+  return <AuthContext.Provider value={auth0}>{children}</AuthContext.Provider>;
+}

@@ -14,4 +14,5 @@ interface IFeatures {
 interface IAuth0 {
   login: (connection?: string) => Promise<void>;
   logout: () => void | Promise<void>;
+  user?: User;
 }

@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
+import OAuthProvider from "@/lib/oauthProvider";
 import AuthProvider from "@/lib/authProvider";
-import MyAuth0Provider from "@/lib/oauth";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
@@ -32,16 +32,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <AuthProvider>
+      <OAuthProvider>
         <body
           className={inter.className}
         >
           <ConvexAuthNextjsServerProvider>
-            <MyAuth0Provider>{children}</MyAuth0Provider>
+            <AuthProvider>{children}</AuthProvider>
           </ConvexAuthNextjsServerProvider>
           <ToastContainer />
         </body>
-      </AuthProvider>
+      </OAuthProvider>
     </html>
   );
 }

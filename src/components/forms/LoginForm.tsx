@@ -14,10 +14,10 @@ import {
 } from "@/components/ui/card";
 import React, { useContext } from "react";
 import { ImGithub } from "react-icons/im";
-import { MyAuth0Context } from "@/lib/oauth";
+import { AuthContext } from "@/lib/authProvider";
 
 export default function LoginForm() {
-  const { login } = useContext(MyAuth0Context) as IAuth0;
+  const { login } = useContext(AuthContext) as IAuth0;
 
   return (
     <div className="min-h-screen flex fle-col items-center justify-center py-6 px-4">

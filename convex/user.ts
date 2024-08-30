@@ -14,7 +14,7 @@ export const checkOrCreateUser = mutation({
     const userId = args.user.sub;
     const existingUser = await ctx.db
       .query("users")
-      .withIndex("by_id", (q) => q.eq("_id", userId as Id<"users">))
+      .withIndex("email", (q) => q.eq("email", args.user.email))
       .first();
 
     if (existingUser) {
@@ -25,12 +25,25 @@ export const checkOrCreateUser = mutation({
     }
 
     const newUserInfo = {
-      _id: userId,
       email: args.user.email,
       name: args.user.name || "Anonymous",
     };
 
     const newUser = await ctx.db.insert("users", newUserInfo);
     return newUser;
+  },
+});
+
+export const getUser = mutation({
+  args: { userId: v.string() },
+  handler: async ({ db }, { userId }) => {
+    const user = await db
+      .query("users")
+      .withIndex("by_id", (q) => q.eq("_id", userId as Id<"users">))
+      .first();
+    if (!user) {
+      throw new Error(`User with ID ${userId} not found`);
+    }
+    return user;
   },
 });

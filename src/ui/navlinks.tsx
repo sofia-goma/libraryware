@@ -12,20 +12,14 @@ export default function NavLinks({ links }: { links: any[] }) {
           <Link
             key={link.name}
             href={link.href[0]}
-            className={`flex h-[48px] grow gap-3 items-center rounded-md px-3 py-4 text-sm w-full font-medium ${
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
               link.href.includes(pathname)
-                ? "bg-[#3c5968] text-slate-900"
-                : "hover:bg-[#3c596866]"
+                ? "bg-muted text-primary"
+                : "hover:text-primary"
             }`}
           >
-            {link.href.includes(pathname) ? link.icons : link.icon}
-            <p
-              className={`hidden md:block text-base shadow-[inset 0px -1px 0px #D1D4DB] ${
-                link.href.includes(pathname) ? "text-white" : ""
-              }`}
-            >
-              {link.name}
-            </p>
+            {link.icon}
+            {link.name}
           </Link>
         );
       })}

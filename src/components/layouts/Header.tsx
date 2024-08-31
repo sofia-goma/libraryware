@@ -23,19 +23,15 @@ export default function Header() {
       </section>
 
       <nav className="bg-white w-full border-b border-gray-200">
-        <div className="flex flex-wrap items-center justify-between mx-auto p-4 container">
-          <Link
-            href="/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-            {/* <div className="glass-logo bg-green-400 max-[770px]:self-start  flex px-5 items-center justify-center py-2  p-4 z-20">
+        <div className="flex flex-wrap items-center justify-between mx-auto p-4 container space-x-3 rtl:space-x-reverse">
+          {/* <div className="glass-logo bg-green-400 max-[770px]:self-start  flex px-5 items-center justify-center py-2  p-4 z-20">
               <Logo />
             </div> */}
-            <Logo />
-            {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <Logo />
+          {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               LibraryWave
             </span> */}
-          </Link>
+
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <Link href="/login">
               <Button>GET STARTED</Button>

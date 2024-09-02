@@ -1,5 +1,4 @@
-import Tab from "@/ui/tab";
-
+import Tab from "@/components/shared/tab";
 export default function RootLayout({
   children,
 }: Readonly<{

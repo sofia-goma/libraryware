@@ -1,8 +1,12 @@
-interface IButton {
-  title?: string;
-  className?: string;
-  type?: "button" | "submit" | "reset";
-  handleClick?: () => void | null;
+// team card -> for contributors to the librarywave project
+
+interface ITeam {
+  name: string;
+  job: string;
+  githubLink?: string;
+  linkedinLink?: string;
+  twitterLink?: string;
+  imageSrc?: string;
 }
 
 interface IFeatures {

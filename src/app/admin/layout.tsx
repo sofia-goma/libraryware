@@ -1,7 +1,6 @@
 "use client";
-
-import NavBar from "@/ui/navbar";
-import Sidebar from "@/ui/sidebar";
+import NavBar from "@/components/shared/navbar";
+import Sidebar from "@/components/layouts/sidebar";
 import {
   IoBook,
   IoBookOutline,

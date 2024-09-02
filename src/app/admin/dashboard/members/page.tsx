@@ -1,10 +1,9 @@
 "use client";
-
-import AvailableTab from "@/ui/availableTab";
-import BorrowedTab from "@/ui/borrowedTab";
-import OverdueTab from "@/ui/overdueTab";
-import ReserveTab from "@/ui/reserveTab";
-import Statistique from "@/ui/statistique";
+import AvailableTab from "@/components/shared/available-tab";
+import BorrowedTab from "@/components/shared/borrowed-tab";
+import OverdueTab from "@/components/shared/overdueTab";
+import ReserveTab from "@/components/shared/reserve-tab";
+import Statistique from "@/components/shared/statistique";
 import React, { useContext, useEffect, useState } from "react";
 
 type Props = {};

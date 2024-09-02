@@ -1,7 +1,7 @@
 "use client";
 
 import { MyContext } from "@/lib/context";
-import ReserveTab from "@/ui/reserveTab";
+import ReserveTab from "@/components/shared/reserve-tab";
 import { useContext } from "react";
 
 type Props = {};

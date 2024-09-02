@@ -19,8 +19,8 @@ import {
   Workflow,
   User,
 } from "lucide-react";
-import Citation from "@/ui/citations";
-import NewBook from "@/ui/newBooks";
+import Citation from '@/components/shared/citations';
+import NewBook from "@/components/shared/new-books";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,8 +41,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React, { useContext } from "react";
-import { AuthContext } from "@/lib/authProvider";
-import Logo from "@/components/shared/Logo";
+import { AuthContext } from "@/lib/auth-provider";
+import Logo from "@/components/shared/logo";
 import isAuth from "@/lib/isAuth";
 
 import {
@@ -58,7 +58,7 @@ import {
   MdWorkspaces,
 } from "react-icons/md";
 import { IoIosNotifications, IoIosNotificationsOutline } from "react-icons/io";
-import NavLinks from "../../ui/navlinks";
+import NavLinks from "@/components/shared/navlinks";
 
 const links = [
   {
@@ -114,19 +114,13 @@ function UserLayout({
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-            {/* <Package2 className="h-6 w-6" /> */}
-            {/* <span className="">Acme Inc</span> */}
             <Logo />
-            <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-              <Bell className="h-4 w-4" />
-              <span className="sr-only">Toggle notifications</span>
-            </Button>
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               {/* <Link
                 href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                clasdsName="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
                 <User className="h-4 w-4" />
                 Profile

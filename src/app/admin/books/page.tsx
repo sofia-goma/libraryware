@@ -1,9 +1,7 @@
 "use client";
-
-import { MyContext } from "@/lib/context";
-import BookTab from "@/ui/bookTab";
-import PopUp from "@/ui/popUp";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import BookTab from "@/components/shared/book-tab";
+import Popup from "@/components/shared/pop-up";
 import { LuBookPlus } from "react-icons/lu";
 
 type Props = {};
@@ -20,7 +18,7 @@ export default function Page({}: Props) {
         <button onClick={handleShow} title="Ajouter un livre">
           <LuBookPlus size={"30px"} />
         </button>
-        <PopUp show={show} onClose={onclose} />
+        {/* <PopUp show={show} onClose={onclose} /> */}
       </div>
       {/* <BookTab headers={headers}} /> */}
     </div>

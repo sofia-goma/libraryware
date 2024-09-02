@@ -2,6 +2,6 @@
 
 export default function Error() {
     return (
-        <h1>Oops! Something went wrong</h1>
+        <h1 className="bg-primary">Oops! Something went wrong</h1>
     );
 }

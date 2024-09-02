@@ -1,8 +1,8 @@
 "use client";
 
 import { MyContext } from "@/lib/context";
-import BookTab from "@/ui/bookTab";
-import UserTab from "@/ui/userTab";
+import BookTab from "@/components/shared/book-tab";
+import UserTab from "@/components/shared/user-tab";
 // import { useContext } from "react";
 import { LuBookPlus } from "react-icons/lu";
 

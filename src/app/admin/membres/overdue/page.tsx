@@ -1,7 +1,7 @@
 "use client";
 
 import { MyContext } from "@/lib/context";
-import OverdueTab from "@/ui/overdueTab";
+import OverdueTab from "@/components/shared/overdueTab";
 import { useContext } from "react";
 
 type Props = {};

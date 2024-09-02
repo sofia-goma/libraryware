@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
-import OAuthProvider from "@/lib/oauthProvider";
-import AuthProvider from "@/lib/authProvider";
+import OAuthProvider from "@/lib/oauth-provider";
+import AuthProvider from "@/lib/auth-provider";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 

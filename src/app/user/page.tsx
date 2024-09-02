@@ -1,6 +1,7 @@
 "use client";
-import Citation from "@/ui/citations";
-import NewBook from "@/ui/newBooks";
+import Citation from "@/components/shared/citations";
+import NewBook from "@/components/shared/new-books";
+
 
 export default function Dashboard() {
     return (

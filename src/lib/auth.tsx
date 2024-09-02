@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
 const useAuth = () => {
   const router = useRouter();
@@ -17,11 +17,11 @@ const useAuth = () => {
       return;
     }
 
-    try {
-      jwt.verify(token, process.env.TOKEN_SECRET as string);
-    } catch (err) {
-      // router.push("/login");
-    }
+    // try {
+    //   jwt.verify(token, process.env.TOKEN_SECRET as string);
+    // } catch (err) {
+    //   // router.push("/login");
+    // }
   }, [router]);
 };
 

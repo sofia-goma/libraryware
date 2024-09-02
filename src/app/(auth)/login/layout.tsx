@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
-    title: "sofia library web login",
+    title: "librarywave web login",
     description: "a modern website for managing a online library's login or get started or sign in page ",
 };
 
@@ -15,7 +14,7 @@ export default function LoginLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body>
                 {children}
             </body>
         </html>

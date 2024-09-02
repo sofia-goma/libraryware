@@ -1,8 +1,8 @@
 "use client";
-
-import { MyContext } from "@/lib/context";
-import BorrowedTab from "@/ui/borrowedTab";
 import { useContext } from "react";
+import { MyContext } from "@/lib/context";
+import BorrowedTab from "@/components/shared/borrowed-tab";
+
 
 type Props = {};
 

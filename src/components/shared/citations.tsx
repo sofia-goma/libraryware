@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 
-const citations = [
+const citations: ICitation[] = [
   {
-    text: "La lecture est à l'esprit ce que l'exercice est au corps.",
+    text: "Reading is to the mind what exercise is to the body.",
     author: "Joseph Addison",
   },
   {
-    text: "Un livre est un rêve que vous tenez entre vos mains.",
+    text: "A book is a dream you hold in your hands.",
     author: "Neil Gaiman",
   },
   {
-    text: "La lecture est une fenêtre ouverte sur le monde et sur soi-même.",
+    text: "Reading is a window open to the world and to oneself.",
     author: "Pierre Assouline",
   },
   {
-    text: "Les livres sont des amis silencieux et toujours fidèles.",
-    author: "Proverbe indien",
+    text: "Books are silent and always faithful friends.",
+    author: "Indian Proverb",
   },
 ];
+
 
 const Citation = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,17 +36,16 @@ const Citation = () => {
   };
 
   return (
-    <div className="bg-primary text-xl text-slate-100 p-5 w-[30vw] h-[25vh] rounded-3xl shadow-md">
-      <p className="text-center h-16">{citations[currentIndex].text}</p>
+    <div className="bg-muted w-full text-xl text-muted-foreground p-5 lg:w-[30vw] h-auto rounded-lg shadow-md">
+      <p className="text-center">{citations[currentIndex].text}</p>
       <p className="text-center italic">{`- ${citations[currentIndex].author}`}</p>
       <div className="flex gap-2 justify-end items-end">
         {citations.map((_, index) => (
           <span
             key={index}
             style={{ backgroundColor: "background-color 0.3s" }}
-            className={`w-3 h-3 rounded-full cursor-pointer ${
-              currentIndex === index ? "bg-[#3c5968]" : "bg-[#ccc]"
-            }`}
+            className={`w-3 h-3 rounded-full cursor-pointer ${currentIndex === index ? "bg-primary" : "bg-popover"
+              }`}
             onClick={() => handleDotClick(index)}
           />
         ))}

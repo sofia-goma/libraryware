@@ -23,7 +23,9 @@ const schema = defineSchema({
     bookId: v.id("book"),
     title: v.string(),
     body: v.string(),
-  }),
+  })
+    .index("by_bookId", ["bookId"])
+    .index("by_userId", ["userId"]),
 
   comment: defineTable({
     userId: v.id("users"),

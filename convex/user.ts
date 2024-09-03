@@ -35,11 +35,11 @@ export const checkOrCreateUser = mutation({
 });
 
 export const getUser = mutation({
-  args: { userId: v.string() },
+  args: { userId: v.id("users") },
   handler: async ({ db }, { userId }) => {
     const user = await db
       .query("users")
-      .withIndex("by_id", (q) => q.eq("_id", userId as Id<"users">))
+      .withIndex("by_id", (q) => q.eq("_id", userId))
       .first();
     if (!user) {
       throw new Error(`User with ID ${userId} not found`);

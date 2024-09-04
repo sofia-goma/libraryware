@@ -1,5 +1,6 @@
 import Logo from '@/components/shared/logo';
 import { Separator } from '../ui/separator';
+import ModeToggle from '../shared/mode-toggle';
 
 export default function Footer() {
   return (
@@ -59,8 +60,8 @@ export default function Footer() {
               . All Rights Reserved.
             </span>
           </div>
+          <ModeToggle />
         </div>
-
       </div>
     </footer>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "@/providers/theme-provider";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
@@ -37,10 +38,17 @@ export default function RootLayout({
         <body
           className={inter.className}
         >
-          <ConvexAuthNextjsServerProvider>
-            <AuthProvider>{children}</AuthProvider>
-          </ConvexAuthNextjsServerProvider>
-          <ToastContainer />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ConvexAuthNextjsServerProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </ConvexAuthNextjsServerProvider>
+            <ToastContainer />
+          </ThemeProvider>
         </body>
       </OAuthProvider>
     </html>

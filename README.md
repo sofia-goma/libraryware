@@ -1,6 +1,6 @@
-# Sofia Library
+# LibraryWare
 
-Welcome to the Sofia Library repository. This project is a Next.js application with TypeScript and Tailwind CSS, created to serve as a digital library platform.
+**Libraryware** is an online platform that makes reading more interactive and social. It allows users to easily access and read books, bookmark their favorite sections, and share their thoughts with friends. Whether you're exploring a new title or revisiting a classic, Libraryware enhances your reading experience by connecting you with others who share your passion for books.
 
 ## Features
 - **Next.js**: React-based framework for fast, server-rendered web applications.

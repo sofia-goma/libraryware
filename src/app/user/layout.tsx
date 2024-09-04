@@ -5,23 +5,12 @@ import {
   Bell,
   CircleUser,
   Home,
-  Settings,
-  LineChart,
   Menu,
-  Package,
-  Package2,
   Search,
-  ShoppingCart,
-  Users,
   InboxIcon,
   Bookmark,
-  WorkflowIcon,
-  Workflow,
   User,
 } from "lucide-react";
-import Citation from '@/components/shared/citations';
-import NewBook from "@/components/shared/new-books";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -43,66 +32,37 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React, { useContext } from "react";
 import { AuthContext } from "@/lib/auth-provider";
 import Logo from "@/components/shared/logo";
-import isAuth from "@/lib/isAuth";
-
-import {
-  IoHome,
-  IoHomeOutline,
-  IoSettings,
-  IoSettingsOutline,
-} from "react-icons/io5";
-import {
-  MdForum,
-  MdOutlineForum,
-  MdOutlineWorkspaces,
-  MdWorkspaces,
-} from "react-icons/md";
-import { IoIosNotifications, IoIosNotificationsOutline } from "react-icons/io";
 import NavLinks from "@/components/shared/navlinks";
+import ModeToggle from "@/components/shared/mode-toggle";
 
 const links = [
   {
     name: "Dashboard",
     href: ["/user"],
     icon: <Home className="h-4 w-4" />,
-    // icons: <IoHome size={"24px"} color="white" />,
   },
   {
     name: "Forum",
-    // href: "/user/forum",
     href: ["/user/forum"],
     icon: <InboxIcon className="h-4 w-4" />,
-    // icons: <MdForum size={"24px"} color="white" />,
   },
   {
     name: "Bookmark",
-    // href: "/user/notification",
     href: ["/user/bookmark"],
     icon: <Bookmark className="h-4 w-4" />,
-    // icons: <IoIosNotifications size={"24px"} color="white" />,
-  },
-  {
-    name: "Workspace",
-    // href: "/user/notification",
-    href: ["/user/workspace"],
-    icon: <WorkflowIcon className="h-4 w-4" />,
-    // icons: <IoIosNotifications size={"24px"} color="white" />,
   },
   {
     name: "Notifications",
-    // href: "/user/notification",
     href: ["/user/notifications"],
-    icon: <Bell className="h-4 w-4" />,
-    // icons: <IoIosNotifications size={"24px"} color="white" />,
+    icon: <Bell className="h-4 w-4" />
   },
   {
-    name: "Settings",
-    // href: "/user/setting",
-    href: ["#"],
-    icon: <Settings className="h-4 w-4" />,
-    // icons: <IoSettings size={"24px"} color="white" />,
+    name: "Profile",
+    href: ["/user/profile"],
+    icon: <User className="h-4 w-4" />
   },
 ];
+
 function UserLayout({
   children,
 }: Readonly<{
@@ -118,13 +78,6 @@ function UserLayout({
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              {/* <Link
-                href="#"
-                clasdsName="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <User className="h-4 w-4" />
-                Profile
-              </Link> */}
               <NavLinks links={links} />
             </nav>
           </div>
@@ -165,47 +118,9 @@ function UserLayout({
                   href="#"
                   className="flex items-center gap-2 text-lg font-semibold"
                 >
-                  <Package2 className="h-6 w-6" />
-                  <span className="sr-only">LibraryWave</span>
+                  <Logo />
+                  <span className="sr-only">LibraryWare</span>
                 </Link>
-                {/* <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Home className="h-5 w-5" />
-                  Dashboard
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  Forum
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
-                  </Badge>
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Package className="h-5 w-5" />
-                  Products
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Users className="h-5 w-5" />
-                  Customers
-                </Link>
-                <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <LineChart className="h-5 w-5" />
-                  Analytics
-                </Link> */}
                 <NavLinks links={links} />
               </nav>
               <div className="mt-auto">
@@ -238,6 +153,7 @@ function UserLayout({
               </div>
             </form>
           </div>
+          <ModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
@@ -246,10 +162,10 @@ function UserLayout({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuLabel>
+                <p>@username</p>
+                <p>username@gmail.com</p>
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>

@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-    title: "librarywave web login",
-    description: "a modern website for managing a online library's login or get started or sign in page ",
-};
+    title: "LibraryWare",
+    description: "Access your LibraryWare account or get started with a seamless login experience to manage your online library effortlessly.",
+  };
+  
 
 export default function LoginLayout({
     children,

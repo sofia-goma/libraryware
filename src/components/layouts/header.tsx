@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <header className="tracking-wide z-50 sticky top-0">
       <section className="py-2 bg-primary text-primary-foreground text-center px-10">
-        <p className="text-sm">
+        <p className="text-sm text-primary-foreground">
           Find Your Summer Escape with Our Exclusive Book Deals!
         </p>
       </section>
@@ -29,7 +29,7 @@ export default function Header() {
           <Searchbar />
 
           <Link href="/login">
-            <Button>GET STARTED</Button>
+            <Button variant='outline'>SIGN IN</Button>
           </Link>
         </div>
       </nav>

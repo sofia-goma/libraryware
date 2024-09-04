@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "@/providers/theme-provider";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
@@ -21,9 +22,10 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "sofia library web",
-  description: "a modern website for managing a online library",
+  title: "LibraryWare",
+  description: "An innovative platform for managing and sharing your online library, making it easier to discover, bookmark, and discuss your favorite books.",
 };
+
 
 export default function RootLayout({
   children,
@@ -36,10 +38,17 @@ export default function RootLayout({
         <body
           className={inter.className}
         >
-          <ConvexAuthNextjsServerProvider>
-            <AuthProvider>{children}</AuthProvider>
-          </ConvexAuthNextjsServerProvider>
-          <ToastContainer />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ConvexAuthNextjsServerProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </ConvexAuthNextjsServerProvider>
+            <ToastContainer />
+          </ThemeProvider>
         </body>
       </OAuthProvider>
     </html>

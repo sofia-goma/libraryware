@@ -9,7 +9,12 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["covers.openlibrary.org"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'covers.openlibrary.org'
+      }
+    ]
   },
 };
 

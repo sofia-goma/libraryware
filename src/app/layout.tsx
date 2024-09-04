@@ -21,9 +21,10 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "sofia library web",
-  description: "a modern website for managing a online library",
+  title: "LibraryWare",
+  description: "An innovative platform for managing and sharing your online library, making it easier to discover, bookmark, and discuss your favorite books.",
 };
+
 
 export default function RootLayout({
   children,

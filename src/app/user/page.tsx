@@ -34,7 +34,7 @@ export default function Dashboard() {
   console.log(books[0]);
 
   return (
-    <div className="flex justify-between flex-row-reverse items-start h-screen gap-4">
+    <div className="flex justify-between items-start h-screen gap-4">
       {/* <Citation /> */}
       <div className="flex flex-col">
         <div className="mb-4">
@@ -46,9 +46,9 @@ export default function Dashboard() {
                     </div> */}
         </div>
 
-        <ScrollArea className="w-full h-[500px] overflow-y-auto">
+        <ScrollArea className="w-full h-[80vh] overflow-y-auto">
           {books.length === 0 ? (
-            <div className="flex items-center justify-center">
+            <div className="flex flex-wrap gap-[2%]">
               <Loading />
             </div>
           ) : (

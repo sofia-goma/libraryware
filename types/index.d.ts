@@ -25,3 +25,7 @@ interface ICitation {
   text: string;
   author: string;
 }
+
+interface IPost {
+  body: string;
+};

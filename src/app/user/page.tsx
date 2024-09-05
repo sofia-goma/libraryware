@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Loading from '@/components/shared/loading';
 
-function Card({ title, cover, className=' ' }: { authorName?: string; title: string; cover?: string; className: string;}) {
+function Card({ title, cover, className = ' ' }: { authorName?: string; title: string; cover?: string; className: string; }) {
     return (
         <div className={className}>
             {/* author_name */}
@@ -39,35 +39,39 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <>
-            <div className="flex mb-4">
-                <Citation />
-                <NewBook />
-            </div>
+        <div className="flex justify-between flex-row-reverse items-start h-screen gap-4">
+            <Citation />
             <div className="flex flex-col">
-                <h1 className="text-lg font-semibold md:text-2xl">Recommended for you</h1>
+                <div className="mb-4">
+                    <h1 className="text-lg font-semibold md:text-2xl">Recommended for you</h1>
+                    {/* <div className="">
+                        <Badge>ALL</Badge>
+                    </div> */}
+                </div>
 
                 <ScrollArea className="w-full h-[500px] overflow-y-auto">
-    {
-        books.length === 0 ? (
-            <Loading />
-        ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {books.map((book: any, index) => (
-                    <Link key={index} href={`/user/${book.url.replace('S', 'L').replace('/works/', '')}`}>
-                        <Card
-                            title={book.title}
-                            cover={book?.picture?.url}
-                            className="transition transform hover:scale-105 hover:shadow-lg"
-                        />
-                    </Link>
-                ))}
-            </div>
-        )
-    }
-</ScrollArea>
+                    {
+                        books.length === 0 ? (
+                            <div className="flex items-center justify-center">
+                                <Loading />
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {books.map((book: any, index) => (
+                                    <Link key={index} href={`/user/${book.url.replace('S', 'L').replace('/works/', '')}`}>
+                                        <Card
+                                            title={book.title}
+                                            cover={book?.picture?.url}
+                                            className="transition transform hover:scale-105 hover:shadow-lg"
+                                        />
+                                    </Link>
+                                ))}
+                            </div>
+                        )
+                    }
+                </ScrollArea>
 
             </div>
-        </>
+        </div>
     );
 }

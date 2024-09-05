@@ -36,7 +36,7 @@ const Citation = () => {
   };
 
   return (
-    <div className="bg-muted w-full text-xl text-muted-foreground p-5 lg:w-[30vw] h-auto rounded-lg shadow-md">
+    <div className="hidden md:block text-xl text-foreground w-[25vw] h-auto">
       <p className="text-center">{citations[currentIndex].text}</p>
       <p className="text-center italic">{`- ${citations[currentIndex].author}`}</p>
       <div className="flex gap-2 justify-end items-end">
@@ -44,7 +44,7 @@ const Citation = () => {
           <span
             key={index}
             style={{ backgroundColor: "background-color 0.3s" }}
-            className={`w-3 h-3 rounded-full cursor-pointer ${currentIndex === index ? "bg-primary" : "bg-popover"
+            className={`w-3 h-3 rounded-full cursor-pointer ${currentIndex === index ? "bg-primary" : "bg-ring"
               }`}
             onClick={() => handleDotClick(index)}
           />

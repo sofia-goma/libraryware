@@ -10,18 +10,11 @@ import NewsLetter from "@/components/layouts/home/news-letter";
 import Hero from "@/components/layouts/home/hero";
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <>
       {/* <Header /> */}
       <Header />
-      <main className="mt-[15vh]">
-
+      <main role='main'>
         {/* hero */}
         <Hero />
         {/* BANNER WELCOME */}

@@ -1,16 +1,19 @@
-import { Button } from "@/components/ui/button"
-
+import { Button } from "@/components/ui/button";
+import hero from '../../../../public/hero.png';
+import Image from 'next/image';
 export default function Hero() {
     return (
-        <div className="container w-full flex flex-col text-center items-center md:gap-4 gap-8">
-            <div className="">
-                <h3 className="text-slate-900 sm:text-4xl text-3xl font-bold mb-4">Welcome to LIBRARYWAVE</h3>
-                <p className="mt-4 text-sm text-gray-600">Discover a world of knowledge and adventure at your fingertips. Our online library offers an extensive collection of books, research materials, and multimedia resources to ignite your curiosity and support your learning journey. Explore our vast catalog, access exclusive content, and enjoy a seamless reading experience anytime, anywhere.</p>
-                <Button size='lg' variant='outline'>GET STARTED</Button>
-                <button type="button" className="px-5 py-2.5 mt-8 rounded text-sm outline-none tracking-wide bg-blue-600 text-white hover:bg-blue-700">Explore</button>
+        <div className="container w-full flex bg-background my-12 flex-col md:flex-row text-center items-center md:gap-4 gap-8">
+            <div className="flex-1 flex gap-6 flex-col">
+                <h3 className="text-foreground sm:text-4xl text-3xl font-bold">Welcome to LIBRARYWAVE</h3>
+                <p className="text-foreground">Discover a world of knowledge and adventure at your fingertips. Our online library offers an extensive collection of books, research materials, and multimedia resources to ignite your curiosity and support your learning journey. Explore our vast catalog, access exclusive content, and enjoy a seamless reading experience anytime, anywhere.</p>
+                <div className="flex gap-4 items-center justify-center">
+                    <Button size='lg'>GET STARTED</Button>
+                    <Button size='lg' variant='outline'>Explore</Button>
+                </div>
             </div>
-            <div className="md:h-[470px]">
-                <img src="https://readymadeui.com/photo.webp" className="w-full h-full md:object-contain" />
+            <div className="flex-1 md:h-[470px]">
+                <Image src={hero} className="w-full h-full md:object-contain" alt="hero image" />
             </div>
         </div>
     )

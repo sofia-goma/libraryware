@@ -17,9 +17,9 @@ export default function BookCard({
     <div className="w-full h-full flex">
       {/* author_name */}
       {cover ? (
-        <img src={cover || ""} className="w-[40%] object-cover" alt="cover" />
+        <img src={cover || ""} className="w-[25%] object-cover" alt="cover" />
       ) : (
-        <div className="min-w-[40%] bg-black"></div>
+        <div className="min-w-[25%] bg-black"></div>
       )}
       <div className="text-[12px] px-[12px] w-[60%]">
         <p className=" hover:text-blue-500">

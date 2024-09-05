@@ -1,5 +1,12 @@
 "use client";
-import { CornerDownLeft, Mic, Paperclip, Share, Bookmark } from "lucide-react";
+import {
+  CornerDownLeft,
+  Mic,
+  Paperclip,
+  Share,
+  Bookmark,
+  ArrowLeft,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,6 +20,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BookmarkIcon } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useRouter } from "next/navigation";
 
 export default function BookDetails({
   params,
@@ -70,9 +78,15 @@ export default function BookDetails({
     }
   };
 
+  const router = useRouter();
+
   return (
     <ScrollArea className="h-[85vh] w-full">
       <TooltipProvider>
+        <ArrowLeft
+          className="transition transform hover:scale-150 hover:shadow-lg"
+          onClick={() => router.back()}
+        />
         {loading ? (
           <div className="flex justify-center items-center h-screen">
             <h1 className="text-2xl font-semibold">Loading...</h1>

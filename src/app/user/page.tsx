@@ -35,7 +35,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex justify-between flex-row-reverse items-start h-screen gap-4">
-      <Citation />
+      {/* <Citation /> */}
       <div className="flex flex-col">
         <div className="mb-4">
           <h1 className="text-lg font-semibold md:text-2xl">
@@ -57,11 +57,11 @@ export default function Dashboard() {
                 <Link
                   key={index}
                   href={`/user/${book.url.replace("S", "L").replace("/works/", "")}`}
-                  className="w-[30%] h-[20vh] rounded-sm bg-slate-100 shadow-xl mb-[2%] max-lg:w-[100%] max-lg:h-[15vh]"
+                  className="w-[30%] h-[20vh] rounded-sm shadow-xl mb-[2%] max-lg:w-[100%] max-lg:h-[15vh]"
                 >
                   <BookCard
                     title={book.title}
-                    cover={book?.picture?.url}
+                    cover={book?.picture?.url.replace("S.jpg", "L.jpg")}
                     date={book.last_update}
                     type={book.type}
                   />

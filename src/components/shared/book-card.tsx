@@ -14,16 +14,16 @@ export default function BookCard({
   date = newDate;
 
   return (
-    <div className="w-full h-full flex">
+    <div className="w-full h-full flex border border-border rounded-lg p-2">
       {/* author_name */}
       {cover ? (
         <img src={cover || ""} className="w-[25%] object-cover" alt="cover" />
       ) : (
         <div className="min-w-[25%] bg-black"></div>
       )}
-      <div className="text-[12px] px-[12px] w-[60%]">
-        <p className=" hover:text-blue-500">
-          <span className="font-bold">Title: </span>
+      <div className="text-[12px] px-[12px] w-[75%]">
+        <p className=" hover:text-primary text-lg">
+          {/* <span className="font-bold">Title: </span> */}
           {title}
         </p>
         <p>

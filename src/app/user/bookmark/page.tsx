@@ -1,4 +1,34 @@
 import React from 'react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Image from 'next/image';
+import image from '../../../../public/benefit-one.png';
+
+function MyComponent() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Card Title</CardTitle>
+        <CardDescription>Author</CardDescription>
+      </CardHeader>
+      <CardContent>
+        {/* <Image src={image} alt='description' /> */}
+        <img src="https://readymadeui.com/team-2.webp" alt='hdldld' />
+      </CardContent>
+      <CardFooter>
+        <p>last update</p>
+        <p>Type</p>
+      </CardFooter>
+    </Card>
+
+  )
+}
 
 export default function BookMark() {
   // Simulate some bookmarked books with random data
@@ -11,6 +41,7 @@ export default function BookMark() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
+      <MyComponent />
       <h1 className="text-3xl font-bold text-center mb-8">Bookmarked Books</h1>
       <ul className="space-y-6 max-w-4xl mx-auto">
         {bookmarkedBooks.map((book) => (

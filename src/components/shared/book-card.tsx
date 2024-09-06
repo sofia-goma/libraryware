@@ -1,40 +1,41 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Image from 'next/image';
+
 export default function BookCard({
   title,
   cover,
   date,
-  type,
 }: {
-  authorName?: string;
   title: string;
   cover?: string;
   date?: string;
-  type?: string;
 }) {
   const newDate = date?.split("T")[0];
   date = newDate;
 
   return (
-    <div className="w-full h-full flex border border-border rounded-lg p-2">
-      {/* author_name */}
-      {cover ? (
-        <img src={cover || ""} className="w-[25%] object-cover" alt="cover" />
-      ) : (
-        <div className="min-w-[25%] bg-black"></div>
-      )}
-      <div className="text-[12px] px-[12px] w-[75%]">
-        <p className=" hover:text-primary text-lg">
-          {/* <span className="font-bold">Title: </span> */}
-          {title}
-        </p>
-        <p>
-          <span className="font-bold">Last update: </span>
-          {date}
-        </p>
-        <p>
-          <span className="font-bold">Type: </span>
-          {type}
-        </p>
-      </div>
-    </div>
+    <Card className="w-[380px] h-[400px]">
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>          
+          <span className="font-bold">Last update: </span>{date}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className='overflow-hidden'>
+        <div className="w-[100%] h-[100%]">
+          {cover ? (
+            <img src={cover || ""} className="w-[100%] h-[100%] object-cover" alt="cover" />
+          ) : (
+            <div className="w-[100%] h-[50%] bg-black"></div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 }

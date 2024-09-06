@@ -1,9 +1,17 @@
+"use client";
+import React from "react";
 import ProfileInfoCard from "@/components/ui/ProfileInfoCard";
+import ProfileTabCard from "@/components/ui/ProfileTabCard";
+import { useAuth } from "@/providers/auth-provider";
 
-export default function Profile() {
+function ProfilePage() {
+  const { user } = useAuth();
   return (
     <>
-      <h1>Profile</h1>
+      <ProfileInfoCard user={user} />
+      <ProfileTabCard user={user} />
     </>
   );
 }
+
+export default ProfilePage;

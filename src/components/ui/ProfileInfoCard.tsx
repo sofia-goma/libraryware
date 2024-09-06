@@ -10,11 +10,12 @@ function ProfileInfoCard({ user }: { user: any }) {
           {user?.picture ? (
             <img
               className="w-32 h-32 rounded-full mx-auto"
-              src="user?.picture"
+              src={user?.picture}
               alt="User profile picture"
+              referrerPolicy="no-referrer"
             />
           ) : (
-            <CircleUser className="h-32 w-32" />
+            <CircleUser className="h-32 w-32 rounded-full mx-auto" />
           )}
         </div>
 

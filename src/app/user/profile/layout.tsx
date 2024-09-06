@@ -1,16 +1,16 @@
 "use client";
-import React from "react";
-import ProfileInfoCard from "@/components/ui/ProfileInfoCard";
-import ProfileTabCard from "@/components/ui/ProfileTabCard";
-import { useAuth } from "@/providers/auth-provider";
+import React, { ReactNode } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-function ProfileLayout() {
-  const { user } = useAuth();
+function ProfileLayout({
+  children,
+}: Readonly<{
+  children: ReactNode;
+}>) {
   return (
-    <div className="flex flex-col md:flex-row gap-2">
-      <ProfileInfoCard user={user} />
-      <ProfileTabCard user={user} />
-    </div>
+    <ScrollArea className="w-full h-[80vh] overflow-y-auto">
+      <div className="flex flex-col mx-3 md:flex-row gap-2">{children}</div>
+    </ScrollArea>
   );
 }
 

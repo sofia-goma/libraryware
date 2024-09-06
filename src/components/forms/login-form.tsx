@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import React, { useContext } from "react";
 import { ImGithub } from "react-icons/im";
-import { AuthContext } from "@/lib/auth-provider";
+import { AuthContext } from "@/providers/auth-provider";
 
 export default function LoginForm() {
   const { login } = useContext(AuthContext) as IAuth0;

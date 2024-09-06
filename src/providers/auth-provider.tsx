@@ -7,12 +7,23 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0, User } from "@auth0/auth0-react";
 import { useMutation } from "convex/react";
-import type { Context, PropsWithChildren } from "react";
+import { Context, PropsWithChildren, useContext } from "react";
+import { Id } from "../../convex/_generated/dataModel";
 import { api } from "../../convex/_generated/api";
 
-export const AuthContext = createContext(null) as Context<IAuth0 | null>;
+const initialState: IAuth0 = {
+  login: async () => {},
+  logout: async () => {},
+  user: undefined,
+  isAuthenticated: false,
+  isLoading: false,
+};
+
+export const AuthContext = createContext(initialState) as Context<IAuth0>;
+
+export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }: PropsWithChildren) {
   const {
@@ -22,6 +33,8 @@ export default function AuthProvider({ children }: PropsWithChildren) {
     isAuthenticated,
     isLoading,
   } = useAuth0();
+
+  const [userId, setUserId] = useState<Id<"users"> | null>(null);
 
   const logout = useCallback(
     () =>
@@ -40,17 +53,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
     [auth0Login]
   );
 
-  const auth0 = useMemo(
-    () =>
-      ({
-        login,
-        logout,
-        user: user,
-      }) as IAuth0,
-    [login, logout, user]
-  );
-
-  const checkOrCreateUserMutation = useMutation(api.user.checkOrCreateUser);
+  const storeUser = useMutation(api.user.checkOrCreateUser);
 
   useEffect(() => {
     if (!isAuthenticated || !user) {
@@ -59,22 +62,37 @@ export default function AuthProvider({ children }: PropsWithChildren) {
 
     const syncUser = async () => {
       try {
-        if (!user.sub || !user.email) {
-          throw Error("id or email not define");
+        if (!user.email) {
+          throw Error("Email not define");
         }
-        const tuser = await checkOrCreateUserMutation({
+
+        const user_id = await storeUser({
           user: {
-            sub: user.sub,
             email: user.email,
-            name: user.name || "Anomynous",
+            name: user.name || "Anonymous",
+            phone: user.phone_number,
+            image: user.picture,
           },
         });
+
+        setUserId(user_id);
       } catch (error) {
         return;
       }
     };
     syncUser();
-  }, [isAuthenticated, checkOrCreateUserMutation, user]);
+  }, [isAuthenticated, storeUser, user]);
 
+  const auth0 = useMemo(
+    () =>
+      ({
+        login,
+        logout,
+        user: { id: userId, ...user },
+        isAuthenticated,
+        isLoading,
+      }) as IAuth0,
+    [login, logout, user, userId, isAuthenticated, isLoading]
+  );
   return <AuthContext.Provider value={auth0}>{children}</AuthContext.Provider>;
 }

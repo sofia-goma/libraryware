@@ -29,6 +29,7 @@ export default function BookDetails({
     bookId: string;
   };
 }) {
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [bookDetails, setBookDetails] = useState<any>(null);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -78,8 +79,7 @@ export default function BookDetails({
     }
   };
 
-  const router = useRouter();
-
+  console.log(bookDetails);
   return (
     <ScrollArea className="h-[85vh] w-full">
       <TooltipProvider>
@@ -92,7 +92,7 @@ export default function BookDetails({
             <h1 className="text-2xl font-semibold">Loading...</h1>
           </div>
         ) : (
-          <div className="max-w-3xl mx-auto p-6">
+          <div className="">
             <h1 className="text-3xl font-bold mb-4">{bookDetails?.title}</h1>
             <p className="text-gray-700 mb-2">{bookDetails?.description}</p>
             <p className="text-gray-600 mb-2">

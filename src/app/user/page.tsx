@@ -18,12 +18,11 @@ export default function Dashboard() {
       // http://openlibrary.org/people/george08/lists/OL97L/seeds.json
       // /people/davidscotson/lists/OL235275L
       // const resp = await axios.get('https://openlibrary.org/collections/100-best-mystery-and-thriller-books-of-all-time.json?limit=100&has_fulltext=true');
-      const resp = await axios.get(
+      const { data } = await axios.get(
         "https://openlibrary.org/people/davidscotson/lists/OL235275L/seeds.json"
       );
-      const result = await resp.data;
       // const result = await resp.json();
-      const allBooks = await result.entries;
+      const allBooks = await data.entries;
       console.log(allBooks);
       // console.log('hello world');
       // console.log(result.docs);
@@ -31,19 +30,18 @@ export default function Dashboard() {
     }
     loadBook();
   }, []);
-  console.log(books[0]);
+  // console.log(books[0]);
 
   return (
     <div className="flex justify-between items-start h-screen gap-4">
-      {/* <Citation /> */}
       <div className="flex flex-col">
         <div className="mb-4">
           <h1 className="text-lg font-semibold md:text-2xl">
             Recommended for you
           </h1>
           {/* <div className="">
-                        <Badge>ALL</Badge>
-                    </div> */}
+              <Badge>ALL</Badge>
+          </div> */}
         </div>
 
         <ScrollArea className="w-full h-[80vh] overflow-y-auto">
@@ -52,18 +50,16 @@ export default function Dashboard() {
               <Loading />
             </div>
           ) : (
-            <div className="flex flex-wrap gap-[2%]">
+            <div className="flex flex-wrap justify-between gap-2">
               {books.map((book: any, index) => (
                 <Link
                   key={index}
-                  href={`/user/${book.url.replace("S", "L").replace("/works/", "")}`}
-                  className="w-[30%] h-[20vh] rounded-sm shadow-xl mb-[2%] max-lg:w-[100%] max-lg:h-[15vh]"
+                  href={`/user/${book.url.replace("/works/", "")}`}
                 >
                   <BookCard
                     title={book.title}
                     cover={book?.picture?.url.replace("S.jpg", "L.jpg")}
                     date={book.last_update}
-                    type={book.type}
                   />
                 </Link>
               ))}

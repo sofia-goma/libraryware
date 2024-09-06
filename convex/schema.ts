@@ -16,7 +16,7 @@ const schema = defineSchema({
   bookmark: defineTable({
     userId: v.id("users"),
     bookId: v.id("book"),
-  }),
+  }).index("by_userId", ["userId", "bookId"]),
 
   post: defineTable({
     userId: v.id("users"),

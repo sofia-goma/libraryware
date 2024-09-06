@@ -1,5 +1,4 @@
 // team card -> for contributors to the librarywave project
-
 interface ITeam {
   name: string;
   job: string;
@@ -22,6 +21,8 @@ interface IFeatures {
 interface IAuth0 {
   login: (connection?: string) => Promise<void>;
   logout: () => void | Promise<void>;
+  isAuthenticated?: boolean;
+  isLoading?: boolean;
   user?: User;
 }
 
@@ -36,4 +37,4 @@ interface ICitation {
 
 interface IPost {
   body: string;
-};
+}

@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { Auth0Provider, AppState } from "@auth0/auth0-react";
 import { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithAuth0 } from "convex/react-auth0";
+import { useRouter } from "next/navigation";
 
 const address = process.env.NEXT_PUBLIC_CONVEX_URL;
 if (!address) throw new Error("Convex URL not found");
@@ -19,6 +20,12 @@ function OAuthProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navigate = useRouter();
+
+  const onRedirectCallback = (appState?: AppState) => {
+    navigate.push(appState?.returnTo || window.location.pathname);
+  };
+
   return (
     <>
       <Auth0Provider
@@ -26,6 +33,7 @@ function OAuthProvider({
         clientId={authClient}
         useRefreshTokens={true}
         cacheLocation="localstorage"
+        onRedirectCallback={onRedirectCallback}
       >
         <ConvexProviderWithAuth0 client={convex}>
           {children}

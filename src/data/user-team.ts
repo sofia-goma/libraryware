@@ -16,12 +16,12 @@ export const teamMembersData: ITeam[] = [
     imageSrc: "https://avatars.githubusercontent.com/u/142086785?v=4",
   },
   {
-    name: "Blessing",
+    name: "Blessing Tutka",
     job: "Software Developer",
-    githubLink: "hello",
-    linkedinLink: "https://www.linkedin.com/in/sophia/",
-    twitterLink: "hello world!",
-    imageSrc: "https://readymadeui.com/team-4.webp",
+    githubLink: "https://github.com/blessingtutka",
+    linkedinLink: "https://www.linkedin.com/in/blessing-tutka-5184802b2/",
+    twitterLink: "https://x.com/Blessingtutka",
+    imageSrc: "/author/blessing-tutka.png",
   },
   {
     name: "Landry",
@@ -29,6 +29,6 @@ export const teamMembersData: ITeam[] = [
     githubLink: "https://github.com/land-bit",
     linkedinLink: "hello",
     twitterLink: "holl",
-    imageSrc: "holla",
+    imageSrc: "https://readymadeui.com/team-2.webp",
   },
 ];

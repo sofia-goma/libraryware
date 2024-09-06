@@ -9,10 +9,11 @@ import {
 } from "@/components/ui/card";
 import ProfileSettingForm from "../forms/ProfileSettingForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FaMapMarkerAlt } from "react-icons/fa";
-const ProfileTabCard: React.FC = () => {
+import { FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+
+const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
   return (
-    <Tabs defaultValue="about-me" className="w-9/12">
+    <Tabs defaultValue="about-me" className="w-full md:w-8/12 lg:w-9/12">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="about-me">About Me</TabsTrigger>
         <TabsTrigger value="book-mark">Book Mark</TabsTrigger>
@@ -32,7 +33,15 @@ const ProfileTabCard: React.FC = () => {
               <span className="font-bold flex gap-2 items-center">
                 <FaMapMarkerAlt className="w-4 h-4" /> Location
               </span>
-              <span className="text-gray-600 ">Japan, Tokyo</span>
+              <span className="text-gray-600 ">{user.address || "N/A"}</span>
+            </div>
+            <div className="flex flex-col gap-1">
+              <span className="font-bold flex gap-2 items-center">
+                <FaPhone className="w-4 h-4" /> Phone Number
+              </span>
+              <span className="text-gray-600 ">
+                {user.phone_number || "N/A"}
+              </span>
             </div>
           </CardContent>
         </Card>

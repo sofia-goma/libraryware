@@ -1,33 +1,16 @@
 "use client";
-import React from "react";
-import { useMutation } from 'convex/react';
-import { api } from '../../../../convex/_generated/api';
-import ProfileInfoCard from "@/components/ui/ProfileInfoCard";
-import ProfileTabCard from "@/components/ui/ProfileTabCard";
+import React, { ReactNode } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-function ProfileLayout() {
-  // npx convex dev --configure=existing --team librarywave --project libraryware
-  const getUser = useMutation(api.user.getUser);
-
-  const fetchUser = async () => {
-    // setLoading(true);
-    // setError(null);
-    try {
-      // const userData = await getUser({ userId: "hellowd" });
-      // console.log(userData);
-      // setUser(userData);
-    } catch (err) {
-      // setError(err.message);
-    } finally {
-      // setLoading(false);
-    }
-  };
-  // console.log(getUserInfo);
+function ProfileLayout({
+  children,
+}: Readonly<{
+  children: ReactNode;
+}>) {
   return (
-    <div className="flex gap-2">
-      <ProfileInfoCard />
-      <ProfileTabCard />
-    </div>
+    <ScrollArea className="w-full h-[80vh] overflow-y-auto">
+      <div className="flex flex-col mx-3 md:flex-row gap-2">{children}</div>
+    </ScrollArea>
   );
 }
 

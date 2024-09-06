@@ -1,25 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import Image from "next/image";
+import { CircleUser } from "lucide-react";
 
-function ProfileInfoCard() {
+function ProfileInfoCard({ user }: { user: any }) {
   return (
-    <div className="w-3/12 bg-white shadow-box border-t-4 border-solid border-primary rounded-lg">
+    <div className="w-full md:w-4/12 lg:w-3/12 bg-white shadow-box border-t-4 border-solid border-primary rounded-lg">
       <div className="p-6">
         <div className="text-center">
-          <img
-            className="w-32 h-32 rounded-full mx-auto"
-            src="https://avatars.githubusercontent.com/u/142086785?v=4"
-            alt="User profile picture"
-          />
+          {user?.picture ? (
+            <img
+              className="w-32 h-32 rounded-full mx-auto"
+              src={user?.picture}
+              alt="User profile picture"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <CircleUser className="h-32 w-32 rounded-full mx-auto" />
+          )}
         </div>
 
         <h3 className="text-xl font-semibold text-center mt-4">
-          Birusha Rusha
+          {user.name || "User"}
         </h3>
 
-        <p className="text-gray-600 text-center">Software Engineer</p>
-
+        <p className="text-gray-600 text-center text-sm">
+          {user.email || "email"}
+        </p>
         <ul className="mt-4 space-y-2">
           <li className="flex justify-between border-b pb-2">
             <span className="font-semibold">Liked Books</span>

@@ -11,7 +11,6 @@ import {
   Bookmark,
   User,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -27,13 +26,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import React, { useContext } from "react";
-import { AuthContext } from "@/lib/auth-provider";
+import React from "react";
 import Logo from "@/components/shared/logo";
 import NavLinks from "@/components/shared/navlinks";
 import ModeToggle from "@/components/shared/mode-toggle";
+import Loading from "@/components/shared/loading";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/providers/auth-provider";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const links = [
   {
@@ -54,12 +56,12 @@ const links = [
   {
     name: "Notifications",
     href: ["/user/notifications"],
-    icon: <Bell className="h-4 w-4" />
+    icon: <Bell className="h-4 w-4" />,
   },
   {
     name: "Profile",
     href: ["/user/profile"],
-    icon: <User className="h-4 w-4" />
+    icon: <User className="h-4 w-4" />,
   },
 ];
 
@@ -68,7 +70,8 @@ function UserLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const { logout } = useContext(AuthContext) as IAuth0;
+  const { logout, user } = useAuth();
+
   return (
     <div className="grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -163,8 +166,8 @@ function UserLayout({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>
-                <p>@username</p>
-                <p>username@gmail.com</p>
+                <p>{user.name || "Anonymous"}</p>
+                <p>{user.email || "mail"}</p>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
@@ -182,6 +185,6 @@ function UserLayout({
   );
 }
 
-// export default isAuth(UserLayout); //To use once we're done
-
-export default UserLayout;
+export default withAuthenticationRequired(UserLayout, {
+  onRedirecting: () => <Loading />,
+});

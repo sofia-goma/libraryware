@@ -5,7 +5,7 @@ export default function Logo() {
                 <span className="mr-1 font-semibold text-lg py-1 px-2 rounded bg-primary text-primary-foreground">
                     L
                 </span>
-                ibraryWave
+                ibraryWare
             </p>
         </div>
     );

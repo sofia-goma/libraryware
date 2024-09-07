@@ -1,12 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import Citation from "@/components/shared/citations";
-import NewBook from "@/components/shared/new-books";
-import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import axios from "axios";
 import Link from "next/link";
-import Image from "next/image";
 import Loading from "@/components/shared/loading";
 import BookCard from "@/components/shared/book-card";
 
@@ -46,22 +42,19 @@ export default function Dashboard() {
 
         <ScrollArea className="w-full h-[80vh] overflow-y-auto">
           {books.length === 0 ? (
-            <div className="flex mx-auto justify-items-center bg-red-500 bg-green-500 w-[100%]">
+            <div className="flex mx-auto justify-items-center w-[100%]">
               <Loading />
             </div>
           ) : (
-            <div className="flex flex-wrap justify-between gap-2">
+            <div className="flex flex-wrap gap-4 md:gap-5 lg:gap-3 mb-4">
               {books.map((book: any, index) => (
-                <Link
-                  key={index}
-                  href={`/user/${book.url.replace("/works/", "")}`}
-                >
                   <BookCard
+                  key={index}
+                    href={`/user/${book.url.replace("/works/", "")}`}
                     title={book.title}
                     cover={book?.picture?.url.replace("S.jpg", "L.jpg")}
                     date={book.last_update}
                   />
-                </Link>
               ))}
             </div>
           )}

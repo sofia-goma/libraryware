@@ -1,5 +1,7 @@
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import getFormattedInitials from "@/lib/get-formatted-initials";
+
 
 export default function TeamCard({
   name,
@@ -10,13 +12,11 @@ export default function TeamCard({
   imageSrc,
 }: ITeam) {
   return (
-    <div className="">
-      <img
-        src={imageSrc}
-        alt={`${name}'s profile picture`}
-        className="w-32 h-32 rounded-full inline-block"
-      />
-
+    <div className="flex flex-col items-center justify-center">
+      <Avatar className="w-32 h-32 inline-block static">
+        <AvatarImage src={imageSrc} />
+        <AvatarFallback>{getFormattedInitials(name)}</AvatarFallback>
+      </Avatar>
       <div className="py-4">
         <h4 className="text-foreground text-base font-bold">{name}</h4>
         <p className="text-muted-foreground text-xs mt-1">{job}</p>

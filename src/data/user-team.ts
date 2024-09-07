@@ -1,6 +1,6 @@
 export const teamMembersData: ITeam[] = [
   {
-    name: "Nganduli valivambene firmin",
+    name: "Nganduli Firmin",
     job: "full stack Software Engineer",
     githubLink: "https://github.com/firminfinva",
     linkedinLink: "#",

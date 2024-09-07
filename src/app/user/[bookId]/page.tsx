@@ -37,10 +37,6 @@ export default function BookDetails({
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [bookDetails, setBookDetails] = useState<any>(null);
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const [isRead, setIsRead] = useState(false);
-  const [comments, setComments] = useState<string[]>([]);
-  const [newComment, setNewComment] = useState("");
   const imageURL =
     `https://covers.openlibrary.org/b/id/${params.bookId}-L.jpg` ||
     notfoundimage;
@@ -65,8 +61,12 @@ export default function BookDetails({
   return (
     <ScrollArea className="w-full" style={{ height: "calc(100vh - 80px)" }}>
       <TooltipProvider>
-        <Button variant="outline" className="mb-3 fixed z-20">
-          <ArrowLeft className="mr-2" onClick={() => router.back()} />
+        <Button
+          variant="outline"
+          className="mb-2"
+          onClick={() => router.back()}
+        >
+          <ArrowLeft className="mr-2" />
           Go Back
         </Button>
         {loading ? (

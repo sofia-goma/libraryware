@@ -1,22 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { CircleUser } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import getFormattedInitials from "@/lib/get-formatted-initials";
 
 function ProfileInfoCard({ user }: { user: any }) {
   return (
-    <div className="w-full md:w-4/12 lg:w-3/12 bg-white shadow-box border-t-4 border-solid border-primary rounded-lg">
+    <div className="w-full md:w-4/12 lg:w-3/12 shadow-box border-t-4 border-solid border-primary rounded-lg">
       <div className="p-6">
         <div className="text-center">
-          {user?.picture ? (
-            <img
-              className="w-32 h-32 rounded-full mx-auto"
-              src={user?.picture}
-              alt="User profile picture"
-              referrerPolicy="no-referrer"
-            />
-          ) : (
-            <CircleUser className="h-32 w-32 rounded-full mx-auto" />
-          )}
+          <Avatar className="inline-block w-32 h-32 static">
+            <AvatarImage src={user?.picture} />
+            <AvatarFallback>{getFormattedInitials(user?.name || "A")}</AvatarFallback>
+          </Avatar>
         </div>
 
         <h3 className="text-xl font-semibold text-center mt-4">

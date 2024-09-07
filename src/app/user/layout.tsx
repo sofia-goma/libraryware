@@ -1,4 +1,6 @@
 "use client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import getFormattedInitials from "@/lib/get-formatted-initials";
 import { ReactNode } from "react";
 import Link from "next/link";
 import {
@@ -161,8 +163,12 @@ function UserLayout({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
-                {/* <CircleUser className="h-5 w-5" /> */}
-                <img src={user.picture} alt="user" />
+                <Avatar className="inline-block static">
+                  <AvatarImage src={user.picture} />
+                  <AvatarFallback>
+                    {getFormattedInitials(user.name)}
+                  </AvatarFallback>
+                </Avatar>
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>

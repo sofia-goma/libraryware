@@ -22,29 +22,32 @@ export default function TeamCard({
         <p className="text-muted-foreground text-xs mt-1">{job}</p>
         <div className="space-x-4 mt-4">
           {githubLink && (
-            <Link
+            <a
               href={githubLink}
+              target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
               <FaGithub width="12px" className="fill-foreground" />
-            </Link>
+            </a>
           )}
           {linkedinLink && (
-            <Link
+            <a
               href={linkedinLink}
+              target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
               <FaLinkedin width="12px" className="fill-foreground" />
-            </Link>
+            </a>
           )}
 
           {twitterLink && (
-            <Link
+            <a
               href={twitterLink}
+              target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
               <FaTwitter width="12px" className="fill-foreground" />
-            </Link>
+            </a>
           )}
         </div>
       </div>

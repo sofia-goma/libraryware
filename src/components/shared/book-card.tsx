@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from 'next/image';
+import notfound from '../../../public/cover_not_found.jpg';
 
 export default function BookCard({
   title,
@@ -20,7 +21,7 @@ export default function BookCard({
   date = newDate;
 
   return (
-    <Card className="w-[380px] h-[400px]">
+    <Card className="w-[380px]">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>          
@@ -32,7 +33,11 @@ export default function BookCard({
           {cover ? (
             <img src={cover || ""} className="w-[100%] h-[100%] object-cover" alt="cover" />
           ) : (
-            <div className="w-[100%] h-[50%] bg-black"></div>
+            <Image
+              src={notfound}
+              alt="Not Found"
+              width={380}
+              height={400} />
           )}
         </div>
       </CardContent>

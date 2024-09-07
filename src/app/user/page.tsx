@@ -46,7 +46,7 @@ export default function Dashboard() {
 
         <ScrollArea className="w-full h-[80vh] overflow-y-auto">
           {books.length === 0 ? (
-            <div className="flex flex-wrap gap-[2%]">
+            <div className="flex mx-auto justify-items-center bg-red-500 bg-green-500 w-[100%]">
               <Loading />
             </div>
           ) : (

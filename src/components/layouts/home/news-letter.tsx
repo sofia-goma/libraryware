@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
+import { Separator } from '@/components/ui/separator';
 export default function NewsLetter() {
   return (
-    <div className="relative bg-gradient-to-r from-accent to-secondary">
+    <div className="relative">
+      <Separator />
       <div className="container text-background flex flex-col py-12 gap-4 items-center justify-between md:flex-row md:gap-0 md:min-h-[200px]">
         <div className="">
           <h6 className="sm:text-xl text-xl mb-1.5 tracking-wide text-popover-foreground">

@@ -11,15 +11,15 @@ export default function Team() {
         </p>
       </div>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-8 text-center my-16 max-w-5xl max-lg:max-w-3xl max-md:max-w-xl mx-auto">
-        {teamMembersData.map((member, index) => (
+        {teamMembersData.map((team, index) => (
           <TeamCard
             key={index}
-            name={member.name}
-            job={member.job}
-            githubLink={member.githubLink}
-            linkedinLink={member.linkedinLink}
-            twitterLink={member.twitterLink}
-            imageSrc={member.imageSrc}
+            name={team.name}
+            job={team.job}
+            githubLink={team.githubLink}
+            linkedinLink={team.linkedinLink}
+            twitterLink={team.twitterLink}
+            imageSrc={team?.imageSrc}
           />
         ))}
       </div>

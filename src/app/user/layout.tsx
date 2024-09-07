@@ -71,6 +71,7 @@ function UserLayout({
   children: ReactNode;
 }>) {
   const { logout, user } = useAuth();
+  console.log(user);
 
   return (
     <div className="grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -160,7 +161,8 @@ function UserLayout({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
+                {/* <CircleUser className="h-5 w-5" /> */}
+                <img src={user.picture} alt="user" />
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>

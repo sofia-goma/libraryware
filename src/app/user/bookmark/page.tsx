@@ -1,36 +1,8 @@
-import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import Image from "next/image";
-import image from "../../../../public/benefit-one.png";
-
-function MyComponent() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Author</CardDescription>
-      </CardHeader>
-      <CardContent>
-        {/* <Image src={image} alt='description' /> */}
-        <img src="https://readymadeui.com/team-2.webp" alt="hdldld" />
-      </CardContent>
-      <CardFooter>
-        <p>last update</p>
-        <p>Type</p>
-      </CardFooter>
-    </Card>
-  );
-}
-
+import BookCard from "@/components/shared/book-card";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { TooltipProvider } from "@/components/ui/tooltip";
 export default function BookMark() {
-  // Simulate some bookmarked books with random data
   const bookmarkedBooks = [
     {
       id: 1,
@@ -61,25 +33,26 @@ export default function BookMark() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <p>
-        <a href="https://giphy.com/gifs/book-reading-study-63w1IGRec5qFf0MFX8">
-          via GIPHY
-        </a>
-      </p>
-      <MyComponent />
-      <h1 className="text-3xl font-bold text-center mb-8">Bookmarked Books</h1>
-      <ul className="space-y-6 max-w-4xl mx-auto">
+    <ScrollArea className="w-full" style={{ height: "calc(100vh - 80px)" }}>
+      <ul className="flex items-center justify-center">
+        {bookmarkedBooks.length === 0 && (
+          <TooltipProvider>
+            <div className="flex flex-col items-center gap-3 justify-center">
+              <p className="text-center text-secondary-foreground">
+                Your bookmarks are empty for now. Add books to your collection
+                and revisit them anytime!
+              </p>
+              <Button size="lg">START EXPLORING</Button>
+            </div>
+          </TooltipProvider>
+        )}
+        <div className="flex flex-wrap gap-3">
         {bookmarkedBooks.map((book) => (
-          <li key={book.id} className="bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-semibold mb-2">{book.title}</h2>
-            <p className="text-gray-700 mb-4">
-              <strong>Author:</strong> {book.author}
-            </p>
-            <p className="text-gray-600">{book.description}</p>
-          </li>
+          <BookCard key={book.id} href="#" title={book.title} />
         ))}
+
+        </div>
       </ul>
-    </div>
+    </ScrollArea>
   );
 }

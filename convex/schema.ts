@@ -35,6 +35,14 @@ const schema = defineSchema({
   })
     .index("by_postId", ["postId"])
     .index("by_parentId", ["parentId"]),
+
+  notification: defineTable({
+    message: v.string(),
+    isRead: v.boolean(),
+    userId: v.id("users"),
+  })
+    .index("by_isRead", ["isRead"])
+    .index("by_userId", ["userId"]),
 });
 
 export default schema;

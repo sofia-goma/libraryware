@@ -5,7 +5,7 @@ export const teamMembersData: ITeam[] = [
     githubLink: "https://github.com/firminfinva",
     linkedinLink: "#",
     twitterLink: "#",
-    imageSrc: "https://readymadeui.com/team-2.webp",
+    imageSrc: "https://avatars.githubusercontent.com/u/49530656?v=4",
   },
   {
     name: "Birusha Ndegeya",
@@ -24,11 +24,11 @@ export const teamMembersData: ITeam[] = [
     imageSrc: "/author/blessing-tutka.png",
   },
   {
-    name: "Landry",
+    name: "Landry Bitege",
     job: "Software Engineer",
     githubLink: "https://github.com/land-bit",
     linkedinLink: "hello",
     twitterLink: "holl",
-    imageSrc: "https://readymadeui.com/team-2.webp",
+    imageSrc: "https://avatars.githubusercontent.com/u/141019256?v=4",
   },
 ];

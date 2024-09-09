@@ -57,7 +57,7 @@ export default function Footer() {
   return (
     <footer>
       <Separator />
-      <div className="container bg-background text-foreground flex flex-col py-4 items-center gap-3 lg:flex-row justify-between">
+      <div className="container bg-secondary text-secondary-foreground flex flex-col py-4 items-center gap-3 lg:flex-row justify-between">
         {showMenu}
         <ModeToggle className="fixed bottom-4 right-4" />
       </div>

@@ -1,13 +1,13 @@
+"use client";
+import { ReactNode } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Share2, Heart, MessageCircle, Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
-import {
-    Card,
-} from '@/components/ui/card';
+import { Card } from "@/components/ui/card";
 import Link from "next/link";
 
-export default function PostUI() {
+export default function PostUI({ children }: { children?: ReactNode }) {
   const navigate = useRouter();
   const goToPath = (path: string) => {
     // navigate("/user/forum/[postId]", { postId: "123" });
@@ -62,6 +62,8 @@ export default function PostUI() {
             <Share2 size={18} />
           </Button>
         </div>
+        {/* comments input */}
+        <div>{children}</div>
       </div>
     </div>
   );

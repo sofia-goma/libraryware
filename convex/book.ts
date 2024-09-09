@@ -1,8 +1,10 @@
 import { mutation, query } from "./_generated/server";
 import { Id } from "./_generated/dataModel";
 import { v } from "convex/values";
+import { paginationOptsValidator } from "convex/server";
 
 export const getAllBooks = query({
+  // args: { paginationOpts: paginationOptsValidator },
   handler: async (ctx) => {
     const books = await ctx.db.query("book").collect();
     return books;

@@ -1,33 +1,12 @@
-"use client";
-import { useEffect, useState } from "react";
+'use client';
 import { ScrollArea } from "@/components/ui/scroll-area";
-import axios from "axios";
-import Link from "next/link";
 import Loading from "@/components/shared/loading";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 import BookCard from "@/components/shared/book-card";
 
 export default function Dashboard() {
-  const [books, setBooks] = useState([]);
-  useEffect(() => {
-    async function loadBook() {
-      // this is code is a trial for attempting to load 99 books from open library api
-      // http://openlibrary.org/people/george08/lists/OL97L/seeds.json
-      // /people/davidscotson/lists/OL235275L
-      // const resp = await axios.get('https://openlibrary.org/collections/100-best-mystery-and-thriller-books-of-all-time.json?limit=100&has_fulltext=true');
-      const { data } = await axios.get(
-        "https://openlibrary.org/people/davidscotson/lists/OL235275L/seeds.json"
-      );
-      // const result = await resp.json();
-      const allBooks = await data.entries;
-      console.log(allBooks);
-      // console.log('hello world');
-      // console.log(result.docs);
-      setBooks(allBooks);
-    }
-    loadBook();
-  }, []);
-  // console.log(books[0]);
-
+  const books = useQuery(api.book.getAllBooks);
   return (
     <div className="flex justify-between items-start h-screen gap-4">
       <div className="flex flex-col">
@@ -41,20 +20,20 @@ export default function Dashboard() {
         </div>
 
         <ScrollArea className="w-full h-[80vh] overflow-y-auto">
-          {books.length === 0 ? (
+          {books?.length === 0 || !books ? (
             <div className="flex mx-auto justify-items-center w-[100%]">
               <Loading />
             </div>
           ) : (
             <div className="flex flex-wrap gap-4 md:gap-5 lg:gap-3 mb-4">
-              {books.map((book: any, index) => (
-                  <BookCard
-                  key={index}
-                    href={`/user/${book.url.replace("/works/", "")}`}
-                    title={book.title}
-                    cover={book?.picture?.url.replace("S.jpg", "L.jpg")}
-                    date={book.last_update}
-                  />
+              {books?.map(({ openLibraryId, _id, title, author, coverUrl }) => (
+                <BookCard
+                  key={_id}
+                  href={`/user/${_id}`}
+                  title={title}
+                  cover={coverUrl || ''}
+                  author={author}
+                />
               ))}
             </div>
           )}

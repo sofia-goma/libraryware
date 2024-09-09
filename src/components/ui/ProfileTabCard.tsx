@@ -16,7 +16,7 @@ const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
     <Tabs defaultValue="about-me" className="w-full md:w-8/12 lg:w-9/12">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="about-me">About Me</TabsTrigger>
-        <TabsTrigger value="book-mark">Book Mark</TabsTrigger>
+        <TabsTrigger value="book-mark">Posts</TabsTrigger>
         <TabsTrigger value="settings">Setting</TabsTrigger>
       </TabsList>
       <TabsContent value="about-me">
@@ -33,13 +33,13 @@ const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
               <span className="font-bold flex gap-2 items-center">
                 <FaMapMarkerAlt className="w-4 h-4" /> Location
               </span>
-              <span className="text-gray-600 ">{user.address || "N/A"}</span>
+              <span className="text-secondary-foreground ">{user.address || "N/A"}</span>
             </div>
             <div className="flex flex-col gap-1">
               <span className="font-bold flex gap-2 items-center">
                 <FaPhone className="w-4 h-4" /> Phone Number
               </span>
-              <span className="text-gray-600 ">
+              <span className="text-secondary-foreground ">
                 {user.phone_number || "N/A"}
               </span>
             </div>

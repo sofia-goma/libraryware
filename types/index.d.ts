@@ -38,3 +38,12 @@ interface ICitation {
 interface IPost {
   body: string;
 }
+
+// for book card
+
+interface IBookCard {
+  author?: string;
+  title: string;
+  cover?: string;
+  href: string;
+}

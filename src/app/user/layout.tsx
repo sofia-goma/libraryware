@@ -73,7 +73,7 @@ function UserLayout({
   children: ReactNode;
 }>) {
   const { logout, user } = useAuth();
-  console.log(user);
+
 
   return (
     <div className="grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -174,8 +174,8 @@ function UserLayout({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>
-                <p>{user.name || "Anonymous"}</p>
-                <p>{user.email || "mail"}</p>
+                <p className="text-sm font-medium">{user.name || "Anonymous"}</p>
+                <p className="text-xs font-light">{user.email || "mail"}</p>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>

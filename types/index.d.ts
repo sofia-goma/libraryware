@@ -43,6 +43,17 @@ type IUser =
     }
   | undefined;
 
+// for comments
+interface IComment {
+  _id: string;
+  _creationTime: number;
+  userId: string;
+  postId: string;
+  parentId: string | null;
+  body: string;
+  children?: IComment[];
+}
+
 // for authentification with autho
 
 interface IAuth0 {

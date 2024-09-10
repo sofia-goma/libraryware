@@ -66,19 +66,21 @@ export default function BookCard({
 
   return (
     <Card className="w-[250px] p-0 m-0">
-      <Link href={href}>
-        <CardHeader className="p-4 text-center">
+      <CardHeader className="p-4 text-center">
+        <Link href={href}>
           <CardTitle className="text-sm hover:text-primary transition-colors h-5 overflow-hidden">
             {title}
           </CardTitle>
-          <CardDescription>
-            <span className="text-xs">
-              <span className="font-bold">Author: </span>
-              {author}
-            </span>
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="py-0 flex items-center justify-center">
+        </Link>
+        <CardDescription>
+          <span className="text-xs">
+            <span className="font-bold">Author: </span>
+            {author}
+          </span>
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="py-0 flex items-center justify-center">
+        <Link href={href}>
           <Image
             src={`${cover ? `${cover}` : `/cover_not_found.jpg`}`}
             width={150}
@@ -86,19 +88,19 @@ export default function BookCard({
             className="object-cover"
             alt="book card image"
           />
-        </CardContent>
-        <CardFooter className="pb-0 flex items-center justify-center gap-3 py-2">
-          <BookAIcon className="hover:cursor-pointer" color="blue" />
-          <PlusCircleIcon className="hover:cursor-pointer" />
-          <div className="" onClick={bookmark}>
-            {!isBookmarked ? (
-              <Bookmark className="hover:cursor-pointer" />
-            ) : (
-              <BookmarkCheck className="hover:cursor-pointer" />
-            )}
-          </div>
-        </CardFooter>
-      </Link>
+        </Link>
+      </CardContent>
+      <CardFooter className="pb-0 flex items-center justify-center gap-3 py-2">
+        <BookAIcon className="hover:cursor-pointer" color="blue" />
+        <PlusCircleIcon className="hover:cursor-pointer" />
+        <div className="" onClick={bookmark}>
+          {!isBookmarked ? (
+            <Bookmark className="hover:cursor-pointer" />
+          ) : (
+            <BookmarkCheck className="hover:cursor-pointer" />
+          )}
+        </div>
+      </CardFooter>
     </Card>
   );
 }

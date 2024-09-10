@@ -1,4 +1,4 @@
-import { Id } from "../convex/_generated/dataModel";
+// import { Id } from "../convex/_generated/dataModel";
 
 // team card -> for contributors to the librarywave project
 interface ITeam {
@@ -16,6 +16,42 @@ interface IFeatures {
   heading?: string;
   description?: string;
   icon?: any | JSX.Element;
+}
+
+// post type
+type IPost = {
+  _id: string;
+  _creationTime: number;
+  title: string;
+  userId: string;
+  bookId: string;
+  body: string;
+};
+
+// application user Interface
+type IUser =
+  | {
+      _id: string;
+      _creationTime: number;
+      name?: string | undefined;
+      image?: string | undefined;
+      email?: string | undefined;
+      emailVerificationTime?: number | undefined;
+      phone?: string | undefined;
+      phoneVerificationTime?: number | undefined;
+      isAnonymous?: boolean | undefined;
+    }
+  | undefined;
+
+// for comments
+interface IComment {
+  _id: string;
+  _creationTime: number;
+  userId: string;
+  postId: string;
+  parentId: string | null;
+  body: string;
+  children?: IComment[];
 }
 
 // for authentification with autho

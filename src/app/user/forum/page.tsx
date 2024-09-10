@@ -12,6 +12,7 @@ export default function Forum() {
         {posts?.map((e) => (
           <PostUI
             key={e._id}
+            id={e._id}
             body={e.body}
             userId={e.userId}
             time={e._creationTime}

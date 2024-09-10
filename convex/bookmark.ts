@@ -64,3 +64,20 @@ export const getBookmarksByUserId = query({
     return bookmarks;
   },
 });
+
+export const isBookmark = query({
+  args: {
+    userId: v.id("users"),
+    bookId: v.id("book"),
+  },
+  handler: async (ctx, args) => {
+    const bookmark = await ctx.db
+     .query("bookmark")
+     .withIndex("by_userId", (q) =>
+        q.eq("userId", args.userId).eq("bookId", args.bookId)
+      )
+     .first();
+
+    return!!bookmark;
+  },
+})

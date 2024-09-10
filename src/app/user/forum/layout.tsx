@@ -14,7 +14,7 @@ export default function LoginLayout({
   children: ReactNode;
 }>) {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-center items-center lg:justify-between lg:items-start">
       <div>{children}</div>
       <div className="hidden lg:block h-dvh border-border max-w-[350px]">
         <Citation />

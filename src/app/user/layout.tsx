@@ -5,7 +5,6 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import {
   Bell,
-  CircleUser,
   Home,
   Menu,
   Search,

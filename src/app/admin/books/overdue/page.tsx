@@ -1,15 +1,7 @@
-"use client";
-import { MyContext } from "@/lib/context";
-import OverdueTab from "@/components/shared/overdueTab";
-import { useContext } from "react";
-
-type Props = {};
-
-export default function Page({}: Props) {
-  const { books }: { books?: any } = useContext(MyContext);
+export default function Overdue() {
   return (
     <div className="my-4">
-      <OverdueTab val={true} all={true} />
+      <h1>OverDue</h1>
     </div>
   );
 }

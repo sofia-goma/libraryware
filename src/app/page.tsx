@@ -2,7 +2,6 @@ import Header from "@/components/layouts/header";
 import Footer from "@/components/layouts/footer";
 import Features from "@/components/layouts/home/features";
 import Team from "@/components/layouts/home/team";
-import Banner from "@/components/layouts/home/banner";
 import Hero from "@/components/layouts/home/hero";
 
 export default function Home() {

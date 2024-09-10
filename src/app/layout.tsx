@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
@@ -8,16 +7,6 @@ import OAuthProvider from "@/providers/oauth-provider";
 import AuthProvider from "@/providers/auth-provider";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-
-// const fontSans = FontSans({
-//   subsets: ["latin"],
-//   variable: "--font-sans",
-// });
-
-// className={cn(
-//   "min-h-screen bg-background font-sans antialiased",
-//   fontSans.variable
-// )}
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -4,12 +4,25 @@ import { useRouter } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
 import Loading from "@/components/shared/loading";
 import { api } from "../../../../convex/_generated/api";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { CirclePlus, BookmarkIcon, BookOpenText } from "lucide-react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
-
+// import {
+//   Popover,
+//   PopoverContent,
+//   PopoverTrigger,
+// } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { PostPopup } from "@/components/shared/post-popup";
 export default function BookDetails({
   params,
 }: {
@@ -27,15 +40,25 @@ export default function BookDetails({
         userId: user.id,
         bookId: params.bookId,
       });
-      // console.log(user.id);
-      // console.log(params.bookId);
-      // console.log(user);
       toast.success("Book marked!");
-      // console.log("Book mark");
     } catch (error: any) {
       toast.error(error.message || "Failed to bookmark the book.");
       // console.error("Error bookmarking the book:", error);
     }
+  };
+  // this function is a book is bookmark
+  const isBookmarked = useQuery(api.bookmark.isBookmark, {
+    userId: user.id,
+    bookId: params.bookId,
+  });
+
+  // handle read function
+  const read = () => {};
+
+  // handle post function
+
+  const post = () => {
+    console.log("post function");
   };
 
   if (!bookDetails) {
@@ -69,7 +92,10 @@ export default function BookDetails({
         </div>
       </div>
       <div className="flex items-center md:items-start mt-4 space-x-4 mb-6">
-        <Button variant="outline" onClick={bookmark}>
+        <Button
+          variant={isBookmarked ? "secondary" : "outline"}
+          onClick={bookmark}
+        >
           <BookmarkIcon className="w-5 h-5 mr-2" />
           Bookmark
         </Button>
@@ -77,10 +103,8 @@ export default function BookDetails({
           <BookOpenText className="w-5 h-5 mr-2" />
           Read
         </Button>
-        <Button variant="default">
-          <CirclePlus className="w-5 h-5 mr-2" />
-          Post
-        </Button>
+        {/* post button */}
+        <PostPopup title={bookDetails.title} />
       </div>
     </TooltipProvider>
   );

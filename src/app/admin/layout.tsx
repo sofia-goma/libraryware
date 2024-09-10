@@ -1,67 +1,162 @@
 "use client";
-import NavBar from "@/components/shared/navbar";
-import Sidebar from "@/components/layouts/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import getFormattedInitials from "@/lib/get-formatted-initials";
+import { ReactNode } from "react";
+import Link from "next/link";
 import {
-  IoBook,
-  IoBookOutline,
-  IoHome,
-  IoHomeOutline,
-  IoSettings,
-  IoSettingsOutline,
-} from "react-icons/io5";
-import { RiContactsFill, RiContactsLine } from "react-icons/ri";
+  Bell,
+  CircleUser,
+  Home,
+  Menu,
+  Search,
+  InboxIcon,
+  Bookmark,
+  User,
+  Users,
+  BookAIcon,
+} from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import React from "react";
+import Logo from "@/components/shared/logo";
+import NavLinks from "@/components/shared/navlinks";
+import ModeToggle from "@/components/shared/mode-toggle";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/providers/auth-provider";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const links = [
   {
-    name: "Tableau de bord",
-    href: ["/admin/dashboard", "/admin/dashboard/members"],
-    icon: <IoHomeOutline size={"24px"} />,
-    icons: <IoHome size={"24px"} color="white" />,
+    name: "Dashboard",
+    href: ["/admin"],
+    icon: <Home className="h-4 w-4" />,
   },
   {
-    name: "Nos livres",
-    href: [
-      "/admin/books",
-      "/admin/books/overdue",
-      "/admin/books/borrowed",
-      "/admin/books/available",
-      "/admin/books/reserve",
-    ],
-    icon: <IoBookOutline size={"24px"} />,
-    icons: <IoBook size={"24px"} color="white" />,
+    name: "Books",
+    href: ["/admin/books"],
+    icon: <BookAIcon className="h-4 w-4" />,
   },
   {
-    name: "Membres",
-    href: [
-      "/admin/membres",
-      "/admin/membres/overdue",
-      "/admin/membres/borrowed",
-      "/admin/membres/available",
-      "/admin/membres/reserve",
-    ],
-    icon: <RiContactsLine size={"24px"} />,
-    icons: <RiContactsFill size={"24px"} color="white" />,
+    name: "Users",
+    href: ["/admin/users"],
+    icon: <Users className="h-4 w-4" />,
   },
   {
-    name: "Paramètres",
-    href: ["#"],
-    icon: <IoSettingsOutline size={"24px"} />,
-    icons: <IoSettings size={"24px"} color="white" />,
+    name: "Notifications",
+    href: ["/admin/notifications"],
+    icon: <Bell className="h-4 w-4" />,
+  },
+  {
+    name: "Profile",
+    href: ["/admin/profile"],
+    icon: <User className="h-4 w-4" />,
   },
 ];
 
-export default function RootLayout({
+export default function AdminLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
+  const { logout, user } = useAuth();
+
+
   return (
-    <main className="bg-[#3c596822] w-screen h-screen">
-      <NavBar />
-      <div className="flex w-screen">
-        <Sidebar links={links} />
-        {children}
+    <div className="grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+      <div className="hidden border-r bg-muted/40 md:block">
+        <div className="flex h-full max-h-screen flex-col gap-2">
+          <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+            <Logo />
+          </div>
+          <div className="flex-1">
+            <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+              <NavLinks links={links} />
+            </nav>
+          </div>
+        </div>
       </div>
-    </main>
+      <div className="flex flex-col">
+        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="shrink-0 md:hidden"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="flex flex-col">
+              <nav className="grid gap-2 text-lg font-medium">
+                <Link
+                  href="#"
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  <Logo />
+                  <span className="sr-only">LibraryWare</span>
+                </Link>
+                <NavLinks links={links} />
+              </nav>
+            </SheetContent>
+          </Sheet>
+          <div className="w-full flex-1">
+            <form>
+              <div className="relative">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Search your favorites book..."
+                  className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
+                />
+              </div>
+            </form>
+          </div>
+          <ModeToggle />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" size="icon" className="rounded-full">
+                <Avatar className="inline-block static">
+                  <AvatarImage src={user.picture} />
+                  <AvatarFallback>
+                    {getFormattedInitials(user.name)}
+                  </AvatarFallback>
+                </Avatar>
+                <span className="sr-only">Toggle user menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>
+                <p className="text-sm font-medium">{user.name || "Anonymous"}</p>
+                <p className="text-xs font-light">{user.email || "mail"}</p>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </header>
+        {/* children */}
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          {children}
+        </main>
+
+        {/* children */}
+      </div>
+    </div>
   );
 }

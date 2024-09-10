@@ -3,17 +3,13 @@ import BookCard from "@/components/shared/book-card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useQuery } from "convex/react";
-import { api } from "../../../../convex/_generated/api";
-import { useAuth } from "@/providers/auth-provider";
 
 export default function BookMark() {
-  // const { user } = useAuth();
+  const bookmarkedBooks: any[] = [];
+  // console.log('helloworld');
   // console.log("user: ", user);
   // const bookmarked = useQuery(api.bookmark.getBookmarksByUserId);
 
-  const bookmarkedBooks: any[] = [];
-  // console.log(user);
   return (
     <ScrollArea className="w-full" style={{ height: "calc(100vh - 80px)" }}>
       <ul className="flex items-center justify-center">

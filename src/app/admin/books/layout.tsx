@@ -1,22 +1,19 @@
-import Tab from "@/components/shared/tab";
+import { ReactNode } from 'react';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "LibraryWare",
+  description:
+    "An innovative platform for managing and sharing your online library, making it easier to discover, bookmark, and discuss your favorite books.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
-  const items = [
-    { title: "Total", href: "/admin/books" },
-    { title: "Ajournement", href: "/admin/books/overdue" },
-    { title: "En Lecture", href: "/admin/books/borrowed" },
-    { title: "Disponible", href: "/admin/books/available" },
-    { title: "Réservés", href: "/admin/books/reserve" },
-  ];
-  return (
-    <div className="mx-[5%] pt-[2vh] w-[80%] h-[88vh] overflow-y-scroll scrollbar-none  scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
-      <div>
-        <Tab items={items} />
-      </div>
-      {children}
-    </div>
-  );
+  return <div className={inter.className}>{children}</div>;
 }

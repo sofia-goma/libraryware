@@ -1,8 +1,7 @@
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import getFormattedInitials from "@/lib/get-formatted-initials";
-
-
+import { LucideLinkedin, TwitterIcon } from "lucide-react";
+import { GitHubIcon } from "../icons/github";
 export default function TeamCard({
   name,
   job,
@@ -27,7 +26,7 @@ export default function TeamCard({
               target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
-              <FaGithub width="12px" className="fill-foreground" />
+              <GitHubIcon className="fill-foreground w-3" />
             </a>
           )}
           {linkedinLink && (
@@ -36,7 +35,7 @@ export default function TeamCard({
               target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
-              <FaLinkedin width="12px" className="fill-foreground" />
+              <LucideLinkedin width="12px" className="fill-foreground" />
             </a>
           )}
 
@@ -46,7 +45,7 @@ export default function TeamCard({
               target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
-              <FaTwitter width="12px" className="fill-foreground" />
+              <TwitterIcon width="12px" className="fill-foreground" />
             </a>
           )}
         </div>

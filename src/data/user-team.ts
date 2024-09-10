@@ -21,7 +21,7 @@ export const teamMembersData: ITeam[] = [
     githubLink: "https://github.com/blessingtutka",
     linkedinLink: "https://www.linkedin.com/in/blessing-tutka-5184802b2/",
     twitterLink: "https://x.com/Blessingtutka",
-    imageSrc: "/author/blessing-tutka.png",
+    imageSrc: "/blessing-tutka.png",
   },
   {
     name: "Landry Bitege",

@@ -1,9 +1,9 @@
 "use client";
-
 import Image from "next/image";
-import { FcGoogle } from "react-icons/fc";
+import { GoogleIcon } from "@/components/icons/google";
+import { GitHubIcon } from "@/components/icons/github";
+import { LucideFacebook } from "lucide-react";
 import loginImage from "../../../public/login-image.webp";
-import { ImFacebook2 } from "react-icons/im";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,7 +13,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import React, { useContext } from "react";
-import { ImGithub } from "react-icons/im";
 import { AuthContext } from "@/providers/auth-provider";
 
 export default function LoginForm() {
@@ -42,7 +41,7 @@ export default function LoginForm() {
                 className="w-full"
                 onClick={() => login("github")}
               >
-                <ImGithub className="fill-black mr-2 h-4 w-4" /> Continue with
+                <GitHubIcon className="fill-black mr-2 h-4 w-4" /> Continue with
                 Github
               </Button>
               <Button
@@ -50,15 +49,15 @@ export default function LoginForm() {
                 className="w-full"
                 onClick={() => login("facebook")}
               >
-                <ImFacebook2 className="fill-primary mr-2 h-4 w-4" /> Continue
-                with Facebook
+                <LucideFacebook className="fill-primary mr-2 h-4 w-4" />{" "}
+                Continue with Facebook
               </Button>
               <Button
                 variant="outline"
                 className="w-full"
                 onClick={() => login("google-oauth2")}
               >
-                <FcGoogle className="mr-2 h-4 w-4" /> Continue with Google
+                <GoogleIcon className="mr-2 h-4 w-4" /> Continue with Google
               </Button>
             </div>
           </CardContent>

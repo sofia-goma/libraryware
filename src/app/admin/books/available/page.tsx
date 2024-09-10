@@ -1,15 +1,7 @@
-"use client";
-import { MyContext } from "@/lib/context";
-import AvailableTab from "@/components/shared/available-tab";
-import { useContext } from "react";
-
-type Props = {};
-
-export default function Page({}: Props) {
-  const { books }: { books?: any } = useContext(MyContext);
+export default function Available() {
   return (
     <div className="my-4">
-      <AvailableTab val={true} all={true} />
+     <h1>Reserve</h1>
     </div>
   );
 }

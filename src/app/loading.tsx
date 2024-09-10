@@ -1,12 +1,3 @@
-// import Loading from '@/components/shared/loading';
-
-// export default function LoadingPage(){
-//   return (
-//     <div className="flex space-x-2 justify-center items-center bg-background h-screen">
-//       <Loading />
-//     </div>
-//   )
-// };
 export default function Loading() {
   return (
     <div className="flex space-x-2 justify-center items-center bg-background h-screen">

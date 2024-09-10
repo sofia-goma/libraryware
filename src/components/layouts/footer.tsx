@@ -1,8 +1,14 @@
-'use client';
+"use client";
 import { Separator } from "../ui/separator";
 import ModeToggle from "../shared/mode-toggle";
-import { BookOpenText, CodeXml, StarIcon, MessagesSquare, Bug } from "lucide-react";
-import { motion } from 'framer-motion';
+import {
+  BookOpenText,
+  CodeXml,
+  StarIcon,
+  MessagesSquare,
+  Bug,
+} from "lucide-react";
+
 
 export default function Footer() {
   const media = [
@@ -27,14 +33,7 @@ export default function Footer() {
       title: "Feedback",
     },
     {
-      icon: <motion.div
-      animate={{ rotate: 360 }}
-      transition={{
-        duration: 2,
-        ease: "easeInOut",
-        repeat: Infinity,
-        repeatType: "loop",}}
-      ><StarIcon size={18} /></motion.div>,
+      icon: <StarIcon size={18} />,
       link: "https://github.com/sofia-goma/libraryware/issues",
       title: "Give us a star on GitHub",
     },

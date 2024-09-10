@@ -33,6 +33,7 @@ import { getPostById } from "../../../../../convex/post";
 import { Id } from "../../../../../convex/_generated/dataModel";
 import { useAuth } from "@/providers/auth-provider";
 import { toast } from "react-toastify";
+import CommentUI from "@/components/shared/comment-ui";
 
 export default function PostId({
   params,
@@ -43,6 +44,9 @@ export default function PostId({
 }) {
   const [commentContent, setCommentContent] = React.useState("");
   const post = useQuery(api.post.getPostById, { postId: params.postId });
+  const comments = useQuery(api.comment.getCommentsByPost, {
+    postId: params.postId,
+  });
   const router = useRouter();
   const { user } = useAuth();
   const createComment = useMutation(api.comment.createComment);
@@ -78,6 +82,14 @@ export default function PostId({
         bookId={post.bookId}
         title={post.title}
       />
+      {comments?.map((e) => (
+        <CommentUI
+          key={e._id}
+          userId={e.userId}
+          body={e.body}
+          time={e._creationTime}
+        />
+      ))}
       <form
         className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
         x-chunk="dashboard-03-chunk-1"

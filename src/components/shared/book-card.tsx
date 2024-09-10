@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -15,9 +16,54 @@ import {
   BookmarkPlus,
   BookmarkMinus,
   Bookmark,
+  BookmarkCheck,
 } from "lucide-react";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { toast } from "react-toastify";
+import { useAuth } from "@/providers/auth-provider";
+import { IBookCard } from "../../../types";
 
-export default function BookCard({ author, title, cover, href }: IBookCard) {
+export default function BookCard({
+  id,
+  author,
+  title,
+  cover,
+  href,
+}: IBookCard) {
+  const { user } = useAuth();
+  console.log(id);
+  const createBookmark = useMutation(api.bookmark.createBookmark);
+  const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
+  const isBookmarked = useQuery(api.bookmark.isBookmark, {
+    userId: user.id,
+    bookId: id,
+  });
+
+  const bookmark = async () => {
+    if (!isBookmarked) {
+      try {
+        await createBookmark({
+          userId: user.id,
+          bookId: id,
+        });
+        toast.success("Book marked!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to bookmark the book.");
+      }
+    }
+    if (isBookmarked) {
+      try {
+        await deleteBookmark({
+          bookmarkId: isBookmarked._id,
+        });
+        toast.success("Remove Bookmark!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to bookmark the book.");
+      }
+    }
+  };
+
   return (
     <Card className="w-[250px] p-0 m-0">
       <CardHeader className="pt-0 text-center">
@@ -48,7 +94,13 @@ export default function BookCard({ author, title, cover, href }: IBookCard) {
       <CardFooter className="pb-0 flex items-center justify-center gap-3 py-2">
         <BookAIcon className="hover:cursor-pointer" color="blue" />
         <PlusCircleIcon className="hover:cursor-pointer" />
-        <Bookmark className="hover:cursor-pointer" />
+        <div className="" onClick={bookmark}>
+          {!isBookmarked ? (
+            <Bookmark className="hover:cursor-pointer" />
+          ) : (
+            <BookmarkCheck className="hover:cursor-pointer" />
+          )}
+        </div>
       </CardFooter>
     </Card>
   );

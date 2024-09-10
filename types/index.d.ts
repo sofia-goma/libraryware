@@ -1,3 +1,5 @@
+import { Id } from "../convex/_generated/dataModel";
+
 // team card -> for contributors to the librarywave project
 interface ITeam {
   name: string;
@@ -42,6 +44,7 @@ interface IPost {
 // for book card
 
 interface IBookCard {
+  id: Id<"book">;
   author?: string;
   title: string;
   cover?: string;

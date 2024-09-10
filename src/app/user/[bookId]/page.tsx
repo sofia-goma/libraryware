@@ -1,31 +1,33 @@
 "use client";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
 import Loading from "@/components/shared/loading";
 import { api } from "../../../../convex/_generated/api";
-import { BookmarkIcon, BookOpenText, BookmarkCheck } from "lucide-react";
+import { Id } from "../../../../convex/_generated/dataModel";
+import { BookmarkCheck, BookmarkIcon, BookOpenText } from "lucide-react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
 import { Button } from "@/components/ui/button";
 import { PostPopup } from "@/components/shared/post-popup";
+import { createPost } from "../../../../convex/post";
+
 export default function BookDetails({
   params,
 }: {
   params: {
-    bookId: string | any;
+    bookId: Id<"book">;
   };
 }) {
-  const { user } = useAuth();
+  const { user } = useAuth(); // Ensure user authentication
   const router = useRouter();
-  const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
-  const createBookmark = useMutation(api.bookmark.createBookmark);
-  const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
-  const isBookmarked = useQuery(api.bookmark.isBookmark, {
-    userId: user.id,
-    bookId: params.bookId,
-  });
+
+  // Wait for user to be available
+  if (!user || !user.id) {
+    return <Loading />; // Show loading while fetching user
+  }
 
   const bookmark = async () => {
     if (!isBookmarked) {
@@ -38,6 +40,43 @@ export default function BookDetails({
       } catch (error: any) {
         toast.error(error.message || "Failed to bookmark the book.");
       }
+    }
+    if (isBookmarked) {
+      try {
+        await deleteBookmark({
+          bookmarkId: isBookmarked._id,
+        });
+        toast.success("Remove Bookmark!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to bookmark the book.");
+      }
+    }
+  };
+
+  // Fetch book details
+  const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
+  const createBookmark = useMutation(api.bookmark.createBookmark);
+  const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
+  const isBookmarked = useQuery(api.bookmark.isBookmark, {
+    userId: user.id,
+    bookId: params.bookId,
+  });
+
+  const createPostConvex = useMutation(api.post.createPost);
+
+  const createPostfunction = async (content: string) => {
+    try {
+      // Call the Convex mutation to create the post
+      await createPostConvex({
+        userId: user.id,
+        bookId: params.bookId,
+        title: bookDetails?.title ? bookDetails.title : "Title to update",
+        body: content,
+      });
+
+      toast.success("Post created successfully!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to create the post.");
     }
     if (isBookmarked) {
       try {
@@ -107,7 +146,10 @@ export default function BookDetails({
           Read
         </Button>
         {/* post button */}
-        <PostPopup title={bookDetails.title} />
+        <PostPopup
+          handleSubmit={createPostfunction}
+          title={bookDetails.title}
+        />
       </div>
     </TooltipProvider>
   );

@@ -29,8 +29,15 @@ export function PostPopup({
   handleSubmit,
 }: {
   title: string;
-  handleSubmit?: () => void;
+  handleSubmit?: (content: string) => void;
 }) {
+  const [postContent, setPostContent] = React.useState(""); // State to store the input value
+
+  const handlePost = () => {
+    if (handleSubmit) {
+      handleSubmit(postContent); // Pass the content to the submit function
+    }
+  };
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -50,75 +57,24 @@ export function PostPopup({
               readers.
             </p>
           </div>
-          <form className="my-2">
+          <div className="my-2">
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Share your thougths</Label>
-                <Input id="name" placeholder="Share your thougths" />
+                <Input
+                  id="name"
+                  placeholder="Share your thougths"
+                  value={postContent} // Bind input value to state
+                  onChange={(e) => setPostContent(e.target.value)}
+                />
               </div>
             </div>
-          </form>
+          </div>
           <div className="flex justify-between">
             <Button variant="outline">Cancel</Button>
-            <Button>Post</Button>
+            <Button onClick={handlePost}>Post</Button>
           </div>
         </div>
       </PopoverContent>
     </Popover>
   );
-}
-
-{
-  /* <Popover>
-<PopoverTrigger asChild>
-  <Button variant="default">
-    <CirclePlus className="w-5 h-5 mr-2" />
-    Post
-  </Button>
-</PopoverTrigger>
-<PopoverContent className="w-80">
-  <div className="grid gap-4">
-    <div className="space-y-2">
-      <h4 className="font-medium leading-none">Dimensions</h4>
-      <p className="text-sm text-muted-foreground">
-        Set the dimensions for the layer.
-      </p>
-    </div>
-    <div className="grid gap-2">
-      <div className="grid grid-cols-3 items-center gap-4">
-        <Label htmlFor="width">Width</Label>
-        <Input
-          id="width"
-          defaultValue="100%"
-          className="col-span-2 h-8"
-        />
-      </div>
-      <div className="grid grid-cols-3 items-center gap-4">
-        <Label htmlFor="maxWidth">Max. width</Label>
-        <Input
-          id="maxWidth"
-          defaultValue="300px"
-          className="col-span-2 h-8"
-        />
-      </div>
-      <div className="grid grid-cols-3 items-center gap-4">
-        <Label htmlFor="height">Height</Label>
-        <Input
-          id="height"
-          defaultValue="25px"
-          className="col-span-2 h-8"
-        />
-      </div>
-      <div className="grid grid-cols-3 items-center gap-4">
-        <Label htmlFor="maxHeight">Max. height</Label>
-        <Input
-          id="maxHeight"
-          defaultValue="none"
-          className="col-span-2 h-8"
-        />
-      </div>
-    </div>
-  </div>
-</PopoverContent>
-</Popover> */
 }

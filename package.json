@@ -11,7 +11,7 @@
   "dependencies": {
     "@auth/core": "^0.34.2",
     "@auth0/auth0-react": "^2.2.4",
-    "@convex-dev/auth": "^0.0.60",
+    "@convex-dev/auth": "^0.0.65",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",

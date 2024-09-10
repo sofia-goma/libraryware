@@ -1,86 +1,73 @@
 "use client";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
 import Loading from "@/components/shared/loading";
 import { api } from "../../../../convex/_generated/api";
-// import { Button } from "@/components/ui/button";
-import {
-  CirclePlus,
-  BookmarkIcon,
-  BookOpenText,
-  BookmarkCheck,
-} from "lucide-react";
+import { Id } from "../../../../convex/_generated/dataModel";
+import { BookmarkIcon, BookOpenText } from "lucide-react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
-// import {
-//   Popover,
-//   PopoverContent,
-//   PopoverTrigger,
-// } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { PostPopup } from "@/components/shared/post-popup";
-import { useState } from "react";
+import { createPost } from "../../../../convex/post";
+
 export default function BookDetails({
   params,
 }: {
   params: {
-    bookId: string | any;
+    bookId: Id<"book">;
   };
 }) {
-  const { user } = useAuth();
-  // const [bookmarkcheck, setBookmarkcheck] = useState(true);
+  const { user } = useAuth(); // Ensure user authentication
   const router = useRouter();
+
+  // Wait for user to be available
+  if (!user || !user.id) {
+    return <Loading />; // Show loading while fetching user
+  }
+
+  // Fetch book details
   const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
-  const createBookmark = useMutation(api.bookmark.createBookmark);
-  const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
-  // this function is a book is bookmark
+
+  // Fetch bookmark status only if user.id is available
   const isBookmarked = useQuery(api.bookmark.isBookmark, {
     userId: user.id,
     bookId: params.bookId,
   });
 
-  const bookmark = async () => {
-    if (!isBookmarked) {
-      try {
-        await createBookmark({
-          userId: user.id,
-          bookId: params.bookId,
-        });
-        toast.success("Book marked!");
-      } catch (error: any) {
-        toast.error(error.message || "Failed to bookmark the book.");
-        // console.error("Error bookmarking the book:", error);
-      }
-    }
-    if (isBookmarked) {
-      try {
-        await deleteBookmark({
-          bookmarkId: isBookmarked._id,
-        });
-        toast.success("Remove Bookmark!");
-      } catch (error: any) {
-        toast.error(error.message || "Failed to bookmark the book.");
-        // console.error("Error bookmarking the book:", error);
-      }
+  const createBookmark = useMutation(api.bookmark.createBookmark);
+
+  const createPostConvex = useMutation(api.post.createPost);
+
+  const createPostfunction = async (content: string) => {
+    try {
+      // Call the Convex mutation to create the post
+      await createPostConvex({
+        userId: user.id,
+        bookId: params.bookId,
+        title: bookDetails?.title ? bookDetails.title : "Title to update",
+        body: content,
+      });
+
+      toast.success("Post created successfully!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to create the post.");
     }
   };
-
-  // handle read function
-  const read = () => {};
-
-  // handle post function
-
-  const post = () => {
-    console.log("post function");
+  // Bookmark function
+  const bookmark = async () => {
+    try {
+      await createBookmark({
+        userId: user.id, // Safely use user.id here
+        bookId: params.bookId,
+      });
+      toast.success("Bookmarked!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to bookmark the book.");
+    }
   };
 
   if (!bookDetails) {
@@ -118,11 +105,7 @@ export default function BookDetails({
           variant={isBookmarked ? "secondary" : "outline"}
           onClick={bookmark}
         >
-          {!isBookmarked ? (
-            <BookmarkIcon className="w-5 h-5 mr-2" />
-          ) : (
-            <BookmarkCheck className="w-5 h-5 mr-2" />
-          )}
+          <BookmarkIcon className="w-5 h-5 mr-2" />
           Bookmark
         </Button>
         <Button variant="outline">
@@ -130,7 +113,10 @@ export default function BookDetails({
           Read
         </Button>
         {/* post button */}
-        <PostPopup title={bookDetails.title} />
+        <PostPopup
+          handleSubmit={createPostfunction}
+          title={bookDetails.title}
+        />
       </div>
     </TooltipProvider>
   );

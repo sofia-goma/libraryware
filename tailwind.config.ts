@@ -18,11 +18,16 @@ const config = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
+        mlg: "991px",
       },
     },
     extend: {
       boxShadow: {
         box: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+      },
+      screens: {
+        "2xl": "1400px",
+        mlg: "991px",
       },
       colors: {
         border: "hsl(var(--border))",

@@ -10,12 +10,14 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 export default function PostUI({
+  id,
   body,
   userId,
   time,
   bookId,
   title,
 }: {
+  id: Id<"post">;
   body: string;
   userId: Id<"users">;
   time: number;
@@ -68,7 +70,7 @@ export default function PostUI({
 
         <div className="flex justify-between">
           {/* comment btn */}
-          <Link href="/user/forum/dkkdkdk">
+          <Link href={`/user/forum/${id}`}>
             <Button variant="ghost" size="sm">
               <MessageCircle size={18} />
             </Button>

@@ -26,7 +26,7 @@ export default function TeamCard({
               target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
-              <GithubIcon width="12px" className="fill-foreground" />
+              <GitHubIcon className="fill-foreground w-3" />
             </a>
           )}
           {linkedinLink && (

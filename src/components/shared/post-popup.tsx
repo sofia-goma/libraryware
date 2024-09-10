@@ -29,7 +29,7 @@ export function PostPopup({
   handleSubmit,
 }: {
   title: string;
-  handleSubmit: () => void;
+  handleSubmit?: () => void;
 }) {
   return (
     <Popover>

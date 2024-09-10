@@ -4,9 +4,8 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Share2, Heart, MessageCircle, Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Card } from "@/components/ui/card";
-import Link from "next/link";
-
+import Image from 'next/image';
+import Link from 'next/link';
 export default function PostUI({ children }: { children?: ReactNode }) {
   const navigate = useRouter();
   const goToPath = (path: string) => {
@@ -33,10 +32,11 @@ export default function PostUI({ children }: { children?: ReactNode }) {
 
         {/* image post */}
 
-        <img
+        <Image
           src={"/hero.png"}
           width={200}
           height={100}
+          alt="post image"
           //    className="w-full max-h-[500px] object-center mb-2"
         />
 

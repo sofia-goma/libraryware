@@ -60,6 +60,7 @@ export const getBookmarksByUserId = query({
       .query("bookmark")
       .withIndex("by_userId", (q) => q.eq("userId", args.userId))
       .collect();
+    console.log(bookmarks);
 
     return bookmarks;
   },
@@ -72,12 +73,12 @@ export const isBookmark = query({
   },
   handler: async (ctx, args) => {
     const bookmark = await ctx.db
-     .query("bookmark")
-     .withIndex("by_userId", (q) =>
+      .query("bookmark")
+      .withIndex("by_userId", (q) =>
         q.eq("userId", args.userId).eq("bookId", args.bookId)
       )
-     .first();
+      .first();
 
-    return!!bookmark;
+    return bookmark;
   },
-})
+});

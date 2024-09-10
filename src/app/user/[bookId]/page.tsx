@@ -5,7 +5,12 @@ import { useQuery, useMutation } from "convex/react";
 import Loading from "@/components/shared/loading";
 import { api } from "../../../../convex/_generated/api";
 // import { Button } from "@/components/ui/button";
-import { CirclePlus, BookmarkIcon, BookOpenText } from "lucide-react";
+import {
+  CirclePlus,
+  BookmarkIcon,
+  BookOpenText,
+  BookmarkCheck,
+} from "lucide-react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
@@ -23,6 +28,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { PostPopup } from "@/components/shared/post-popup";
+import { useState } from "react";
 export default function BookDetails({
   params,
 }: {
@@ -31,26 +37,42 @@ export default function BookDetails({
   };
 }) {
   const { user } = useAuth();
+  // const [bookmarkcheck, setBookmarkcheck] = useState(true);
   const router = useRouter();
   const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
   const createBookmark = useMutation(api.bookmark.createBookmark);
-  const bookmark = async () => {
-    try {
-      await createBookmark({
-        userId: user.id,
-        bookId: params.bookId,
-      });
-      toast.success("Book marked!");
-    } catch (error: any) {
-      toast.error(error.message || "Failed to bookmark the book.");
-      // console.error("Error bookmarking the book:", error);
-    }
-  };
+  const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
   // this function is a book is bookmark
   const isBookmarked = useQuery(api.bookmark.isBookmark, {
     userId: user.id,
     bookId: params.bookId,
   });
+
+  const bookmark = async () => {
+    if (!isBookmarked) {
+      try {
+        await createBookmark({
+          userId: user.id,
+          bookId: params.bookId,
+        });
+        toast.success("Book marked!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to bookmark the book.");
+        // console.error("Error bookmarking the book:", error);
+      }
+    }
+    if (isBookmarked) {
+      try {
+        await deleteBookmark({
+          bookmarkId: isBookmarked._id,
+        });
+        toast.success("Remove Bookmark!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to bookmark the book.");
+        // console.error("Error bookmarking the book:", error);
+      }
+    }
+  };
 
   // handle read function
   const read = () => {};
@@ -96,7 +118,11 @@ export default function BookDetails({
           variant={isBookmarked ? "secondary" : "outline"}
           onClick={bookmark}
         >
-          <BookmarkIcon className="w-5 h-5 mr-2" />
+          {!isBookmarked ? (
+            <BookmarkIcon className="w-5 h-5 mr-2" />
+          ) : (
+            <BookmarkCheck className="w-5 h-5 mr-2" />
+          )}
           Bookmark
         </Button>
         <Button variant="outline">

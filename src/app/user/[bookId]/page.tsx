@@ -6,7 +6,7 @@ import { useQuery, useMutation } from "convex/react";
 import Loading from "@/components/shared/loading";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
-import { BookmarkIcon, BookOpenText } from "lucide-react";
+import { BookmarkCheck, BookmarkIcon, BookOpenText } from "lucide-react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
@@ -29,6 +29,30 @@ export default function BookDetails({
     return <Loading />; // Show loading while fetching user
   }
 
+  const bookmark = async () => {
+    if (!isBookmarked) {
+      try {
+        await createBookmark({
+          userId: user.id,
+          bookId: params.bookId,
+        });
+        toast.success("Book marked!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to bookmark the book.");
+      }
+    }
+    if (isBookmarked) {
+      try {
+        await deleteBookmark({
+          bookmarkId: isBookmarked._id,
+        });
+        toast.success("Remove Bookmark!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to bookmark the book.");
+      }
+    }
+  };
+
   // Fetch book details
   const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
   const createBookmark = useMutation(api.bookmark.createBookmark);
@@ -37,8 +61,6 @@ export default function BookDetails({
     userId: user.id,
     bookId: params.bookId,
   });
-
-  const createBookmark = useMutation(api.bookmark.createBookmark);
 
   const createPostConvex = useMutation(api.post.createPost);
 

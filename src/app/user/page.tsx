@@ -31,6 +31,7 @@ export default function Dashboard() {
                   ({ openLibraryId, _id, title, author, coverUrl }) => (
                     <BookCard
                       key={_id}
+                      id={_id}
                       href={`/user/${_id}`}
                       title={title}
                       cover={coverUrl || ""}

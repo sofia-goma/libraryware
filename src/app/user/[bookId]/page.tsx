@@ -31,8 +31,8 @@ export default function BookDetails({
 
   // Fetch book details
   const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
-
-  // Fetch bookmark status only if user.id is available
+  const createBookmark = useMutation(api.bookmark.createBookmark);
+  const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
   const isBookmarked = useQuery(api.bookmark.isBookmark, {
     userId: user.id,
     bookId: params.bookId,
@@ -56,18 +56,25 @@ export default function BookDetails({
     } catch (error: any) {
       toast.error(error.message || "Failed to create the post.");
     }
-  };
-  // Bookmark function
-  const bookmark = async () => {
-    try {
-      await createBookmark({
-        userId: user.id, // Safely use user.id here
-        bookId: params.bookId,
-      });
-      toast.success("Bookmarked!");
-    } catch (error: any) {
-      toast.error(error.message || "Failed to bookmark the book.");
+    if (isBookmarked) {
+      try {
+        await deleteBookmark({
+          bookmarkId: isBookmarked._id,
+        });
+        toast.success("Remove Bookmark!");
+      } catch (error: any) {
+        toast.error(error.message || "Failed to bookmark the book.");
+      }
     }
+  };
+
+  // handle read function
+  const read = () => {};
+
+  // handle post function
+
+  const post = () => {
+    console.log("post function");
   };
 
   if (!bookDetails) {
@@ -105,7 +112,11 @@ export default function BookDetails({
           variant={isBookmarked ? "secondary" : "outline"}
           onClick={bookmark}
         >
-          <BookmarkIcon className="w-5 h-5 mr-2" />
+          {!isBookmarked ? (
+            <BookmarkIcon className="w-5 h-5 mr-2" />
+          ) : (
+            <BookmarkCheck className="w-5 h-5 mr-2" color="blue" />
+          )}
           Bookmark
         </Button>
         <Button variant="outline">

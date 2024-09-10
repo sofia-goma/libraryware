@@ -97,7 +97,7 @@ export default function BookCard({
           {!isBookmarked ? (
             <Bookmark className="hover:cursor-pointer" />
           ) : (
-            <BookmarkCheck className="hover:cursor-pointer" />
+            <BookmarkCheck className="hover:cursor-pointer" color="blue" />
           )}
         </div>
       </CardFooter>

@@ -4,11 +4,7 @@ import { useRouter } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
 import Loading from "@/components/shared/loading";
 import { api } from "../../../../convex/_generated/api";
-import {
-  BookmarkIcon,
-  BookOpenText,
-  BookmarkCheck,
-} from "lucide-react";
+import { BookmarkIcon, BookOpenText, BookmarkCheck } from "lucide-react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
@@ -102,7 +98,7 @@ export default function BookDetails({
           {!isBookmarked ? (
             <BookmarkIcon className="w-5 h-5 mr-2" />
           ) : (
-            <BookmarkCheck className="w-5 h-5 mr-2" />
+            <BookmarkCheck className="w-5 h-5 mr-2" color="blue" />
           )}
           Bookmark
         </Button>

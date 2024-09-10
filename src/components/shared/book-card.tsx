@@ -22,7 +22,6 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
-import { IBookCard } from "../../../types";
 
 export default function BookCard({
   id,

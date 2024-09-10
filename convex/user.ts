@@ -75,7 +75,7 @@ export const checkOrCreateUser = mutation({
   },
 });
 
-export const getUser = mutation({
+export const getUser = query({
   args: { userId: v.id("users") },
   handler: async ({ db }, { userId }) => {
     const user = await db

@@ -30,6 +30,7 @@ export default function BookMark() {
           {bookmarkedBooks.map((book) => (
             <BookCard
               key={book.id}
+              id={book.id}
               href="#"
               author={book.author}
               title={book.title}

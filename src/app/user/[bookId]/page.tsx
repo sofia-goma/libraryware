@@ -23,6 +23,16 @@ export default function BookDetails({
 }) {
   const { user } = useAuth(); // Ensure user authentication
   const router = useRouter();
+  // Fetch book details
+  const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
+  const createBookmark = useMutation(api.bookmark.createBookmark);
+  const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
+  const isBookmarked = useQuery(api.bookmark.isBookmark, {
+    userId: user.id,
+    bookId: params.bookId,
+  });
+
+  const createPostConvex = useMutation(api.post.createPost);
 
   // Wait for user to be available
   if (!user || !user.id) {
@@ -52,17 +62,6 @@ export default function BookDetails({
       }
     }
   };
-
-  // Fetch book details
-  const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
-  const createBookmark = useMutation(api.bookmark.createBookmark);
-  const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
-  const isBookmarked = useQuery(api.bookmark.isBookmark, {
-    userId: user.id,
-    bookId: params.bookId,
-  });
-
-  const createPostConvex = useMutation(api.post.createPost);
 
   const createPostfunction = async (content: string) => {
     try {

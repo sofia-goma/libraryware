@@ -22,6 +22,8 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
+import { PostPopup } from "./post-popup";
+import { useState } from "react";
 
 export default function BookCard({
   id,
@@ -62,7 +64,33 @@ export default function BookCard({
       }
     }
   };
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  const createPostConvex = useMutation(api.post.createPost);
+
+  const createPostfunction = async (content: string) => {
+    try {
+      // Call the Convex mutation to create the post
+      await createPostConvex({
+        userId: user.id,
+        bookId: id,
+        title: title,
+        body: content,
+      });
+
+      toast.success("Post created successfully!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to create the post.");
+    }
+  };
   return (
     <Card className="w-[250px] p-0 m-0">
       <CardHeader className="p-4 text-center">
@@ -90,8 +118,13 @@ export default function BookCard({
         </Link>
       </CardContent>
       <CardFooter className="pb-0 flex items-center justify-center gap-3 py-2">
-        <BookAIcon className="hover:cursor-pointer" color="blue" />
-        <PlusCircleIcon className="hover:cursor-pointer" />
+        <BookAIcon className="hover:cursor-pointer" />
+        <PostPopup
+          shape={true}
+          handleSubmit={createPostfunction}
+          title={title}
+        />
+        {/* // )} */}
         <div className="" onClick={bookmark}>
           {!isBookmarked ? (
             <Bookmark className="hover:cursor-pointer" />

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CirclePlus } from "lucide-react";
+import { CirclePlus, PlusCircleIcon } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -27,9 +27,11 @@ import {
 export function PostPopup({
   title,
   handleSubmit,
+  shape,
 }: {
   title: string;
   handleSubmit?: (content: string) => void;
+  shape?: boolean;
 }) {
   const [postContent, setPostContent] = React.useState(""); // State to store the input value
 
@@ -41,10 +43,14 @@ export function PostPopup({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="default">
-          <CirclePlus className="w-5 h-5 mr-2" />
-          Post
-        </Button>
+        {shape ? (
+          <PlusCircleIcon className="hover:cursor-pointer" />
+        ) : (
+          <Button variant="default">
+            <CirclePlus className="w-5 h-5 mr-2" />
+            Post
+          </Button>
+        )}
       </PopoverTrigger>
       <PopoverContent>
         <div className="p-0 m-0 border-none shadow-none">

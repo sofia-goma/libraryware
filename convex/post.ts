@@ -26,7 +26,7 @@ export const editPost = mutation({
   args: {
     postId: v.id("post"),
     title: v.optional(v.string()),
-    body: v.optional(v.string()),
+    body: v.string(),
   },
   handler: async (ctx, args) => {
     const existingPost = await ctx.db.get(args.postId);
@@ -52,7 +52,7 @@ export const deletePost = mutation({
 
 export const getPosts = query({
   handler: async (ctx) => {
-    const posts = await ctx.db.query("post").order('desc').collect();
+    const posts = await ctx.db.query("post").order("desc").collect();
     return posts;
   },
 });

@@ -7,6 +7,7 @@ import { Id } from "../../../convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import BookMarkedList from "./book-marked-list";
+import BookCardLoader from "./book-card-loader";
 
 type Props = { userId: Id<"users"> };
 
@@ -15,7 +16,16 @@ export default function Bookmarked({ userId }: Props) {
     userId,
   });
 
-  if (!bookmarkedBooks) return;
+  if (!bookmarkedBooks)
+    return (
+      <div className="flex flex-wrap gap-4 md:gap-5 lg:gap-3 mb-4">
+        {Array(8)
+          .fill(null)
+          .map((e, i) => (
+            <BookCardLoader key={i} />
+          ))}
+      </div>
+    );
 
   return (
     <ul className="flex items-center justify-center">
@@ -32,9 +42,11 @@ export default function Bookmarked({ userId }: Props) {
           </div>
         </TooltipProvider>
       )}
-      {bookmarkedBooks.map((e) => (
-        <BookMarkedList key={e._id} bookId={e.bookId} />
-      ))}
+      <div className="flex flex-wrap gap-4 md:gap-5 lg:gap-3 mb-4">
+        {bookmarkedBooks.map((e) => (
+          <BookMarkedList key={e._id} bookId={e.bookId} />
+        ))}
+      </div>
     </ul>
   );
 }

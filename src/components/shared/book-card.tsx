@@ -123,7 +123,6 @@ export default function BookCard({
           handleSubmit={createPostfunction}
           title={title}
         />
-        {/* // )} */}
         <div className="" onClick={bookmark}>
           {!isBookmarked ? (
             <Bookmark className="hover:cursor-pointer" />

@@ -4,6 +4,7 @@ import Loading from "@/components/shared/loading";
 import { usePaginatedQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import BookCard from "@/components/shared/book-card";
+import BookCardLoader from "@/components/shared/book-card-loader";
 
 export default function Dashboard() {
   const { results, status, loadMore, isLoading } = usePaginatedQuery(
@@ -21,8 +22,12 @@ export default function Dashboard() {
         </div>
         <ScrollArea className="w-full h-[80vh] overflow-y-auto">
           {isLoading ? (
-            <div className="flex mx-auto justify-items-center w-[100%]">
-              <Loading />
+            <div className="flex flex-wrap gap-4 md:gap-5 lg:gap-3 mb-4">
+              {Array(8)
+                .fill(null)
+                .map((e, i) => (
+                  <BookCardLoader key={i} />
+                ))}
             </div>
           ) : (
             <div className="">

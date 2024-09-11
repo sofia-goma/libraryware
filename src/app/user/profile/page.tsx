@@ -6,6 +6,7 @@ import { useAuth } from "@/providers/auth-provider";
 
 function ProfilePage() {
   const { user } = useAuth();
+  if (!user.id) return;
   return (
     <>
       <ProfileInfoCard user={user} />

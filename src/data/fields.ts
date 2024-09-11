@@ -10,16 +10,10 @@ export interface FormFieldData {
 
 export const profileFields = [
   {
-    name: "username",
-    type: "text",
-    label: "Username",
-    placeholder: "John Doe",
-  },
-  {
-    name: "email",
-    type: "email",
-    label: "Email",
-    placeholder: "johndoe@gmail.com",
+    name: "upload",
+    type: "file",
+    label: "Change your Profile Photo",
+    placeholder: "",
   },
   {
     name: "bio",
@@ -31,6 +25,6 @@ export const profileFields = [
     name: "location",
     type: "text",
     label: "Location",
-    placeholder: "Tokyo",
+    placeholder: "Goma",
   },
 ];

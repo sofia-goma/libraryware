@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -14,8 +13,14 @@ import { PhoneCallIcon, MapIcon } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
+import { ScrollArea } from "../ui/scroll-area";
+import PostBox from "../post/post-box";
 
 const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
+  const posts = useQuery(api.post.getPostsByUserId, {
+    userId: user.id as Id<"users">,
+  });
+  // console.log(usePost);
   return (
     <Tabs defaultValue="about-me" className="w-full md:w-8/12 lg:w-9/12">
       <TabsList className="grid w-full grid-cols-3">
@@ -27,10 +32,7 @@ const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
         <Card>
           <CardHeader>
             <CardTitle>About me</CardTitle>
-            <CardDescription>
-              Bio here.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Etiam fermentum enim neque.
-            </CardDescription>
+            <CardDescription>Hello world</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex flex-col gap-1">
@@ -55,13 +57,22 @@ const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
       <TabsContent value="posts">
         <Card>
           <CardHeader>
-            <CardTitle>Bork Mark</CardTitle>
-            <CardDescription>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-              fermentum enim neque.
-            </CardDescription>
+            <CardTitle>Posts</CardTitle>
+            <CardDescription>See all your posts</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2"></CardContent>
+          <CardContent className="space-y-2">
+            <div className="mx-2 border-x border-t border-solid border-border">
+              {posts && posts.length > 0 ? (
+                <ScrollArea className="w-full h-[80vh] overflow-y-auto">
+                  {posts?.map((post: any, index: number) => (
+                    <PostBox post={post} key={index} />
+                  ))}
+                </ScrollArea>
+              ) : (
+                <p>No posts available</p>
+              )}
+            </div>
+          </CardContent>
         </Card>
       </TabsContent>
       <TabsContent value="settings">
@@ -69,8 +80,8 @@ const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
           <CardHeader>
             <CardTitle>Settings</CardTitle>
             <CardDescription>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-              fermentum enim neque.
+              Customize your Libraryware experience by adjusting your account,
+              reading preferences, and notifications.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">

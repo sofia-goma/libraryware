@@ -17,7 +17,6 @@ export default function Bookmarked({ userId }: Props) {
 
   if (!bookmarkedBooks) return;
 
-  console.log(bookmarkedBooks);
   return (
     <ul className="flex items-center justify-center">
       {bookmarkedBooks.length === 0 && (

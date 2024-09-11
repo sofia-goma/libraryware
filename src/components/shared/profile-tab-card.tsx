@@ -16,10 +16,6 @@ import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 
 const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
-  // const usePost = useQuery(api.post.getPostsByUserId, {
-  //   userId: user._id as Id<"users">,
-  // });
-  // console.log(usePost);
   return (
     <Tabs defaultValue="about-me" className="w-full md:w-8/12 lg:w-9/12">
       <TabsList className="grid w-full grid-cols-3">

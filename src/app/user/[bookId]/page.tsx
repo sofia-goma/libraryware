@@ -94,9 +94,7 @@ export default function BookDetails({
 
   // handle post function
 
-  const post = () => {
-    console.log("post function");
-  };
+  const post = () => {};
 
   if (!bookDetails) {
     return (

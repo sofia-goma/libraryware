@@ -15,9 +15,7 @@ const formSchema = z.object({
 });
 
 export default function ProfileSettingForm() {
-  function onSubmit(values: z.infer<any>) {
-    console.log(values);
-  }
+  function onSubmit(values: z.infer<any>) {}
 
   return (
     <CustomForm

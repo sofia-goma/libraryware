@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { ReactNode } from "react";
 import { useAuth } from "@/providers/auth-provider";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
@@ -10,7 +10,6 @@ function NotificationsLayout({
   children: ReactNode;
 }>) {
   const { user } = useAuth();
-  console.log(user);
   return <div>{children}</div>;
 }
 

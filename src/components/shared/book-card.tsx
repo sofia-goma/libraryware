@@ -33,7 +33,6 @@ export default function BookCard({
   href,
 }: IBookCard) {
   const { user } = useAuth();
-  console.log(id);
   const createBookmark = useMutation(api.bookmark.createBookmark);
   const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
   const isBookmarked = useQuery(api.bookmark.isBookmark, {

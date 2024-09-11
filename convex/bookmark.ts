@@ -60,7 +60,6 @@ export const getBookmarksByUserId = query({
       .query("bookmark")
       .withIndex("by_userId", (q) => q.eq("userId", args.userId))
       .collect();
-    console.log(bookmarks);
 
     return bookmarks;
   },

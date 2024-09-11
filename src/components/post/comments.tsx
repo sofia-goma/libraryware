@@ -1,7 +1,8 @@
+"use client";
 import React, { useState, useRef, useMemo, useCallback } from "react";
-
 import Link from "next/link";
-import socialDate from "@/lib/socialDate";
+// import useAut
+import socialDate from "@/lib/social-date";
 import getFormattedInitials from "@/lib/get-formatted-initials";
 import { Id } from "../../../convex/_generated/dataModel";
 import { api } from "../../../convex/_generated/api";
@@ -106,12 +107,12 @@ function Comments({ post }: { post: IPost }) {
   const [openedReplies, setOpenedReplies] = useState<OpenedReplies>({});
   const [activeName, setActiveName] = useState<string>("");
   // To uncomments when posts exists in the database
-  // const comments = useQuery(api.comment.getCommentsByPost, {
-  //   postId: post._id as Id<"post">,
-  // });
+  const comments = useQuery(api.comment.getCommentsByPost, {
+    postId: post._id as Id<"post">,
+  });
 
   //Replace "commentsData" with "comments" in the comments above :)
-  const nestedComments = useMemo(() => buildCommentTree(commentsData), []);
+  const nestedComments = useMemo(() => buildCommentTree(comments ?? []), [comments])
 
   const handleToggle = useCallback(
     (id: string) => {
@@ -156,7 +157,7 @@ function Comments({ post }: { post: IPost }) {
               classesActive,
             ].join(" ")}
           >
-            <div className="flex cursor-text text-gray-700 flex-col gap-1">
+            <div className="flex cursor-text text-secondary-foreground flex-col gap-1">
               <CommentUser item={item} />
               <div className="">{item.body}</div>
             </div>

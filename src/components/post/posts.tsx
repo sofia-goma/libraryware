@@ -1,11 +1,10 @@
 "use client";
-
+import React from "react";
 import { api } from "../../../convex/_generated/api";
 import { useMutation, useQuery } from "convex/react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import PostBox from "./post-box";
 
-import React from "react";
 
 function Posts() {
   const posts = useQuery(api.post.getPosts);
@@ -37,10 +36,10 @@ function Posts() {
   ];
   // Replace postEx with posts
   return (
-    <div className="mx-2 border-x border-t border-solid border-gray-300">
+    <div className="mx-2 border-x border-t border-solid border-border">
       {postEx.length > 0 ? (
         <ScrollArea className="w-full h-[80vh] overflow-y-auto">
-          {postEx.map((post, index) => (
+          {posts?.map((post, index) => (
             <PostBox post={post} key={index} />
           ))}
         </ScrollArea>

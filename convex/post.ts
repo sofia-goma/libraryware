@@ -52,7 +52,7 @@ export const deletePost = mutation({
 
 export const getPosts = query({
   handler: async (ctx) => {
-    const posts = await ctx.db.query("post").collect();
+    const posts = await ctx.db.query("post").order('desc').collect();
     return posts;
   },
 });

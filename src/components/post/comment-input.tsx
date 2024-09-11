@@ -8,6 +8,11 @@ import { api } from "../../../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { SendHorizonal } from "lucide-react";
 import FormLoading from "../shared/FormLoading";
+import { useForm } from "react-hook-form";
+
+interface IPostComment {
+  body: string;
+}
 
 function CommentInput({ post, comment }: { post: IPost; comment?: IComment }) {
   const { user } = useAuth();
@@ -15,14 +20,15 @@ function CommentInput({ post, comment }: { post: IPost; comment?: IComment }) {
   const createComment = useMutation(api.comment.createComment);
   //We'll use react hook form tomorrow
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleComment = async () => {
+  const { register, handleSubmit } = useForm<IPostComment>();
+  const handleComment = async (data: IPostComment) => {
     setLoading(true);
+    // console.log(data.body);
     try {
-      const comId = await createComment({
+      await createComment({
         postId: post._id as Id<"post">,
         userId: user.id as Id<"users">,
-        body: "Let's jus put a test here",
+        body: data.body,
         parentId: comment ? (comment._id as Id<"comment">) : undefined,
       });
     } catch (error) {
@@ -32,13 +38,20 @@ function CommentInput({ post, comment }: { post: IPost; comment?: IComment }) {
   };
   return (
     <div className="relative">
-      <Input placeholder="Type a comment" ref={inputRef} />
-      <Button
-        onClick={handleComment}
-        className="p-2 absolute right-0 top-0 bg-primary rounded-tl-none rounded-bl-none "
-      >
-        {loading ? <FormLoading /> : <SendHorizonal className="w-6 h-6" />}
-      </Button>
+      <form onSubmit={handleSubmit(handleComment)}>
+        <Input
+          placeholder="Type a comment"
+          // ref={inputRef}
+          {...register("body")}
+        />
+        <Button
+          type="submit"
+          // onClick={handleComment}
+          className="p-2 absolute right-0 top-0 bg-primary rounded-tl-none rounded-bl-none "
+        >
+          {loading ? <FormLoading /> : <SendHorizonal className="w-6 h-6" />}
+        </Button>
+      </form>
     </div>
   );
 }

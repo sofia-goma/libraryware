@@ -54,7 +54,7 @@ export default function Footer() {
     );
   });
   return (
-    <footer>
+    <footer className="bg-secondary">
       <Separator />
       <div className="container bg-secondary text-secondary-foreground flex flex-col py-4 items-center gap-3 lg:flex-row justify-between">
         {showMenu}

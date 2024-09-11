@@ -122,7 +122,7 @@ const PostBox = ({ post }: { post: IPost }) => {
             </Dialog>
           )}
         </div>
-        <Button variant="link">
+        <h1>
           <Drawer>
             <DrawerTrigger className="text-secondary-foreground flex justify-center items-center gap-1">
               <MessagesSquare className="w-4 h-4" /> Comments (
@@ -138,13 +138,11 @@ const PostBox = ({ post }: { post: IPost }) => {
               </ScrollArea>
               <CommentInput post={post} />
               <DrawerFooter className="self-start p-0 pt-2">
-                <DrawerClose>
-                  <Button variant="outline">Close</Button>
-                </DrawerClose>
+                <DrawerClose></DrawerClose>
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
-        </Button>
+        </h1>
       </div>
       <CommentInput post={post} />
     </div>

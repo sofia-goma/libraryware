@@ -23,7 +23,6 @@ function CommentInput({ post, comment }: { post: IPost; comment?: IComment }) {
   const { register, handleSubmit } = useForm<IPostComment>();
   const handleComment = async (data: IPostComment) => {
     setLoading(true);
-    // console.log(data.body);
     try {
       await createComment({
         postId: post._id as Id<"post">,

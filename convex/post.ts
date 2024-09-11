@@ -8,6 +8,7 @@ export const createPost = mutation({
     bookId: v.id("book"),
     title: v.string(),
     body: v.string(),
+    picture: v.optional(v.string())
   },
   handler: async (ctx, args) => {
     const newPost = {
@@ -15,6 +16,7 @@ export const createPost = mutation({
       bookId: args.bookId,
       title: args.title,
       body: args.body,
+      picture: args?.picture || null,
     };
 
     const insertedPost = await ctx.db.insert("post", newPost);
@@ -91,3 +93,11 @@ export const getPostsByUserId = query({
     return posts;
   },
 });
+
+// generate url
+
+export const generateUploadUrl = mutation(async (ctx) => {
+  console.log(ctx.storage);
+  return await ctx.storage.generateUploadUrl();
+});
+

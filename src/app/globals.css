@@ -62,8 +62,8 @@
 
 @layer base {
   * {
-    font-family: "sans-serif";
     @apply border-border;
+    @apply font-inter;
   }
   body {
     @apply bg-background text-foreground;

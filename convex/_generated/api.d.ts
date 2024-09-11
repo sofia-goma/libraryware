@@ -20,6 +20,7 @@ import type * as comment from "../comment.js";
 import type * as crons from "../crons.js";
 import type * as helpers from "../helpers.js";
 import type * as http from "../http.js";
+import type * as like from "../like.js";
 import type * as notification from "../notification.js";
 import type * as post from "../post.js";
 import type * as user from "../user.js";
@@ -40,6 +41,7 @@ declare const fullApi: ApiFromModules<{
   crons: typeof crons;
   helpers: typeof helpers;
   http: typeof http;
+  like: typeof like;
   notification: typeof notification;
   post: typeof post;
   user: typeof user;

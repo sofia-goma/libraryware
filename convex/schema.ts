@@ -18,6 +18,11 @@ const schema = defineSchema({
     bookId: v.id("book"),
   }).index("by_userId", ["userId", "bookId"]),
 
+  like: defineTable({
+    userId: v.id("users"),
+    postId: v.id("post"),
+  }).index("by_userId", ["userId", "postId"]),
+
   post: defineTable({
     userId: v.id("users"),
     bookId: v.id("book"),

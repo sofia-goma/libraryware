@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import OAuthProvider from "@/providers/oauth-provider";
@@ -8,7 +7,6 @@ import AuthProvider from "@/providers/auth-provider";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "LibraryWare",
@@ -23,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body>
         <OAuthProvider>
           <ThemeProvider
             attribute="class"

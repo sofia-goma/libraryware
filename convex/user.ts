@@ -88,3 +88,24 @@ export const getUser = query({
     return user;
   },
 });
+
+export const editUserProfilePhoto = mutation({
+  args: {
+    userId: v.id("users"), // ID of the user whose profile photo will be updated
+    newImageUrl: v.string(), // The new profile image URL
+  },
+  handler: async (ctx, { userId, newImageUrl }) => {
+    // Fetch the user by userId
+    const user = await ctx.db.get(userId);
+
+    // If user doesn't exist, throw an error
+    if (!user) {
+      throw new Error(`User with ID ${userId} not found`);
+    }
+
+    if (user.image !== newImageUrl) {
+      await ctx.db.patch(userId, { image: newImageUrl });
+    }
+    return userId;
+  },
+});

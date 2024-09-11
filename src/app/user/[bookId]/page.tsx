@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
 import { Button } from "@/components/ui/button";
 import { PostPopup } from "@/components/shared/post-popup";
-import { createPost } from "../../../../convex/post";
+
 
 export default function BookDetails({
   params,
@@ -92,9 +92,6 @@ export default function BookDetails({
   // handle read function
   const read = () => {};
 
-  // handle post function
-
-  const post = () => {};
 
   if (!bookDetails) {
     return (

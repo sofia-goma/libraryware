@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BookAIcon, Bookmark, CirclePlus } from "lucide-react";
+import { BookOpenText, Bookmark, CirclePlus } from "lucide-react";
 
 export default function BookCardLoader({}) {
   return (
@@ -22,7 +22,7 @@ export default function BookCardLoader({}) {
         <div className="bg-gray-300 rounded object-cover w-[150px] h-[230px]"></div>
       </CardContent>
       <CardFooter className="pb-0 flex items-center justify-center gap-3 py-2">
-        <BookAIcon />
+        <BookOpenText />
         <CirclePlus />
         <Bookmark />
       </CardFooter>

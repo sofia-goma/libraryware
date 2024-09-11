@@ -20,7 +20,7 @@ const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
   const posts = useQuery(api.post.getPostsByUserId, {
     userId: user.id as Id<"users">,
   });
-  // console.log(usePost);
+
   return (
     <Tabs defaultValue="about-me" className="w-full md:w-8/12 lg:w-9/12">
       <TabsList className="grid w-full grid-cols-3">

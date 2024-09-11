@@ -19,8 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useMutation, useQuery } from "convex/react";
 import { Id } from "../../../convex/_generated/dataModel";
@@ -33,6 +32,7 @@ import CommentInput from "./comment-input";
 import Comments from "./comments";
 import socialDate from "@/lib/social-date";
 import { useAuth } from "@/providers/auth-provider";
+import { toast } from "react-toastify";
 
 const PostBox = ({ post }: { post: IPost }) => {
   const [editMode, setEditMode] = useState(post.body);
@@ -45,7 +45,12 @@ const PostBox = ({ post }: { post: IPost }) => {
   });
   const editPostConvex = useMutation(api.post.editPost);
   const editPost = async () => {
-    await editPostConvex({ postId: post._id as Id<"post">, body: editMode });
+    try {
+      await editPostConvex({ postId: post._id as Id<"post">, body: editMode });
+      toast.success("Edit Success");
+    } catch {
+      toast.error("Error editing post");
+    }
   };
   return (
     <div className="bg-background w-full border-b border-solid border-border p-4 mb-4">
@@ -103,8 +108,7 @@ const PostBox = ({ post }: { post: IPost }) => {
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                   <div className="grid grid-cols-4 items-center gap-4">
-                    <Input
-                      id="name"
+                    <Textarea
                       defaultValue={post.body}
                       className="col-span-4"
                       onChange={(e) => setEditMode(e.target.value)}

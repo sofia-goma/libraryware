@@ -5,6 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Textarea } from "../ui/textarea";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -66,12 +67,17 @@ export function PostPopup({
           <div className="my-2">
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
-                <Input
-                  id="name"
+                <Textarea
                   placeholder="Share your thougths"
                   value={postContent} // Bind input value to state
                   onChange={(e) => setPostContent(e.target.value)}
                 />
+                {/* <Input
+                  id="name"
+                  placeholder="Share your thougths"
+                  value={postContent} // Bind input value to state
+                  onChange={(e) => setPostContent(e.target.value)}
+                /> */}
               </div>
             </div>
           </div>

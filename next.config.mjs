@@ -13,6 +13,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'covers.openlibrary.org'
+      },
+      {
+        protocol: "https",
+        hostname: "fabulous-starfish-340.convex.cloud"
       }
     ]
   },

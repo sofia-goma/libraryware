@@ -2,6 +2,12 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 import { authTables } from "@convex-dev/auth/server";
 
+export const fileTypes = v.union(
+  v.literal("image"),
+  v.literal("csv"),
+  v.literal("pdf")
+);
+
 const schema = defineSchema({
   ...authTables,
 
@@ -17,11 +23,6 @@ const schema = defineSchema({
     userId: v.id("users"),
     bookId: v.id("book"),
   }).index("by_userId", ["userId", "bookId"]),
-
-  like: defineTable({
-    userId: v.id("users"),
-    postId: v.id("post"),
-  }).index("by_userId", ["userId", "postId"]),
 
   post: defineTable({
     userId: v.id("users"),
@@ -48,6 +49,19 @@ const schema = defineSchema({
   })
     .index("by_isRead", ["isRead"])
     .index("by_userId", ["userId"]),
+
+  like: defineTable({
+    userId: v.id("users"),
+    postId: v.id("post"),
+  }).index("by_userId", ["userId", "postId"]),
+
+  files: defineTable({
+    name: v.string(),
+    type: fileTypes,
+    userId: v.id("users"),
+    fileId: v.id("_storage"),
+    postId: v.id("post"),
+  }).index("by_postId", ["postId"]),
 });
 
 export default schema;

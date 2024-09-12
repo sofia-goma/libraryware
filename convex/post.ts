@@ -2,6 +2,26 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { Id } from "./_generated/dataModel";
 
+// Mutation to handle image upload and return the URL
+export const uploadImage = mutation({
+  args: {
+    file: v.bytes()
+  },
+  handler: async (ctx, args) => {
+    const { file } = args;
+
+    // Store the file in Convex's storage
+    // const storageId = await ctx.storage.store(file);
+    const url = await ctx.storage.generateUploadUrl();
+
+    // Get the URL for the uploaded file
+    // const fileUrl = await ctx.storage.getUrl(storageId);
+
+    return url;
+  },
+});
+
+
 export const createPost = mutation({
   args: {
     userId: v.id("users"),
@@ -93,11 +113,3 @@ export const getPostsByUserId = query({
     return posts;
   },
 });
-
-// generate url
-
-export const generateUploadUrl = mutation(async (ctx) => {
-  console.log(ctx.storage);
-  return await ctx.storage.generateUploadUrl();
-});
-

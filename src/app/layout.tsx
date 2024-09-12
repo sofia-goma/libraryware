@@ -4,9 +4,9 @@ import { ToastContainer } from "react-toastify";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import OAuthProvider from "@/providers/oauth-provider";
 import AuthProvider from "@/providers/auth-provider";
+import { Toaster } from "@/components/ui/toaster";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-
 
 export const metadata: Metadata = {
   title: "LibraryWare",
@@ -30,7 +30,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <ConvexAuthNextjsServerProvider>
-              <AuthProvider>{children}</AuthProvider>
+              <AuthProvider>
+                <main>{children}</main>
+                <Toaster />
+              </AuthProvider>
             </ConvexAuthNextjsServerProvider>
             <ToastContainer />
           </ThemeProvider>

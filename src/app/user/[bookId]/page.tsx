@@ -21,8 +21,9 @@ export default function BookDetails({
     bookId: Id<"book">;
   };
 }) {
-  const { user } = useAuth(); // Ensure user authentication
+  const { user } = useAuth();
   const router = useRouter();
+  if (!user.id) return;
   // Fetch book details
   const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
   const createBookmark = useMutation(api.bookmark.createBookmark);

@@ -79,7 +79,6 @@ export const markNotificationAsRead = mutation({
 export const markAllNotificationAsRead = mutation({
   args: {
     userId: v.id("users"),
-    notificationId: v.id("notification"),
   },
   handler: async (ctx, args) => {
     const unReadNotifications = await ctx.db

@@ -11,6 +11,29 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "../../providers/auth-provider";
 import { toast } from "react-toastify";
 import { deleteComment } from "../../../convex/comment";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
 
 interface OpenedReplies {
   [key: string]: {
@@ -95,7 +118,9 @@ function Comments({ post }: { post: IPost }) {
     },
     [listRef]
   );
+  const [editMode, setEditMode] = useState("");
   const deleteCommentConvex = useMutation(api.comment.deleteComment);
+  const editCommentConvex = useMutation(api.comment.editComment);
   const generateComments = useCallback(
     (item: IComment, recursive: number = 0) => {
       const isActive = activeName === item._id;
@@ -107,6 +132,17 @@ function Comments({ post }: { post: IPost }) {
           toast.success("Delete comment Success");
         } catch {
           toast.error("Error deleting comment");
+        }
+      };
+      const editComment = async () => {
+        try {
+          await editCommentConvex({
+            commentId: item._id as Id<"comment">,
+            body: editMode,
+          });
+          toast.success("Edit Success");
+        } catch {
+          toast.error("Error editing comment");
         }
       };
       return (
@@ -129,9 +165,73 @@ function Comments({ post }: { post: IPost }) {
                 <div className="">{item.body}</div>
               </div>
               {user.id == item.userId && (
-                <div className="flex gap-6">
-                  <Pencil />
-                  <Trash2 onClick={deleteComment} />
+                // <div className="flex gap-6">
+                //   <Pencil />
+                //   <Trash2 onClick={deleteComment} />
+                // </div>
+                <div className="flex gap-2">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="link"
+                        className="text-secondary-foreground flex justify-center items-center gap-1"
+                      >
+                        <Pencil className="w-4 h-4" /> Edit
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>Edit your comment</DialogTitle>
+                        <DialogDescription>{item.body}</DialogDescription>
+                      </DialogHeader>
+                      <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Textarea
+                            defaultValue={item.body}
+                            className="col-span-4"
+                            onChange={(e) => setEditMode(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <DialogFooter>
+                        <DialogClose>
+                          <Button type="submit" onClick={editComment}>
+                            Save changes
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="link"
+                        className="text-destructive flex justify-center items-center gap-1"
+                      >
+                        <Trash2 className="w-4 h-4" /> Delete
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Are you absolutely sure?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently
+                          remove your comment from this post.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter className="gap-6">
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          className="bg-destructive text-destructive-foreground hover:bg-destructive"
+                          onClick={deleteComment}
+                        >
+                          Delete
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
               )}
             </div>
@@ -178,7 +278,15 @@ function Comments({ post }: { post: IPost }) {
         </li>
       );
     },
-    [activeName, openedReplies, handleToggle, user.id, deleteCommentConvex]
+    [
+      activeName,
+      openedReplies,
+      handleToggle,
+      user.id,
+      deleteCommentConvex,
+      editMode,
+      editCommentConvex,
+    ]
   );
 
   return (

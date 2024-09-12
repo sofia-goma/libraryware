@@ -26,13 +26,32 @@ import { Id } from "../../../convex/_generated/dataModel";
 import { api } from "../../../convex/_generated/api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Forward, ThumbsUp, MessagesSquare, Pencil } from "lucide-react";
+import {
+  Forward,
+  ThumbsUp,
+  MessagesSquare,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 import getFormattedInitials from "@/lib/get-formatted-initials";
 import CommentInput from "./comment-input";
 import Comments from "./comments";
 import socialDate from "@/lib/social-date";
 import { useAuth } from "@/providers/auth-provider";
 import { toast } from "react-toastify";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import {
+  AlertDialogCancel,
+  AlertDialogTitle,
+} from "@radix-ui/react-alert-dialog";
 
 const PostBox = ({ post }: { post: IPost }) => {
   const [editMode, setEditMode] = useState(post.body);
@@ -50,6 +69,15 @@ const PostBox = ({ post }: { post: IPost }) => {
       toast.success("Edit Success");
     } catch {
       toast.error("Error editing post");
+    }
+  };
+  const deletePostConvex = useMutation(api.post.deletePost);
+  const deletePost = async () => {
+    try {
+      await deletePostConvex({ postId: post._id as Id<"post"> });
+      toast.success("Delete post Success");
+    } catch {
+      toast.error("Error deleting post");
     }
   };
   return (
@@ -92,38 +120,70 @@ const PostBox = ({ post }: { post: IPost }) => {
             <ThumbsUp className="w-4 h-4" /> Like
           </Button>
           {userIdConnect.id == post.userId && (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  variant="link"
-                  className="text-secondary-foreground flex justify-center items-center gap-1"
-                >
-                  <Pencil className="w-4 h-4" /> Edit
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Edit your post</DialogTitle>
-                  <DialogDescription>{post.body}</DialogDescription>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Textarea
-                      defaultValue={post.body}
-                      className="col-span-4"
-                      onChange={(e) => setEditMode(e.target.value)}
-                    />
+            <>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="link"
+                    className="text-secondary-foreground flex justify-center items-center gap-1"
+                  >
+                    <Pencil className="w-4 h-4" /> Edit
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Edit your post</DialogTitle>
+                    <DialogDescription>{post.body}</DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Textarea
+                        defaultValue={post.body}
+                        className="col-span-4"
+                        onChange={(e) => setEditMode(e.target.value)}
+                      />
+                    </div>
                   </div>
-                </div>
-                <DialogFooter>
-                  <DialogClose>
-                    <Button type="submit" onClick={editPost}>
-                      Save changes
-                    </Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
+                  <DialogFooter>
+                    <DialogClose>
+                      <Button type="submit" onClick={editPost}>
+                        Save changes
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="link"
+                    className="text-destructive flex justify-center items-center gap-1"
+                  >
+                    <Trash2 className="w-4 h-4" /> Delete
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently remove
+                      your post from our application.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter className="gap-6">
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      className="bg-destructive text-destructive-foreground hover:bg-destructive"
+                      onClick={deletePost}
+                    >
+                      Delete
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </>
           )}
         </div>
         <h1>

@@ -1,14 +1,16 @@
 "use client";
 import React, { useState, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
-// import useAut
 import socialDate from "@/lib/social-date";
 import getFormattedInitials from "@/lib/get-formatted-initials";
 import { Id } from "../../../convex/_generated/dataModel";
 import { api } from "../../../convex/_generated/api";
-import { useQuery } from "convex/react";
-import { Dot, MessageCircleReply } from "lucide-react";
+import { useMutation, useQuery } from "convex/react";
+import { Dot, MessageCircleReply, Pencil, Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuth } from "../../providers/auth-provider";
+import { toast } from "react-toastify";
+import { deleteComment } from "../../../convex/comment";
 
 interface OpenedReplies {
   [key: string]: {
@@ -16,53 +18,6 @@ interface OpenedReplies {
     height: string;
   };
 }
-
-const commentsData: IComment[] = [
-  {
-    _id: "1",
-    _creationTime: 1725037774628.4082,
-    userId: "jx7443p6h27gzxfeeyvakzr6w56zt2nr",
-    postId: "post1",
-    parentId: null,
-    body: `Explore our vast catalog, access exclusive content, 
-    and enjoy a seamless reading experience anytime, anywhere.`,
-  },
-  {
-    _id: "2",
-    _creationTime: 1725037774628.4082,
-    userId: "jx7443p6h27gzxfeeyvakzr6w56zt2nr",
-    postId: "post1",
-    parentId: "1",
-    body: `Explore our vast catalog, access exclusive content, 
-    and enjoy a seamless reading experience anytime, anywhere.`,
-  },
-  {
-    _id: "3",
-    _creationTime: 1725037774628.4082,
-    userId: "jx7443p6h27gzxfeeyvakzr6w56zt2nr",
-    postId: "post1",
-    parentId: "1",
-    body: `Discover a world of knowledge and adventure at your fingertips. Our online library offers an extensive collection of books, 
-    research materials, and multimedia resources to ignite your curiosity and support your learning journey`,
-  },
-  {
-    _id: "4",
-    _creationTime: 1725978600000,
-    userId: "jx7443p6h27gzxfeeyvakzr6w56zt2nr",
-    postId: "post1",
-    parentId: "2",
-    body: "Child of child comment",
-  },
-  {
-    _id: "5",
-    _creationTime: 1725978600000,
-    userId: "jx7443p6h27gzxfeeyvakzr6w56zt2nr",
-    postId: "post1",
-    parentId: null,
-    body: "Parents I am a parents yeah cool",
-  },
-];
-
 const buildCommentTree = (comments: IComment[]): IComment[] => {
   const map: { [key: string]: IComment } = {};
   const roots: IComment[] = [];
@@ -110,9 +65,12 @@ function Comments({ post }: { post: IPost }) {
   const comments = useQuery(api.comment.getCommentsByPost, {
     postId: post._id as Id<"post">,
   });
-
+  const { user } = useAuth();
   //Replace "commentsData" with "comments" in the comments above :)
-  const nestedComments = useMemo(() => buildCommentTree(comments ?? []), [comments])
+  const nestedComments = useMemo(
+    () => buildCommentTree(comments ?? []),
+    [comments]
+  );
 
   const handleToggle = useCallback(
     (id: string) => {
@@ -137,12 +95,20 @@ function Comments({ post }: { post: IPost }) {
     },
     [listRef]
   );
-
+  const deleteCommentConvex = useMutation(api.comment.deleteComment);
   const generateComments = useCallback(
     (item: IComment, recursive: number = 0) => {
       const isActive = activeName === item._id;
       const classesActive = isActive ? "active" : "";
 
+      const deleteComment = async () => {
+        try {
+          await deleteCommentConvex({ commentId: item._id as Id<"comment"> });
+          toast.success("Delete comment Success");
+        } catch {
+          toast.error("Error deleting comment");
+        }
+      };
       return (
         <li key={item._id}>
           <div
@@ -157,9 +123,17 @@ function Comments({ post }: { post: IPost }) {
               classesActive,
             ].join(" ")}
           >
-            <div className="flex cursor-text text-secondary-foreground flex-col gap-1">
-              <CommentUser item={item} />
-              <div className="">{item.body}</div>
+            <div className="flex justify-between">
+              <div className="flex cursor-text text-secondary-foreground flex-col gap-1">
+                <CommentUser item={item} />
+                <div className="">{item.body}</div>
+              </div>
+              {user.id == item.userId && (
+                <div className="flex gap-6">
+                  <Pencil />
+                  <Trash2 onClick={deleteComment} />
+                </div>
+              )}
             </div>
             {item.children && item.children.length > 0 && (
               <Link
@@ -204,7 +178,7 @@ function Comments({ post }: { post: IPost }) {
         </li>
       );
     },
-    [activeName, openedReplies, handleToggle]
+    [activeName, openedReplies, handleToggle, user.id, deleteCommentConvex]
   );
 
   return (

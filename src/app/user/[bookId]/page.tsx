@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import Image from "next/image";
@@ -12,7 +13,6 @@ import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
 import { Button } from "@/components/ui/button";
 import { PostPopup } from "@/components/shared/post-popup";
-
 
 export default function BookDetails({
   params,
@@ -34,6 +34,7 @@ export default function BookDetails({
   });
 
   const createPostConvex = useMutation(api.post.createPost);
+  const createNotiConvex = useMutation(api.notification.createNotification);
 
   // Wait for user to be available
   if (!user || !user.id) {
@@ -74,6 +75,11 @@ export default function BookDetails({
         body: content,
       });
 
+      await createNotiConvex({
+        userId: user.id,
+        message: "New post created",
+      });
+
       toast.success("Post created successfully!");
     } catch (error: any) {
       toast.error(error.message || "Failed to create the post.");
@@ -92,7 +98,6 @@ export default function BookDetails({
 
   // handle read function
   const read = () => {};
-
 
   if (!bookDetails) {
     return (

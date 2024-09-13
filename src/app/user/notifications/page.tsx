@@ -20,6 +20,7 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { toast } from "react-toastify";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import socialDate from "@/lib/social-date";
 
 type Notification = {
   _id: string;
@@ -108,7 +109,7 @@ export default function Notifications() {
                         {noti.message}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        {new Date(noti._creationTime).toLocaleString()}
+                        {socialDate(noti._creationTime)}
                       </p>
                     </div>
                   </Button>

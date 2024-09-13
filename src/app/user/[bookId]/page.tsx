@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -32,6 +33,7 @@ export default function BookDetails({
   });
 
   const createPostConvex = useMutation(api.post.createPost);
+  const createNotiConvex = useMutation(api.notification.createNotification);
 
   // Wait for user to be available
   if (!user || !user.id) {
@@ -84,6 +86,11 @@ export default function BookDetails({
         bookId: params.bookId,
         title: bookDetails?.title ? bookDetails.title : "Title to update",
         body: content,
+      });
+
+      await createNotiConvex({
+        userId: user.id,
+        message: `New post created ${bookDetails?.title ? "for " + bookDetails?.title : ""}`,
       });
 
       toast({

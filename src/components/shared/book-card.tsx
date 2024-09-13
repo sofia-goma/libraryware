@@ -139,7 +139,7 @@ export default function BookCard({
           <BookOpenText className="hover:cursor-pointer" />
         </Link>
         <PostPopup
-          shape={true}
+          bookId={id}
           handleSubmit={createPostfunction}
           title={title}
         />

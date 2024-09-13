@@ -1,3 +1,5 @@
+/* prettier-ignore-start */
+
 /* eslint-disable */
 /**
  * Generated `api` utility.
@@ -19,7 +21,6 @@ import type * as bookmark from "../bookmark.js";
 import type * as comment from "../comment.js";
 import type * as crons from "../crons.js";
 import type * as files from "../files.js";
-import type * as helpers from "../helpers.js";
 import type * as http from "../http.js";
 import type * as like from "../like.js";
 import type * as notification from "../notification.js";
@@ -41,7 +42,6 @@ declare const fullApi: ApiFromModules<{
   comment: typeof comment;
   crons: typeof crons;
   files: typeof files;
-  helpers: typeof helpers;
   http: typeof http;
   like: typeof like;
   notification: typeof notification;
@@ -56,3 +56,5 @@ export declare const internal: FilterApi<
   typeof fullApi,
   FunctionReference<any, "internal">
 >;
+
+/* prettier-ignore-end */

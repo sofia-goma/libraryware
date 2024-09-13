@@ -30,6 +30,7 @@ const schema = defineSchema({
     title: v.string(),
     body: v.string(),
     picture: v.optional(v.string()),
+    pictureId: v.optional(v.string()),
   })
     .index("by_bookId", ["bookId"])
     .index("by_userId", ["userId"]),
@@ -59,10 +60,8 @@ const schema = defineSchema({
   files: defineTable({
     name: v.string(),
     type: fileTypes,
-    userId: v.id("users"),
     fileId: v.id("_storage"),
-    postId: v.id("post"),
-  }).index("by_postId", ["postId"]),
+  }).index("by_fileId", ["fileId"]),
 });
 
 export default schema;

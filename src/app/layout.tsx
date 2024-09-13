@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { ToastContainer } from "react-toastify";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import OAuthProvider from "@/providers/oauth-provider";
 import AuthProvider from "@/providers/auth-provider";
 import { Toaster } from "@/components/ui/toaster";
-import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,7 +33,6 @@ export default function RootLayout({
                 <Toaster />
               </AuthProvider>
             </ConvexAuthNextjsServerProvider>
-            <ToastContainer />
           </ThemeProvider>
         </OAuthProvider>
       </body>

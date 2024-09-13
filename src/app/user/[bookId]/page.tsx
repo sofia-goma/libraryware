@@ -90,7 +90,7 @@ export default function BookDetails({
 
       await createNotiConvex({
         userId: user.id,
-        message: "New post created",
+        message: `New post created ${bookDetails?.title ? "for " + bookDetails?.title : ""}`,
       });
 
       toast({

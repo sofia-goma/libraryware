@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -9,17 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Bookmark,
-  BookmarkCheck,
-  BookOpenText
-} from "lucide-react";
+import { Bookmark, BookmarkCheck, BookOpenText } from "lucide-react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
 import { PostPopup } from "./post-popup";
-import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function BookCard({
   id,
@@ -29,6 +25,7 @@ export default function BookCard({
   href,
 }: IBookCard) {
   const { user } = useAuth();
+  const { toast } = useToast();
   const createBookmark = useMutation(api.bookmark.createBookmark);
   const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
   const isBookmarked = useQuery(api.bookmark.isBookmark, {
@@ -43,9 +40,16 @@ export default function BookCard({
           userId: user.id,
           bookId: id,
         });
-        toast.success("Book marked!");
+        toast({
+          title: "Bookmark Added",
+          description: "You have successfully added a new bookmark.",
+        });
       } catch (error: any) {
-        toast.error(error.message || "Failed to bookmark the book.");
+        toast({
+          variant: "destructive",
+          title: "Failed to bookmark the book.",
+          description: "An error occurred while deleting the bookmark.",
+        });
       }
     }
     if (isBookmarked) {
@@ -53,9 +57,16 @@ export default function BookCard({
         await deleteBookmark({
           bookmarkId: isBookmarked._id,
         });
-        toast.success("Remove Bookmark!");
+        toast({
+          title: "Bookmark removed",
+          description: "You have successfully removed a new bookmark.",
+        });
       } catch (error: any) {
-        toast.error(error.message || "Failed to bookmark the book.");
+        toast({
+          variant: "destructive",
+          title: "Failed to remove bookmark",
+          description: "An error occurred while removing the bookmark.",
+        });
       }
     }
   };
@@ -81,9 +92,16 @@ export default function BookCard({
         body: content,
       });
 
-      toast.success("Post created successfully!");
-    } catch (error: any) {
-      toast.error(error.message || "Failed to create the post.");
+      toast({
+        title: "Post Created",
+        description: "Your post has been created successfully and is now live.",
+      });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Failed to create the post! Please try again.",
+      });
     }
   };
   return (

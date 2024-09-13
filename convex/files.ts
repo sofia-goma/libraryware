@@ -22,7 +22,6 @@ export const createFile = mutation({
     postId: v.id("post"),
   },
   handler: async (ctx, args) => {
-    throw new Error("someghing weng");
     await ctx.db.insert("files", {
       name: args.name,
       type: args.type,

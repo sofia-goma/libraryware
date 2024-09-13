@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
@@ -9,10 +8,10 @@ import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { BookmarkCheck, BookmarkIcon, BookOpenText } from "lucide-react";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { toast } from "react-toastify";
 import { useAuth } from "@/providers/auth-provider";
 import { Button } from "@/components/ui/button";
 import { PostPopup } from "@/components/shared/post-popup";
+import { useToast } from "@/hooks/use-toast";
 
 export default function BookDetails({
   params,
@@ -23,8 +22,8 @@ export default function BookDetails({
 }) {
   const { user } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
   if (!user.id) return;
-  // Fetch book details
   const bookDetails = useQuery(api.book.getBookById, { bookId: params.bookId });
   const createBookmark = useMutation(api.bookmark.createBookmark);
   const deleteBookmark = useMutation(api.bookmark.deleteBookmark);
@@ -48,9 +47,16 @@ export default function BookDetails({
           userId: user.id,
           bookId: params.bookId,
         });
-        toast.success("Book marked!");
-      } catch (error: any) {
-        toast.error(error.message || "Failed to bookmark the book.");
+        toast({
+          title: "Bookmark Added",
+          description: "You have successfully added a new bookmark.",
+        });
+      } catch {
+        toast({
+          variant: "destructive",
+          title: "Bookmark Deleted",
+          description: "You have successfully deleted the bookmark.",
+        });
       }
     }
     if (isBookmarked) {
@@ -58,9 +64,16 @@ export default function BookDetails({
         await deleteBookmark({
           bookmarkId: isBookmarked._id,
         });
-        toast.success("Remove Bookmark!");
-      } catch (error: any) {
-        toast.error(error.message || "Failed to bookmark the book.");
+        toast({
+          title: "Bookmark removed",
+          description: "You have successfully deleted bookmark.",
+        });
+      } catch {
+        toast({
+          variant: "destructive",
+          title: "Something went wrong",
+          description: "Failed to delete bookmark! Please try again.",
+        });
       }
     }
   };
@@ -80,18 +93,32 @@ export default function BookDetails({
         message: "New post created",
       });
 
-      toast.success("Post created successfully!");
-    } catch (error: any) {
-      toast.error(error.message || "Failed to create the post.");
+      toast({
+        title: "Post Created",
+        description: "Your post has been created successfully and is now live.",
+      });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Failed to create the post! Please try again.",
+      });
     }
     if (isBookmarked) {
       try {
         await deleteBookmark({
           bookmarkId: isBookmarked._id,
         });
-        toast.success("Remove Bookmark!");
-      } catch (error: any) {
-        toast.error(error.message || "Failed to bookmark the book.");
+        toast({
+          title: "Bookmark removed",
+          description: "You have successfully deleted bookmark.",
+        });
+      } catch {
+        toast({
+          variant: "destructive",
+          title: "Something went wrong",
+          description: "Failed to delete bookmark! Please try again.",
+        });
       }
     }
   };

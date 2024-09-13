@@ -31,16 +31,19 @@ export default function Dashboard() {
           ) : (
             <div className="">
               <div className="flex flex-wrap gap-4 md:gap-5 lg:gap-3 mb-4">
-                {results?.map(({ _id, title, author, coverUrl }) => (
-                  <BookCard
-                    key={_id}
-                    id={_id}
-                    href={`/user/${_id}`}
-                    title={title}
-                    cover={coverUrl || ""}
-                    author={author}
-                  />
-                ))}
+                {results?.map(
+                  ({ _id, title, author, coverUrl, openLibraryId }) => (
+                    <BookCard
+                      key={_id}
+                      id={_id}
+                      href={`/user/${_id}`}
+                      title={title}
+                      cover={coverUrl || ""}
+                      author={author}
+                      openLibraryId={openLibraryId}
+                    />
+                  )
+                )}
               </div>
               <div className="flex items-center justify-center py-4 pb-6 w-full">
                 <button

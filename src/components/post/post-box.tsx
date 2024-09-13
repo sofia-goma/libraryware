@@ -39,6 +39,7 @@ import Comments from "./comments";
 import socialDate from "@/lib/social-date";
 import { useAuth } from "@/providers/auth-provider";
 import { useToast } from "@/hooks/use-toast";
+import PostId from "../../app/user/forum/[postId]/page";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -55,15 +56,21 @@ import {
 
 const PostBox = ({ post }: { post: IPost }) => {
   const { toast } = useToast();
+
   const [editMode, setEditMode] = useState(post.body);
+
   const user = useQuery(api.user.getUser, {
     userId: post.userId as Id<"users">,
   });
+
   const { user: userIdConnect } = useAuth();
+
   const allComents = useQuery(api.comment.getCommentsByPost, {
     postId: post._id as Id<"post">,
   });
+
   const editPostConvex = useMutation(api.post.editPost);
+
   const editPost = async () => {
     try {
       await editPostConvex({ postId: post._id as Id<"post">, body: editMode });
@@ -79,7 +86,9 @@ const PostBox = ({ post }: { post: IPost }) => {
       });
     }
   };
+
   const deletePostConvex = useMutation(api.post.deletePost);
+
   const deletePost = async () => {
     try {
       await deletePostConvex({ postId: post._id as Id<"post"> });
@@ -95,6 +104,52 @@ const PostBox = ({ post }: { post: IPost }) => {
       });
     }
   };
+
+  const createLike = useMutation(api.like.createLike);
+  const deleteLike = useMutation(api.like.deleteLike);
+  const isLiked = useQuery(api.like.isLike, {
+    userId: userIdConnect.id,
+    postId: post._id as Id<"post">,
+  });
+
+  const like = async () => {
+    if (!isLiked) {
+      try {
+        await createLike({
+          userId: userIdConnect.id,
+          postId: post._id as Id<"post">,
+        });
+        toast({
+          title: "Like Added",
+          description: "You have successfully added a new like.",
+        });
+      } catch {
+        toast({
+          variant: "destructive",
+          title: "Like Deleted",
+          description: "You have successfully deleted the like.",
+        });
+      }
+    }
+    if (isLiked) {
+      try {
+        await deleteLike({
+          likeId: isLiked._id,
+        });
+        toast({
+          title: "Like removed",
+          description: "You have successfully deleted like.",
+        });
+      } catch {
+        toast({
+          variant: "destructive",
+          title: "Something went wrong",
+          description: "Failed to delete like! Please try again.",
+        });
+      }
+    }
+  };
+
   return (
     <div className="bg-background w-full border-b border-solid border-border p-4 mb-4">
       <div className="flex items-center space-x-4">
@@ -131,8 +186,14 @@ const PostBox = ({ post }: { post: IPost }) => {
           <Button
             variant="link"
             className="text-secondary-foreground flex justify-center items-center gap-1"
+            onClick={like}
           >
-            <ThumbsUp className="w-4 h-4" /> Like
+            {isLiked ? (
+              <ThumbsUp className="w-4 h-4 fill-current" />
+            ) : (
+              <ThumbsUp className="w-4 h-4 " />
+            )}{" "}
+            Like
           </Button>
           {userIdConnect.id == post.userId && (
             <>

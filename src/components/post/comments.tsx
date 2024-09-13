@@ -9,7 +9,7 @@ import { useMutation, useQuery } from "convex/react";
 import { Dot, MessageCircleReply, Pencil, Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "../../providers/auth-provider";
-import { toast } from "react-toastify";
+import { useToast } from "@/hooks/use-toast";
 import { deleteComment } from "../../../convex/comment";
 import {
   Dialog,
@@ -81,6 +81,7 @@ function CommentUser({ item }: { item: IComment }) {
 }
 
 function Comments({ post }: { post: IPost }) {
+  const { toast } = useToast();
   const listRef = useRef<{ [key: string]: HTMLUListElement | null }>({});
   const [openedReplies, setOpenedReplies] = useState<OpenedReplies>({});
   const [activeName, setActiveName] = useState<string>("");
@@ -129,9 +130,16 @@ function Comments({ post }: { post: IPost }) {
       const deleteComment = async () => {
         try {
           await deleteCommentConvex({ commentId: item._id as Id<"comment"> });
-          toast.success("Delete comment Success");
+          toast({
+            title: "Comment deleted",
+            description: "Deleted comment Success",
+          });
         } catch {
-          toast.error("Error deleting comment");
+          toast({
+            variant: "destructive",
+            title: "Something went wrong!",
+            description: "Error deleting comment",
+          });
         }
       };
       const editComment = async () => {
@@ -140,9 +148,16 @@ function Comments({ post }: { post: IPost }) {
             commentId: item._id as Id<"comment">,
             body: editMode,
           });
-          toast.success("Edit Success");
+          toast({
+            title: "Edited Success",
+            description: "You have sucessfully edited your comment",
+          });
         } catch {
-          toast.error("Error editing comment");
+          toast({
+            variant: "destructive",
+            title: "Something went wrong",
+            description: "Error happened whitle editing your comment",
+          });
         }
       };
       return (

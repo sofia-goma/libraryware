@@ -1,15 +1,6 @@
 "use client";
-import Image from "next/image";
-import {
-  CornerDownLeft,
-  Mic,
-  Paperclip,
-  Share,
-  BookOpenText,
-  CirclePlus,
-  Bookmark,
-  ArrowLeft,
-} from "lucide-react";
+import React from "react";
+import { CornerDownLeft, Mic, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,20 +10,14 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { BookmarkIcon } from "lucide-react";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/shared/loading";
-import notfoundimage from "../../../../public/cover_not_found.jpg";
 import { useMutation, useQuery } from "convex/react";
 import PostUI from "@/components/shared/post-ui";
 import { api } from "../../../../../convex/_generated/api";
-import { getPostById } from "../../../../../convex/post";
 import { Id } from "../../../../../convex/_generated/dataModel";
 import { useAuth } from "@/providers/auth-provider";
-import { toast } from "react-toastify";
+import { useToast } from "@/hooks/use-toast";
 import CommentUI from "@/components/shared/comment-ui";
 
 export default function PostId({
@@ -42,6 +27,7 @@ export default function PostId({
     postId: Id<"post">;
   };
 }) {
+  const { toast } = useToast();
   const [commentContent, setCommentContent] = React.useState("");
   const post = useQuery(api.post.getPostById, { postId: params.postId });
   const comments = useQuery(api.comment.getCommentsByPost, {
@@ -59,9 +45,16 @@ export default function PostId({
         body: content,
       });
 
-      toast.success("comment created successfully!");
+      toast({
+        title: "comment created successfully!",
+        description: "You have successfully created a comment",
+      });
     } catch (error: any) {
-      toast.error(error.message || "Failed to create the comment.");
+      toast({
+        variant: "destructive",
+        title: "Something went wrong!",
+        description: "Failed to create the comment.",
+      });
     }
   };
   if (!post) return <Loading />;

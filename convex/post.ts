@@ -1,26 +1,5 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
-import { Id } from "./_generated/dataModel";
-
-// Mutation to handle image upload and return the URL
-export const uploadImage = mutation({
-  args: {
-    file: v.bytes()
-  },
-  handler: async (ctx, args) => {
-    const { file } = args;
-
-    // Store the file in Convex's storage
-    // const storageId = await ctx.storage.store(file);
-    const url = await ctx.storage.generateUploadUrl();
-
-    // Get the URL for the uploaded file
-    // const fileUrl = await ctx.storage.getUrl(storageId);
-
-    return url;
-  },
-});
-
 
 export const createPost = mutation({
   args: {
@@ -28,7 +7,7 @@ export const createPost = mutation({
     bookId: v.id("book"),
     title: v.string(),
     body: v.string(),
-    picture: v.optional(v.string())
+    picture: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const newPost = {
@@ -36,7 +15,7 @@ export const createPost = mutation({
       bookId: args.bookId,
       title: args.title,
       body: args.body,
-      picture: args?.picture || null,
+      picture: args?.picture || "",
     };
 
     const insertedPost = await ctx.db.insert("post", newPost);
@@ -49,6 +28,7 @@ export const editPost = mutation({
     postId: v.id("post"),
     title: v.optional(v.string()),
     body: v.string(),
+    picture: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const existingPost = await ctx.db.get(args.postId);
@@ -59,6 +39,7 @@ export const editPost = mutation({
     const updates = {
       title: args.title !== undefined ? args.title : existingPost.title,
       body: args.body !== undefined ? args.body : existingPost.body,
+      picture: args.picture !== undefined ? args.picture : existingPost.picture,
     };
 
     await ctx.db.patch(args.postId, updates);

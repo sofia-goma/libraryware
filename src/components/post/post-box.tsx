@@ -38,7 +38,7 @@ import CommentInput from "./comment-input";
 import Comments from "./comments";
 import socialDate from "@/lib/social-date";
 import { useAuth } from "@/providers/auth-provider";
-import { toast } from "react-toastify";
+import { useToast } from "@/hooks/use-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -54,6 +54,7 @@ import {
 } from "@radix-ui/react-alert-dialog";
 
 const PostBox = ({ post }: { post: IPost }) => {
+  const { toast } = useToast();
   const [editMode, setEditMode] = useState(post.body);
   const user = useQuery(api.user.getUser, {
     userId: post.userId as Id<"users">,
@@ -66,18 +67,32 @@ const PostBox = ({ post }: { post: IPost }) => {
   const editPost = async () => {
     try {
       await editPostConvex({ postId: post._id as Id<"post">, body: editMode });
-      toast.success("Edit Success");
+      toast({
+        title: "Edited Successfully",
+        description: "You have edited your post successfully",
+      });
     } catch {
-      toast.error("Error editing post");
+      toast({
+        variant: "destructive",
+        title: "something went wrong",
+        description: "Error editing post",
+      });
     }
   };
   const deletePostConvex = useMutation(api.post.deletePost);
   const deletePost = async () => {
     try {
       await deletePostConvex({ postId: post._id as Id<"post"> });
-      toast.success("Delete post Success");
+      toast({
+        title: "Deleted Successfully",
+        description: "You have deleted your post successfully.",
+      });
     } catch {
-      toast.error("Error deleting post");
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Error happened while deleting your post",
+      });
     }
   };
   return (

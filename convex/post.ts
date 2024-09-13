@@ -8,6 +8,7 @@ export const createPost = mutation({
     title: v.string(),
     body: v.string(),
     picture: v.optional(v.string()),
+    pictureId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const newPost = {
@@ -16,6 +17,7 @@ export const createPost = mutation({
       title: args.title,
       body: args.body,
       picture: args?.picture || "",
+      pictureId: args?.pictureId || "",
     };
 
     const insertedPost = await ctx.db.insert("post", newPost);
@@ -29,6 +31,7 @@ export const editPost = mutation({
     title: v.optional(v.string()),
     body: v.string(),
     picture: v.optional(v.string()),
+    pictureId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const existingPost = await ctx.db.get(args.postId);

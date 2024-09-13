@@ -115,9 +115,6 @@ export default function BookId({ userId, bookId }: Props) {
     }
   };
 
-  // handle read function
-  const read = () => {};
-
   if (!bookDetails) {
     return (
       <div className="flex justify-center items-center">
@@ -167,8 +164,8 @@ export default function BookId({ userId, bookId }: Props) {
         </Link>
         {/* post button */}
         <PostPopup
-          handleSubmit={createPostfunction}
           title={bookDetails.title}
+          bookId={bookDetails._id}
         />
       </div>
     </>

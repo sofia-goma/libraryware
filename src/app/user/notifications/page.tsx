@@ -18,7 +18,7 @@ import { useAuth } from "@/providers/auth-provider";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
-import { toast } from "react-toastify";
+import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import socialDate from "@/lib/social-date";
 
@@ -32,6 +32,7 @@ type Notification = {
 
 export default function Notifications() {
   const { user } = useAuth();
+  const { toast } = useToast();
 
   const notis =
     user && user._id
@@ -45,10 +46,17 @@ export default function Notifications() {
     try {
       if (user && user._id) {
         await setAllAsRead({ userId: user._id as Id<"users"> });
-        toast.success("All notifications marked as read");
+        toast({
+          title: "Mark all as read",
+          description: "All notifications marked as read",
+        });
       }
     } catch (error) {
-      toast.error("Error marking notifications as read");
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Error marking notifications as read",
+      });
     }
   };
 
@@ -57,10 +65,17 @@ export default function Notifications() {
     try {
       if (user && user._id) {
         await setAsRead({ notificationId: notiId });
-        toast.success("Notification marked as read");
+        toast({
+          title: "Mark as read",
+          description: "Notification marked as read",
+        });
       }
     } catch (error) {
-      toast.error("Error marking notification as read");
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Error marking notification as read",
+      });
     }
   };
 

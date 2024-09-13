@@ -18,6 +18,7 @@ export default function BookMarkedList({ bookId }: Props) {
         title={book.title}
         cover={book.coverUrl || ""}
         author={book.author}
+        openLibraryId={book.openLibraryId}
       />
     </div>
   );

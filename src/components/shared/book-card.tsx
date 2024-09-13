@@ -23,6 +23,7 @@ export default function BookCard({
   title,
   cover,
   href,
+  openLibraryId,
 }: IBookCard) {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -131,7 +132,12 @@ export default function BookCard({
         </Link>
       </CardContent>
       <CardFooter className="pb-0 flex items-center justify-center gap-3 py-2">
-        <BookOpenText className="hover:cursor-pointer" />
+        <Link
+          target="_blank"
+          href={`https://openlibrary.org/books/${openLibraryId}`}
+        >
+          <BookOpenText className="hover:cursor-pointer" />
+        </Link>
         <PostPopup
           shape={true}
           handleSubmit={createPostfunction}

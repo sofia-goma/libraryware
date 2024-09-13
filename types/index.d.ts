@@ -85,4 +85,5 @@ interface IBookCard {
   title: string;
   cover?: string;
   href: string;
+  openLibraryId: string;
 }

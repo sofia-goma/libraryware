@@ -79,7 +79,8 @@ export default function Notifications() {
 
   return (
     <div className="flex items-center justify-center">
-      <Card className="w-full max-w-[380px]">
+      {/* max-w-[380px] */}
+      <Card className="w-full max-w-[600px]">
         <CardHeader>
           <CardTitle>Notifications</CardTitle>
           <CardDescription>
@@ -102,15 +103,18 @@ export default function Notifications() {
             </div>
             <Switch />
           </div>
-          <div>
+          <div className="">
             {notis && notis.length > 0 ? (
               <ScrollArea className="w-full h-[200px] overflow-y-auto">
+                {/* mb-3 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0 */}
                 {notis.map((noti) => (
                   <Button
                     key={noti._id}
-                    className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                    size="lg"
+                    className="grid grid-cols-[25px_1fr] items-start pb-4 h-auto p-4 w-full mb-3"
                     onClick={() => markAsRead(noti._id)}
                     disabled={noti.isRead}
+                    variant="outline"
                   >
                     <span
                       className={`flex h-2 w-2 translate-y-1 rounded-full ${

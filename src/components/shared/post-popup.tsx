@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, FormEvent } from "react";
-import { CirclePlus, PlusCircleIcon } from "lucide-react";
+import { PlusCircleIcon } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Id } from "../../../convex/_generated/dataModel";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/providers/auth-provider";
+import { Loader2 } from "lucide-react"; // Import spinner icon
 
 export function PostPopup({
   title,
@@ -31,16 +32,21 @@ export function PostPopup({
 }) {
   const { toast } = useToast();
   const { user } = useAuth();
-  // if (!user._id) return;
   const createPostConvex = useMutation(api.post.createPost);
   const createNotiConvex = useMutation(api.notification.createNotification);
-  const [postContent, setPostContent] = useState(""); // State to store the input value
   const generateUploadURL = useMutation(api.files.generateUploadUrl);
   const createFile = useMutation(api.files.createFile);
   const imageInput = useRef<HTMLInputElement>(null);
+
+  const [postContent, setPostContent] = useState(""); // State to store the input value
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false); // Loading state
+  const [open, setOpen] = useState(false); // Dialog open state
+
   const submit = async (event: FormEvent) => {
     event.preventDefault();
+    setLoading(true); // Start loading
+
     try {
       if (
         postContent.trim() === "" ||
@@ -52,6 +58,7 @@ export function PostPopup({
           title: "Content Required",
           description: "Please enter a content with at least 25 characters.",
         });
+        setLoading(false);
         return;
       }
 
@@ -71,8 +78,7 @@ export function PostPopup({
         type: "image",
       });
 
-      // create post
-      // Call the Convex mutation to create the post
+      // Create post
       await createPostConvex({
         userId: user.id as Id<"users">,
         bookId: bookId as Id<"book">,
@@ -81,7 +87,8 @@ export function PostPopup({
         picture: file || "",
         pictureId: storageId as string,
       });
-      console.log('creating notifications')
+
+      // Create notification
       await createNotiConvex({
         userId: user.id as Id<"users">,
         message: `New post created ${title ? "for " + title : ""}`,
@@ -91,8 +98,10 @@ export function PostPopup({
         title: "Post Created",
         description: "Your post has been created successfully and is now live.",
       });
+
       setSelectedImage(null);
       imageInput.current!.value = "";
+      setOpen(false); // Close dialog on success
     } catch (error: any) {
       console.log(error.message);
       toast({
@@ -100,12 +109,17 @@ export function PostPopup({
         title: "Something went wrong!",
         description: "Your file could not be uploaded. Please try again.",
       });
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
+        <Button variant="outline">
+          <PlusCircleIcon />
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -121,14 +135,17 @@ export function PostPopup({
             accept="image/*"
             ref={imageInput}
             onChange={(event) => setSelectedImage(event.target.files![0])}
-            disabled={selectedImage !== null}
+            disabled={selectedImage !== null || loading} // Disable input while loading
           />
           <Textarea
-            placeholder="Share your thougths"
+            placeholder="Share your thoughts"
             value={postContent}
             onChange={(e) => setPostContent(e.target.value)}
+            disabled={loading} // Disable textarea while loading
           />
-          <Button type="submit">POST TO FORUM</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? <Loader2 className="animate-spin" /> : "POST TO FORUM"}
+          </Button>
         </form>
       </DialogContent>
     </Dialog>

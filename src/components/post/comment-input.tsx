@@ -7,7 +7,7 @@ import { Id } from "../../../convex/_generated/dataModel";
 import { api } from "../../../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { SendHorizonal } from "lucide-react";
-import FormLoading from "../shared/FormLoading";
+import FormLoading from "../shared/form-loading";
 import { useForm } from "react-hook-form";
 
 interface IPostComment {

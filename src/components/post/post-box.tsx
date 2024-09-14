@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from 'next/image';
 import {
   Drawer,
   DrawerClose,
@@ -174,8 +175,8 @@ const PostBox = ({ post }: { post: IPost }) => {
       </div>
 
       <p className="mt-3 text-sm text-foreground">{post.body}</p>
-
-      <div className="flex items-center justify-between mt-4 text-sm text-secondary-foreground">
+      <Image src={post?.picture || ""} width={100} height={100} className="w-full h-[300px] object-cover" alt="post picture" />
+      <div className="flex items-center justify-between mt-0 text-sm text-secondary-foreground">
         <div className="flex items-center gap-3">
           <Button
             variant="link"

@@ -26,6 +26,8 @@ type IPost = {
   userId: string;
   bookId: string;
   body: string;
+  picture?: string;
+  pictureId?: string;
 };
 
 // application user Interface

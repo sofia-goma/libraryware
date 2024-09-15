@@ -5,7 +5,9 @@ import { authTables } from "@convex-dev/auth/server";
 export const fileTypes = v.union(
   v.literal("image"),
   v.literal("csv"),
-  v.literal("pdf")
+  v.literal("pdf"),
+  v.literal("word"),
+  v.literal("text")
 );
 
 const schema = defineSchema({
@@ -62,6 +64,23 @@ const schema = defineSchema({
     type: fileTypes,
     fileId: v.id("_storage"),
   }).index("by_fileId", ["fileId"]),
+
+  collections: defineTable({
+    userId: v.id("users"),
+    collectionId: v.id("_storage"),
+    collectionURL: v.string(),
+    collectionType: fileTypes,
+    name: v.string(),
+  }).index("by_userId", ["userId"]),
+
+  trash: defineTable({
+    userId: v.id("users"),
+    collectionId: v.id("_storage"),
+    collectionURL: v.string(),
+    collectionType: fileTypes,
+    name: v.string(),
+    deletedAt: v.any(),
+  }).index("by_userId", ["userId"]),
 });
 
 export default schema;

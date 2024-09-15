@@ -9,4 +9,10 @@ crons.daily(
   api.notification.deleteAllReadNotifications
 );
 
+crons.daily(
+  "clear an items in trush is expired",
+  { hourUTC: 0, minuteUTC: 0 },
+  api.trash.cleanUpTrash
+);
+
 export default crons;

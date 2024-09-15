@@ -6,6 +6,7 @@
 - **Next.js**: React-based framework for fast, server-rendered web applications.
 - **TypeScript**: Ensures code reliability with static typing.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Convex**: Full Stack Backend Framework
 
 ## Getting Started
 1. Clone the repository:

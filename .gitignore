@@ -44,3 +44,5 @@ docker-compose.yml
 pnpm-lock.yaml
 .env.local
 .env
+
+test.md

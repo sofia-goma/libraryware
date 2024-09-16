@@ -1,7 +1,7 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import getFormattedInitials from "@/lib/get-formatted-initials";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Bell,
@@ -37,13 +37,13 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/providers/auth-provider";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Badge } from "@/components/ui/badge";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { Id } from "../../../convex/_generated/dataModel";
 
 const links = [
-  {
-    name: "Dashboard",
-    href: ["/user"],
-    icon: <Home className="h-4 w-4" />,
-  },
+  { name: "Dashboard", href: ["/user"], icon: <Home className="h-4 w-4" /> },
   {
     name: "Forum",
     href: ["/user/forum"],
@@ -66,13 +66,38 @@ const links = [
   },
 ];
 
-function UserLayout({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) {
+function UserLayout({ children }: { children: ReactNode }) {
   const { logout, user } = useAuth();
+  const [unreadCount, setUnreadCount] = useState(0);
 
+  // Default userId to undefined if not available
+  const userId = user?.id as Id<"users"> | undefined;
+
+  // Call useQuery unconditionally
+  const notificationsQuery = useQuery(
+    api.notification.getNotifications,
+    userId ? { userId } : "skip"
+  );
+
+  // Initialize notifications to an empty array
+  const notifications = notificationsQuery ?? [];
+
+  useEffect(() => {
+    setUnreadCount(notifications.length);
+  }, [notifications]);
+
+  const updatedLinks = links.map((link) =>
+    link.name === "Notifications"
+      ? {
+          ...link,
+          badge: (
+            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+              {unreadCount}
+            </Badge>
+          ),
+        }
+      : link
+  );
 
   return (
     <div className="grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -83,7 +108,7 @@ function UserLayout({
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <NavLinks links={links} />
+              <NavLinks links={updatedLinks} />
             </nav>
           </div>
           <div className="mt-auto p-4">
@@ -173,7 +198,9 @@ function UserLayout({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>
-                <p className="text-sm font-medium">{user.name || "Anonymous"}</p>
+                <p className="text-sm font-medium">
+                  {user.name || "Anonymous"}
+                </p>
                 <p className="text-xs font-light">{user.email || "mail"}</p>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -181,12 +208,9 @@ function UserLayout({
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        {/* children */}
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           {children}
         </main>
-
-        {/* children */}
       </div>
     </div>
   );

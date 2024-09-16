@@ -17,6 +17,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "fabulous-starfish-340.convex.cloud"
+      },
+      {
+        protocol: "https",
+        hostname: "brave-goose-689.convex.cloud"
       }
     ]
   },

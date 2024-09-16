@@ -11,15 +11,15 @@ export default function BookMarkedList({ bookId }: Props) {
   if (!book) return;
   return (
     <>
-      <FileCard
+      {/* <FileCard
         key={book._id}
         id={book._id}
-        href={`/user/${book._id}`}
+        // href={`/user/${book._id}`}
         title={book.title}
-        cover={book.coverUrl || ""}
-        author={book.author}
+        // cover={book.coverUrl || ""}
+        // author={book.author}
         openLibraryId={book.openLibraryId}
-      />
+      /> */}
     </>
   );
 }

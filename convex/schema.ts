@@ -73,7 +73,7 @@ const schema = defineSchema({
 
   collections: defineTable({
     userId: v.id("users"),
-    collectionId: v.id("_storage"),
+    storageId: v.id("_storage"),
     collectionURL: v.string(),
     collectionType: fileTypes,
     name: v.string(),
@@ -81,7 +81,7 @@ const schema = defineSchema({
 
   trash: defineTable({
     userId: v.id("users"),
-    collectionId: v.id("_storage"),
+    storageId: v.id("_storage"),
     collectionURL: v.string(),
     collectionType: fileTypes,
     name: v.string(),

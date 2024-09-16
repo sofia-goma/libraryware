@@ -111,7 +111,7 @@ function UserLayout({ children }: { children: ReactNode }) {
               <NavLinks links={updatedLinks} />
             </nav>
           </div>
-          <div className="mt-auto p-4">
+          {/* <div className="mt-auto p-4">
             <Card x-chunk="dashboard-02-chunk-0">
               <CardHeader className="p-2 pt-0 md:p-4">
                 <CardTitle>Upgrade to Pro</CardTitle>
@@ -126,7 +126,7 @@ function UserLayout({ children }: { children: ReactNode }) {
                 </Button>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex flex-col">
@@ -153,7 +153,7 @@ function UserLayout({ children }: { children: ReactNode }) {
                 </Link>
                 <NavLinks links={links} />
               </nav>
-              <div className="mt-auto">
+              {/* <div className="mt-auto">
                 <Card>
                   <CardHeader>
                     <CardTitle>Upgrade to Pro</CardTitle>
@@ -168,7 +168,7 @@ function UserLayout({ children }: { children: ReactNode }) {
                     </Button>
                   </CardContent>
                 </Card>
-              </div>
+              </div> */}
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1">

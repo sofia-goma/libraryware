@@ -1,6 +1,7 @@
 export async function embed(text: string): Promise<number[]> {
   console.log(text);
   console.log("Hello");
+  console.log("Helllo");
   const key = process.env.NEXT_PUBLIC_OPEN_AI;
   if (!key) {
     throw new Error("OPENAI_KEY environment variable not set!");

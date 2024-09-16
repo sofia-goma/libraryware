@@ -10,7 +10,6 @@ export const getAllBooks = query({
       .query("book")
       .order("desc")
       .paginate(args.paginationOpts);
-    // console.log(results);
     return results;
   },
 });

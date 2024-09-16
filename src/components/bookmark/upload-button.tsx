@@ -86,7 +86,6 @@ export function UploadButton() {
         fileId: storageId as Id<"_storage">,
         type: types[fileType],
       });
-      console.log("starting function");
       await createCollection({
         userId: user.id as Id<"users">,
         collectionURL: url || "",
@@ -94,7 +93,7 @@ export function UploadButton() {
         collectionType: types[fileType],
         name: values.title,
       });
-      console.log("create collection");
+
       form.reset();
 
       setIsFileDialogOpen(false);
@@ -104,7 +103,7 @@ export function UploadButton() {
         description: "Now everyone can view your file",
       });
     } catch (err: any) {
-      console.log(err.message);
+
       toast({
         variant: "destructive",
         title: "Something went wrong",

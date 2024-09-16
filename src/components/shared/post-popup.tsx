@@ -103,7 +103,7 @@ export function PostPopup({
       imageInput.current!.value = "";
       setOpen(false); // Close dialog on success
     } catch (error: any) {
-      console.log(error.message);
+ 
       toast({
         variant: "destructive",
         title: "Something went wrong!",

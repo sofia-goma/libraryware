@@ -14,7 +14,7 @@ export default function NotFound() {
             Sorry, we couldn’t find the page you’re looking for.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Link href="/">
+            <Link href="/user">
               <Button size="lg">Go back home</Button>
             </Link>
             <a href="mailto:sofiadevgoma@gmail.com" target="_blank" className="text-sm font-semibold text-muted-foreground">

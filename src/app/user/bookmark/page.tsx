@@ -6,8 +6,7 @@ import { FileBrowser } from "@/components/bookmark/file-browser";
 
 export default function BookMark() {
   const { user } = useAuth();
-  if (!user.id || !user) return;
-
+  if (!user.id) return;
 
   return (
     <ScrollArea className="w-full" style={{ height: "calc(100vh - 80px)" }}>

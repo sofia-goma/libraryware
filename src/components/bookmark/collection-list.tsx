@@ -13,6 +13,7 @@ export default function CollectionList({ user }: { user: any }) {
     userId: user.id as Id<"users">,
   });
   const isLoading = collectionsList === undefined;
+  console.log(collectionsList);
   return (
     <>
       <div className="flex justify-end items-center mb-8">
@@ -30,9 +31,11 @@ export default function CollectionList({ user }: { user: any }) {
               <FileCard
                 key={i}
                 title={e.name}
-                type={e.collectionType}
-                file={e.collectionURL as "image" | "text" | "csv" | "word"}
+                type={e.collectionType as "image" | "text" | "csv" | "word"}
+                file={e.collectionURL}
                 date={e._creationTime}
+                userId={user.id}
+                id={e.collectionId}
               />
             ))}
           </div>

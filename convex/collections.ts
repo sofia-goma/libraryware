@@ -48,7 +48,6 @@ export const moveToTrash = mutation({
     if (!collection) {
       throw new Error("Collection not found");
     }
-
     // Move to trash
     await ctx.db.insert("trash", {
       ...collection,
@@ -80,7 +79,7 @@ export const restoreFromTrash = mutation({
     // Restore the collection
     await ctx.db.insert("collections", {
       ...trashItem,
-    //   _creationTime: trashItem.deletedAt,
+      //   _creationTime: trashItem.deletedAt,
     });
 
     // Remove from trash

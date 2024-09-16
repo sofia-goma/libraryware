@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import socialDate from "@/lib/social-date";
-import { StarIcon, StarHalf, FileText } from "lucide-react";
+import { StarIcon, StarHalf, FileText, Trash2 } from "lucide-react";
 import { Id, Doc } from "../../../convex/_generated/dataModel";
 import { FileTextIcon, GanttChartIcon, ImageIcon } from "lucide-react";
 import { ReactNode } from "react";
@@ -16,34 +16,62 @@ import Link from "next/link";
 import PdfIcon from "../icons/pdf";
 import Word from "../icons/word";
 import CsvIcon from "../icons/csv";
+import { Button } from "../ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { toast } from "@/hooks/use-toast";
 
 export function FileCard({
   id,
-  href,
+  userId,
   title,
   type,
   date,
   openLibraryId,
   file,
 }: {
-  file?: "image" | "text" | "word" | "csv" | "pdf";
-  id?: string;
-  href?: string;
+  file?: string;
+  id: Id<"_storage">;
+  userId: Id<"users">;
   title?: string;
-  type?: string;
+  type?: "image" | "text" | "word" | "csv" | "pdf";
   date?: number;
   openLibraryId?: string;
 }) {
-  const typeIcons = {
-    image: <ImageIcon />,
-    pdf: <FileTextIcon />,
-    csv: <GanttChartIcon />,
-  } as Record<Doc<"files">["type"], ReactNode>;
+  const moveToTrashConvex = useMutation(api.collections.moveToTrash);
+
+  const moveToTrash = async () => {
+    try {
+      await moveToTrashConvex({ userId: userId, collectionId: id });
+      toast({
+        title: "Deleted Successfully",
+        description: "You have deleted your post successfully.",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "Error happened while deleting your post",
+      });
+    }
+  };
+
   return (
     <Card>
       <CardHeader className="relative">
-        <CardTitle className="flex gap-2 text-base font-normal">
-          <h2 className="text-2xl font-semibold">{title}</h2>
+        <CardTitle className="flex gap-2 text-2xl font-semibold">
+          {title}
         </CardTitle>
         <div className="absolute top-2 right-2">
           {/* <FileCardActions isFavorited={file.isFavorited} file={file} /> */}
@@ -70,7 +98,34 @@ export function FileCard({
       </CardContent>
       <CardFooter className="flex justify-between">
         <div className="text-xs text-muted-foreground">{`Created : ${socialDate(date || 0)}`}</div>
-        <StarIcon size={12} />
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="link"
+              className="text-destructive flex justify-center items-center gap-1"
+            >
+              <Trash2 className="w-6 h-6" />
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                {`You wanted to send the book "${title}" to the trash, this book will
+                be permanently deleted in 15 days.`}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="gap-6">
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={moveToTrash}
+                className="bg-destructive text-destructive-foreground hover:bg-destructive"
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </CardFooter>
     </Card>
   );

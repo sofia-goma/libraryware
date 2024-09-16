@@ -9,7 +9,7 @@ export default function Dashboard() {
   const { results, status, loadMore, isLoading } = usePaginatedQuery(
     api.book.getAllBooks,
     {},
-    { initialNumItems: 10 }
+    { initialNumItems: 12 }
   );
   return (
     <div className="flex justify-between items-start  h-screen gap-4">

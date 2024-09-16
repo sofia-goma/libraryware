@@ -60,23 +60,3 @@ export const createOrGetBook = mutation({
     return insertedBook;
   },
 });
-
-// Vector search query function
-// export const searchBooks = action({
-//   args: {
-//     query: v.string(),
-//     embedding : v.array(v.float64()),
-//   },
-//   handler: async (ctx, { query, embedding }) => {
-//     const results = await ctx
-//       .vectorSearch("book","by_embedding", {
-//         vector: embedding ,
-//         limit: 16,
-//         filter: (q) =>
-//           q.or(q.eq("title",query), q.eq("author",query) )
-
-//       });
-
-//     return results;
-//   }
-// });

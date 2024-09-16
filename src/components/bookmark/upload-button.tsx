@@ -89,8 +89,8 @@ export function UploadButton() {
       console.log("starting function");
       await createCollection({
         userId: user.id as Id<"users">,
-        collectionId: storageId as Id<"_storage">,
         collectionURL: url || "",
+        storageId: storageId as Id<"_storage">,
         collectionType: types[fileType],
         name: values.title,
       });

@@ -22,8 +22,8 @@ const ProfileTabCard: React.FC<{ user: any }> = ({ user }) => {
   });
 
   return (
-    <Tabs defaultValue="about-me" className="w-full md:w-8/12 lg:w-9/12">
-      <TabsList className="grid w-full grid-cols-3">
+    <Tabs defaultValue="about-me" className="w-full">
+      <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="about-me">About Me</TabsTrigger>
         <TabsTrigger value="posts">Posts</TabsTrigger>
         <TabsTrigger value="settings">Setting</TabsTrigger>

@@ -15,18 +15,18 @@ export const list = query({
 export const createCollection = mutation({
   args: {
     userId: v.id("users"),
-    collectionId: v.id("_storage"),
+    storageId: v.id("_storage"),
     collectionURL: v.string(),
     collectionType: fileTypes,
     name: v.string(),
   },
   handler: async (
     ctx,
-    { userId, collectionId, collectionURL, collectionType, name }
+    { userId, storageId, collectionURL, collectionType, name }
   ) => {
     await ctx.db.insert("collections", {
       userId,
-      collectionId,
+      storageId,
       collectionURL,
       collectionType,
       name,
@@ -34,20 +34,23 @@ export const createCollection = mutation({
   },
 });
 
+// move to trash
+
 export const moveToTrash = mutation({
   args: {
     userId: v.id("users"),
-    collectionId: v.id("_storage"),
+    collectionId: v.id("collections"), // Use collectionId here
   },
   handler: async (ctx, { userId, collectionId }) => {
     const collection = await ctx.db
       .query("collections")
-      .filter((q) => q.eq(q.field("collectionId"), collectionId))
+      .filter((q) => q.eq(q.field("_id"), collectionId))
       .first();
 
     if (!collection) {
       throw new Error("Collection not found");
     }
+
     // Move to trash
     await ctx.db.insert("trash", {
       ...collection,
@@ -55,31 +58,34 @@ export const moveToTrash = mutation({
     });
 
     // Remove from collections
-    await ctx.db.delete(collection._id);
+    await ctx.db.delete(collectionId);
   },
 });
+
+
 
 // restore from trash
 
 export const restoreFromTrash = mutation({
   args: {
     userId: v.id("users"),
-    collectionId: v.string(),
+    storageId: v.id("_storage"), // Use collectionId
   },
-  handler: async (ctx, { userId, collectionId }) => {
+  handler: async (ctx, { userId, storageId }) => {
     const trashItem = await ctx.db
       .query("trash")
-      .filter((q) => q.eq(q.field("collectionId"), collectionId))
+      .filter((q) => q.eq(q.field("storageId"), storageId))
       .first();
 
     if (!trashItem) {
       throw new Error("Item not found in trash");
     }
 
-    // Restore the collection
+    // Restore the collection with its original _id and update _creationTime
     await ctx.db.insert("collections", {
       ...trashItem,
-      //   _creationTime: trashItem.deletedAt,
+      // _id: trashItem._id,  // Ensure the original _id is preserved
+      // _creationTime: trashItem.deletedAt,  // Use the deleted time as the new creation time if desired
     });
 
     // Remove from trash
@@ -92,19 +98,19 @@ export const restoreFromTrash = mutation({
 export const permanentlyDelete = mutation({
   args: {
     userId: v.id("users"),
-    collectionId: v.string(),
+    storageId: v.id("_storage"), // Use collectionId
   },
-  handler: async (ctx, { userId, collectionId }) => {
+  handler: async (ctx, { userId, storageId }) => {
     const trashItem = await ctx.db
       .query("trash")
-      .filter((q) => q.eq(q.field("collectionId"), collectionId))
+      .filter((q) => q.eq(q.field("storageId"), storageId))
       .first();
 
     if (!trashItem) {
       throw new Error("Item not found in trash");
     }
 
-    // Permanently delete
+    // Permanently delete the item from trash
     await ctx.db.delete(trashItem._id);
   },
 });

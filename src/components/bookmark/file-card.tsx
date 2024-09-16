@@ -42,7 +42,7 @@ export function FileCard({
   file,
 }: {
   file?: string;
-  id: Id<"_storage">;
+  id: Id<"collections"> | any;
   userId: Id<"users">;
   title?: string;
   type?: "image" | "text" | "word" | "csv" | "pdf";

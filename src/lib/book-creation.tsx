@@ -18,10 +18,9 @@
 //       title: string;
 //       authors: [{ name: string }];
 //     }) {
-//       // console.log(title);
-//       // console.log(key.replace("/works/", ""));
+//   
 //       // const author = authors[0].name;
-//       // console.log(authors[0].name);
+//  
 
 //       const details = await axios.get(
 //         `https://openlibrary.org/works/${key.replace("/works/", "")}.json`
@@ -30,9 +29,7 @@
 //       const url = reponse?.covers[0]
 //         ? `https://covers.openlibrary.org/b/id/${reponse.covers[0]}-L.jpg`
 //         : "";
-//       //  console.log(url);
-//       // console.log(reponse.description.value ? reponse.description.value : reponse.description);
-//       console.log(reponse);
+//     
 //       //   await createBooks({
 //       //     openLibraryId: key.replace("/works/", ""),
 //       //     title: title,
@@ -64,7 +61,7 @@
 //   );
 // const result = await resp.json();
 //   const allBooks = await data.entries;
-// console.log(allBooks);
+// 
 // allBooks.map((book: any) => (
 //   createBooks({
 //     openLibraryId: book?.url || "id",

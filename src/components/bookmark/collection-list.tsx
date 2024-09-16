@@ -13,7 +13,6 @@ export default function CollectionList({ user }: { user: any }) {
     userId: user.id as Id<"users">,
   });
   const isLoading = collectionsList === undefined;
-  console.log(collectionsList);
   return (
     <>
       <div className="flex justify-end items-center mb-8">

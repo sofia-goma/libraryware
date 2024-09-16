@@ -19,7 +19,13 @@ const schema = defineSchema({
     author: v.string(),
     coverUrl: v.union(v.string(), v.null()),
     description: v.optional(v.union(v.string(), v.null())),
+    // embedding: v.array(v.float64()),
   }).index("by_openLibraryId", ["openLibraryId"]),
+  // .vectorIndex("by_embedding", {
+  //   vectorField: "embedding",
+  //   dimensions: 1536,
+  //   filterFields: ["title", "author"],
+  // }),
 
   bookmark: defineTable({
     userId: v.id("users"),

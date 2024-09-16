@@ -26,7 +26,15 @@ export default function CollectionList({ user }: { user: any }) {
 
         <TabsContent value="grid">
           <div className="grid grid-cols-3 gap-4">
-            {collectionsList?.map((e, i) => <FileCard key={i} />)}
+            {collectionsList?.map((e, i) => (
+              <FileCard
+                key={i}
+                title={e.name}
+                type={e.collectionType}
+                file={e.collectionURL as "image" | "text" | "csv" | "word"}
+                date={e._creationTime}
+              />
+            ))}
           </div>
         </TabsContent>
         <TabsContent value="table">

@@ -41,6 +41,7 @@ import { Badge } from "@/components/ui/badge";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
+import SearchField from "@/components/shared/search-field";
 
 const links = [
   { name: "Dashboard", href: ["/user"], icon: <Home className="h-4 w-4" /> },
@@ -98,6 +99,8 @@ function UserLayout({ children }: { children: ReactNode }) {
         }
       : link
   );
+
+  const handleSearch = () => {};
 
   return (
     <div className="grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -171,18 +174,7 @@ function UserLayout({ children }: { children: ReactNode }) {
               </div>
             </SheetContent>
           </Sheet>
-          <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search your favorites book..."
-                  className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-                />
-              </div>
-            </form>
-          </div>
+          <SearchField />
           <ModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

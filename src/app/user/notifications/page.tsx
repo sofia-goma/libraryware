@@ -32,17 +32,17 @@ type Notification = {
 
 export default function Notifications() {
   const { user } = useAuth();
-  const { toast } = useToast();
   if (!user.id) return;
+  const { toast } = useToast();
   const notis = useQuery(api.notification.getNotifications, {
-    userId: user.id,
+    userId: user.id as Id<"users">,
   });
   const setAllAsRead = useMutation(api.notification.markAllNotificationAsRead);
   const setAsRead = useMutation(api.notification.markNotificationAsRead);
 
   const markAllAsRead = async () => {
     try {
-      if (user && user._id) {
+      if (user && user.id) {
         await setAllAsRead({ userId: user._id as Id<"users"> });
         toast({
           title: "Mark all as read",

@@ -28,7 +28,7 @@ export function PostPopup({
   title: string;
   handleSubmit?: (content: string) => void;
   shape?: boolean;
-  bookId: string;
+  bookId?: string;
 }) {
   const { toast } = useToast();
   const { user } = useAuth();

@@ -84,3 +84,19 @@ export const isLike = query({
     return like;
   },
 });
+
+// this get all like by post Id
+
+export const getLikeByPostId = query({
+  args: {
+    postId: v.id('post')
+  },
+  handler: async (ctx, args) => {
+    const likes = await ctx.db
+     .query('like')
+     .withIndex('by_postId', (q) => q.eq('postId', args.postId))
+     .collect()
+
+    return likes
+  }
+})

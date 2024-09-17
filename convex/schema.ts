@@ -68,7 +68,7 @@ const schema = defineSchema({
   like: defineTable({
     userId: v.id("users"),
     postId: v.id("post"),
-  }).index("by_userId", ["userId", "postId"]),
+  }).index("by_userId", ["userId", "postId"]).index("by_postId", ["postId"]),
 
   files: defineTable({
     name: v.string(),

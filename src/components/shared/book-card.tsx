@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Bookmark, BookmarkCheck, BookOpenText } from "lucide-react";
+import { BookOpenText, StarIcon } from "lucide-react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useAuth } from "@/providers/auth-provider";
@@ -71,21 +69,9 @@ export default function BookCard({
       }
     }
   };
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const handleOpenPopup = () => {
-    setIsPopupOpen(true);
-  };
-
-  const handleClosePopup = () => {
-    setIsPopupOpen(false);
-  };
-
   const createPostConvex = useMutation(api.post.createPost);
-
   const createPostfunction = async (content: string) => {
     try {
-      // Call the Convex mutation to create the post
       await createPostConvex({
         userId: user.id,
         bookId: id,
@@ -106,10 +92,10 @@ export default function BookCard({
     }
   };
   return (
-    <Card className="w-[250px] p-0 m-0">
-      <CardHeader className="p-4 text-center">
+    <Card>
+      <CardHeader className="relative">
         <Link href={href}>
-          <CardTitle className="text-sm hover:text-primary transition-colors h-5 overflow-hidden">
+          <CardTitle className="flex gap-2 text-xl font-semibold hover:text-primary transition-colors">
             {title}
           </CardTitle>
         </Link>
@@ -120,18 +106,18 @@ export default function BookCard({
           </span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="py-0 flex items-center justify-center">
+      <CardContent className="h-[200px] flex justify-center items-center">
         <Link href={href}>
           <Image
             src={`${cover ? `${cover}` : `/cover_not_found.jpg`}`}
-            width={150}
-            height={150}
-            className="object-cover"
+            className="w-[150px] hover:scale-105 transition-all"
+            width={100}
+            height={100}
             alt="book card image"
           />
         </Link>
       </CardContent>
-      <CardFooter className="pb-0 flex items-center justify-center gap-3 py-2">
+      <CardFooter className="flex justify-between">
         <Link
           target="_blank"
           href={`https://openlibrary.org/books/${openLibraryId}`}
@@ -145,9 +131,13 @@ export default function BookCard({
         />
         <div className="" onClick={bookmark}>
           {!isBookmarked ? (
-            <Bookmark className="hover:cursor-pointer" />
+            <StarIcon className="hover:cursor-pointer" />
           ) : (
-            <BookmarkCheck className="hover:cursor-pointer" color="blue" />
+            <StarIcon
+              className="hover:cursor-pointer"
+              color="yellow"
+              fill="yellow"
+            />
           )}
         </div>
       </CardFooter>

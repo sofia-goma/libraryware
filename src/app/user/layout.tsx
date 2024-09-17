@@ -32,7 +32,6 @@ import Logo from "@/components/shared/logo";
 import NavLinks from "@/components/shared/navlinks";
 import ModeToggle from "@/components/shared/mode-toggle";
 import Loading from "@/components/shared/loading";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/providers/auth-provider";
 import { withAuthenticationRequired } from "@auth0/auth0-react";

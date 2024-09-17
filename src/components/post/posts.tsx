@@ -11,7 +11,7 @@ function Posts() {
   return (
     <div className="mx-2 border-x border-t border-solid border-border">
       {posts.length > 0 ? (
-        <ScrollArea className="w-full h-[80vh] overflow-y-auto">
+        <ScrollArea className="w-full h-[90vh] lg:h-[85vh] overflow-y-auto">
           {posts?.map((post, index) => <PostBox post={post} key={index} />)}
         </ScrollArea>
       ) : (

@@ -7,18 +7,12 @@ import {
   Bell,
   Home,
   Menu,
-  Search,
   InboxIcon,
   Bookmark,
   User,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
+
 import {
   DropdownMenu,
   DropdownMenuContent,

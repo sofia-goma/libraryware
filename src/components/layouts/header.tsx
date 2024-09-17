@@ -28,12 +28,10 @@ export default function Header() {
               className="w-full"
               onClick={() => login("google-oauth2")}
             >
-              <GoogleIcon className="mr-2 h-4 w-4" /> Continue with Google
+              <GoogleIcon className="mr-2 h-4 w-4" />
+              <span className="hidden md:block">Continue with Google</span>
             </Button>
-            {/* <Link href="/login">
-              <Button>SIGN IN</Button>
-            </Link> */}
-            <div className="hidden md:block">
+            <div className="">
               <ModeToggle />
             </div>
           </div>

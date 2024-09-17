@@ -20,7 +20,12 @@ const schema = defineSchema({
     coverUrl: v.union(v.string(), v.null()),
     description: v.optional(v.union(v.string(), v.null())),
     // embedding: v.array(v.float64()),
-  }).index("by_openLibraryId", ["openLibraryId"]),
+  })
+    .index("by_openLibraryId", ["openLibraryId"])
+    .searchIndex("search_book", {
+      searchField: "title",
+      filterFields: ["author"],
+    }),
   // .vectorIndex("by_embedding", {
   //   vectorField: "embedding",
   //   dimensions: 1536,

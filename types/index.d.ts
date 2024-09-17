@@ -30,7 +30,16 @@ type IPost = {
   pictureId?: string;
 };
 
-// application user Interface
+type IBook = {
+  _id: string;
+  _creationTime: number;
+  description?: string | null | undefined;
+  openLibraryId: string;
+  title: string;
+  author: string;
+  coverUrl: string | null;
+};
+
 type IUser =
   | {
       _id: string;

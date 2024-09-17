@@ -7,18 +7,12 @@ import {
   Bell,
   Home,
   Menu,
-  Search,
   InboxIcon,
   Bookmark,
   User,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,7 +26,6 @@ import Logo from "@/components/shared/logo";
 import NavLinks from "@/components/shared/navlinks";
 import ModeToggle from "@/components/shared/mode-toggle";
 import Loading from "@/components/shared/loading";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/providers/auth-provider";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
@@ -114,7 +107,7 @@ function UserLayout({ children }: { children: ReactNode }) {
               <NavLinks links={updatedLinks} />
             </nav>
           </div>
-          <div className="mt-auto p-4">
+          {/* <div className="mt-auto p-4">
             <Card x-chunk="dashboard-02-chunk-0">
               <CardHeader className="p-2 pt-0 md:p-4">
                 <CardTitle>Upgrade to Pro</CardTitle>
@@ -129,7 +122,7 @@ function UserLayout({ children }: { children: ReactNode }) {
                 </Button>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex flex-col">
@@ -156,7 +149,7 @@ function UserLayout({ children }: { children: ReactNode }) {
                 </Link>
                 <NavLinks links={links} />
               </nav>
-              <div className="mt-auto">
+              {/* <div className="mt-auto">
                 <Card>
                   <CardHeader>
                     <CardTitle>Upgrade to Pro</CardTitle>
@@ -171,7 +164,7 @@ function UserLayout({ children }: { children: ReactNode }) {
                     </Button>
                   </CardContent>
                 </Card>
-              </div>
+              </div> */}
             </SheetContent>
           </Sheet>
           <SearchField />

@@ -1,11 +1,10 @@
 import { api } from "../../../convex/_generated/api";
 import { useQuery } from "convex/react";
 import { Loading } from "./loading";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Id } from "../../../convex/_generated/dataModel";
 import { Placeholder } from "./placeholder";
 import { UploadButton } from "./upload-button";
-import TrashList from "./trash-list";
 import { FileCard } from "./file-card";
 
 export default function CollectionList({ user }: { user: any }) {
@@ -13,7 +12,6 @@ export default function CollectionList({ user }: { user: any }) {
     userId: user.id as Id<"users">,
   });
   const isLoading = collectionsList === undefined;
-  console.log(collectionsList);
   return (
     <>
       <div className="flex justify-end items-center mb-8">
@@ -21,12 +19,10 @@ export default function CollectionList({ user }: { user: any }) {
       </div>
 
       <Tabs defaultValue="grid">
-        <div className="flex justify-between items-center"></div>
-
         {isLoading && <Loading title="trash items" />}
 
         <TabsContent value="grid">
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {collectionsList?.map((e, i) => (
               <FileCard
                 key={i}

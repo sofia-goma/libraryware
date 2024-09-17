@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { Id } from "../../../convex/_generated/dataModel";
@@ -103,7 +103,7 @@ export function PostPopup({
       imageInput.current!.value = "";
       setOpen(false); // Close dialog on success
     } catch (error: any) {
-      console.log(error.message);
+ 
       toast({
         variant: "destructive",
         title: "Something went wrong!",

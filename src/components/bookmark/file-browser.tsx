@@ -1,17 +1,8 @@
 "use client";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { UploadButton } from "./upload-button";
-import { FileCard } from "./file-card";
-import Image from "next/image";
-import { GridIcon, Loader2, RowsIcon } from "lucide-react";
-import { SearchBar } from "./search-bar";
-import { useState } from "react";
-import { DataTable } from "./file-table";
-import { columns } from "./columns";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Doc, Id } from "../../../convex/_generated/dataModel";
-import { useAuth } from "@/providers/auth-provider";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Id } from "../../../convex/_generated/dataModel";
 // import BookMarkedList from "./bookmark-list";
 import { Placeholder } from "./placeholder";
 import { Loading } from "./loading";
@@ -83,9 +74,6 @@ export function FileBrowser({
           <BookMarkedList key={e._id} bookId={e.bookId} />
         ))}
           </div>
-        </TabsContent>
-        <TabsContent value="table">
-          {/* <DataTable columns={columns} data={bookmarkedBooks} /> */}
         </TabsContent>
       </Tabs>
 

@@ -1,5 +1,4 @@
-import { mutation, query, action } from "./_generated/server";
-import { Id } from "./_generated/dataModel";
+import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { paginationOptsValidator } from "convex/server";
 
@@ -10,7 +9,6 @@ export const getAllBooks = query({
       .query("book")
       .order("desc")
       .paginate(args.paginationOpts);
-    // console.log(results);
     return results;
   },
 });

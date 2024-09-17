@@ -24,13 +24,18 @@ import { paginationOptsValidator } from "convex/server";
 // });
 
 export const searchBooks = query({
-  args: { searchQuery: v.string() },
+  args: { 
+    searchQuery: v.string(), 
+    paginationOpts: paginationOptsValidator
+  },
   handler: async (ctx, args) => {
+
     const query = ctx.db
       .query("book")
       .withSearchIndex("search_book", (q) =>
         q.search("title", args.searchQuery)
-      );
+      )
+      .paginate(args.paginationOpts);
 
     const books = await query;
 

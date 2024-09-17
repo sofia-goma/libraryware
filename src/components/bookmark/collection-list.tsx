@@ -19,7 +19,7 @@ export default function CollectionList({ user }: { user: any }) {
       </div>
 
       <Tabs defaultValue="grid">
-        {isLoading && <Loading title="trash items" />}
+        {isLoading && <Loading title="collections items" />}
 
         <TabsContent value="grid">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -35,9 +35,6 @@ export default function CollectionList({ user }: { user: any }) {
               />
             ))}
           </div>
-        </TabsContent>
-        <TabsContent value="table">
-          {/* <DataTable columns={columns} data={trashList} /> */}
         </TabsContent>
       </Tabs>
 

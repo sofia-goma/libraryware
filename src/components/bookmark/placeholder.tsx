@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import { UploadButton } from './upload-button';
+import { ReactNode } from "react";
+import Image from "next/image";
 
-export function Placeholder() {
+export function Placeholder({ children }: { children?: ReactNode }) {
   return (
     <div className="flex flex-col gap-8 w-full items-center">
       <Image
@@ -10,8 +10,7 @@ export function Placeholder() {
         height="300"
         src="/empty.svg"
       />
-      <div className="text-2xl">You have no files, upload one now</div>
-      <UploadButton />
+      {children}
     </div>
   );
 }

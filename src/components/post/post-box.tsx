@@ -151,7 +151,7 @@ const PostBox = ({ post }: { post: IPost }) => {
   };
 
   return (
-    <div className="bg-background w-full border-b border-solid border-border p-4 mb-4">
+    <div className="w-full border-b border-solid border-border p-4 mb-4">
       <div className="flex items-center space-x-4">
         <Avatar className="inline-block w-16 h-16 static">
           <AvatarImage src={user?.image || ""} />

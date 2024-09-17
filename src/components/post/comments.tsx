@@ -72,9 +72,11 @@ function CommentUser({ item }: { item: IComment }) {
           {getFormattedInitials(user?.name || "A")}
         </AvatarFallback>
       </Avatar>
-      <span className="flex gap-0">
-        {user?.name} <Dot /> {socialDate(item._creationTime)}
-      </span>
+      <div className="flex flex-col sm:flex-row gap-0">
+        <span className="">{user?.name}</span>{" "}
+        <Dot className="hidden sm:block" />{" "}
+        <span className="">{socialDate(item._creationTime)}</span>
+      </div>
     </div>
   );
 }
@@ -166,9 +168,7 @@ function Comments({ post }: { post: IPost }) {
               "group m-0 flex flex-col gap-1 rounded-r-lg pr-3 mb-4 focus:outline-none",
               recursive === 0 ? "pl-4" : recursive === 1 ? "pl-11" : "pl-16",
               activeName === item._id || activeName.split(".")[0] === item._id
-                ? `text-[#277C78] font-semibold ${
-                  item.children?.length ? "bg-white" : "bg-transparent"
-                }`
+                ? `text-[#277C78] font-semibold ${item.children?.length ? "bg-white" : "bg-transparent"}`
                 : "text-gray-500",
               classesActive,
             ].join(" ")}
@@ -300,6 +300,7 @@ function Comments({ post }: { post: IPost }) {
       deleteCommentConvex,
       editMode,
       editCommentConvex,
+      toast,
     ]
   );
 

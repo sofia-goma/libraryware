@@ -16,7 +16,7 @@ export default function LoginLayout({
   return (
     <div className="flex justify-center items-center lg:justify-between lg:items-start">
       <div>{children}</div>
-      <div className="hidden lg:block h-dvh border-border max-w-[350px]">
+      <div className="hidden lg:block h-dvh border-border w-[350px]">
         <Citation />
       </div>
     </div>

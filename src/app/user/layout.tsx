@@ -7,18 +7,12 @@ import {
   Bell,
   Home,
   Menu,
-  Search,
   InboxIcon,
   Bookmark,
   User,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -89,17 +83,17 @@ function UserLayout({ children }: { children: ReactNode }) {
   const updatedLinks = links.map((link) =>
     link.name === "Notifications"
       ? {
-          ...link,
-          badge: (
-            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-              {unreadCount}
-            </Badge>
-          ),
-        }
+        ...link,
+        badge: (
+          <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+            {unreadCount}
+          </Badge>
+        ),
+      }
       : link
   );
 
-  const handleSearch = () => {};
+  // const handleSearch = () => {}; for searching books in the db
 
   return (
     <div className="grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -113,22 +107,6 @@ function UserLayout({ children }: { children: ReactNode }) {
               <NavLinks links={updatedLinks} />
             </nav>
           </div>
-          {/* <div className="mt-auto p-4">
-            <Card x-chunk="dashboard-02-chunk-0">
-              <CardHeader className="p-2 pt-0 md:p-4">
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                <Button size="sm" className="w-full">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
-          </div> */}
         </div>
       </div>
       <div className="flex flex-col">
@@ -155,22 +133,6 @@ function UserLayout({ children }: { children: ReactNode }) {
                 </Link>
                 <NavLinks links={links} />
               </nav>
-              {/* <div className="mt-auto">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Upgrade to Pro</CardTitle>
-                    <CardDescription>
-                      Unlock all features and get unlimited access to our
-                      support team.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button size="sm" className="w-full">
-                      Upgrade
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div> */}
             </SheetContent>
           </Sheet>
           <SearchField />

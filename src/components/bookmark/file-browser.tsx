@@ -1,25 +1,14 @@
 "use client";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { UploadButton } from "./upload-button";
-import { FileCard } from "./file-card";
-import Image from "next/image";
-import { GridIcon, Loader2, RowsIcon } from "lucide-react";
-import { SearchBar } from "./search-bar";
-import { useState } from "react";
-import { DataTable } from "./file-table";
-import { columns } from "./columns";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Doc, Id } from "../../../convex/_generated/dataModel";
-import { useAuth } from "@/providers/auth-provider";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Id } from "../../../convex/_generated/dataModel";
 // import BookMarkedList from "./bookmark-list";
 import { Placeholder } from "./placeholder";
 import { Loading } from "./loading";
 import BookMarkedList from "../shared/book-marked-list";
 export function FileBrowser({
   userId,
-  favoritesOnly,
-  deletedOnly,
 }: {
   userId: Id<"users">;
   favoritesOnly?: boolean;
@@ -79,9 +68,9 @@ export function FileBrowser({
 
         <TabsContent value="grid">
           <div className="grid grid-cols-3 gap-4">
-          {bookmarkedBooks?.map((e) => (
-          <BookMarkedList key={e._id} bookId={e.bookId} />
-        ))}
+            {bookmarkedBooks?.map((e) => (
+              <BookMarkedList key={e._id} bookId={e.bookId} />
+            ))}
           </div>
         </TabsContent>
       </Tabs>

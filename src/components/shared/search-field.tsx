@@ -12,6 +12,8 @@ const SearchField: React.FC = () => {
     e.preventDefault();
     if (query.trim()) {
       router.push(`/user?search=${query}`);
+    } else {
+      router.push("/user");
     }
   };
 
@@ -22,10 +24,9 @@ const SearchField: React.FC = () => {
           <Input
             type="search"
             placeholder="Search your favorite book..."
-            className="w-full appearance-none bg-background pr-8 shadow-none"
+            className="w-full appearance-none bg-background pr-9 shadow-none"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            required
           />
           <Button
             className="p-2 absolute right-0 top-0 bg-primary rounded-tl-none rounded-bl-none"

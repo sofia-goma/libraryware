@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { Id } from "../../../convex/_generated/dataModel";
@@ -21,8 +21,6 @@ import { Loader2 } from "lucide-react"; // Import spinner icon
 
 export function PostPopup({
   title,
-  handleSubmit,
-  shape,
   bookId,
 }: {
   title: string;

@@ -1,7 +1,7 @@
 import { api } from "../../../convex/_generated/api";
 import { useQuery } from "convex/react";
 import { Loading } from "./loading";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Id } from "../../../convex/_generated/dataModel";
 import { Placeholder } from "./placeholder";
 

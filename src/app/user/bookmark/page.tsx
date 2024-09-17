@@ -1,6 +1,5 @@
 "use client";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Bookmarked from "@/components/shared/book-marked";
 import { useAuth } from "@/providers/auth-provider";
 import { FileBrowser } from "@/components/bookmark/file-browser";
 

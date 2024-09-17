@@ -91,25 +91,25 @@
 // console.log(books[0]);
 
 // for bookid
-  // const [loading, setLoading] = useState(true);
-  // const imageURL =
-  //   `https://covers.openlibrary.org/b/id/${params.bookId}-L.jpg` ||
-  //   notfoundimage;
-  // const URL = "https://openlibrary.org/works/";
-  // useEffect(() => {
-  //   async function loadBookDetails() {
-  //     try {
-  //       const { data } = await axios.get(
-  //         `https://openlibrary.org/works/${params.bookId}.json`
-  //       );
-  //       setBookDetails(data);
-  //     } catch (error) {
-  //       console.error("Error fetching book details:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  //   loadBookDetails();
-  // }, [params.bookId]);
+// const [loading, setLoading] = useState(true);
+// const imageURL =
+//   `https://covers.openlibrary.org/b/id/${params.bookId}-L.jpg` ||
+//   notfoundimage;
+// const URL = "https://openlibrary.org/works/";
+// useEffect(() => {
+//   async function loadBookDetails() {
+//     try {
+//       const { data } = await axios.get(
+//         `https://openlibrary.org/works/${params.bookId}.json`
+//       );
+//       setBookDetails(data);
+//     } catch (error) {
+//       console.error("Error fetching book details:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   }
+//   loadBookDetails();
+// }, [params.bookId]);
 
-  // console.log(bookDetails);
+// console.log(bookDetails);

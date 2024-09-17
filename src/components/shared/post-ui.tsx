@@ -1,10 +1,8 @@
 "use client";
-import { ReactNode } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Share2, Heart, MessageCircle, Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -14,8 +12,6 @@ export default function PostUI({
   body,
   userId,
   time,
-  bookId,
-  title,
 }: {
   id: Id<"post">;
   body: string;

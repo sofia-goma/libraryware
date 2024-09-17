@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 import { BellIcon, CheckIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import {
   Drawer,
@@ -40,7 +40,6 @@ import Comments from "./comments";
 import socialDate from "@/lib/social-date";
 import { useAuth } from "@/providers/auth-provider";
 import { useToast } from "@/hooks/use-toast";
-import PostId from "../../app/user/forum/[postId]/page";
 import {
   AlertDialog,
   AlertDialogAction,

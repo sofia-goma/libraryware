@@ -3,7 +3,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -11,8 +10,6 @@ import {
   MoreVertical,
   StarHalf,
   StarIcon,
-  TrashIcon,
-  UndoIcon,
 } from "lucide-react";
 import {
   AlertDialog,
@@ -25,8 +22,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
-import { useMutation, useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
 import { useToast } from "@/hooks/use-toast";
 
 
@@ -37,7 +32,7 @@ export function FileCardActions({
   file: Id<"files"> & { url: string | null };
   isFavorited: boolean;
 }) {
-  const deleteFile = useMutation(api.files.deleteFile);
+  // const deleteFile = useMutation(api.files.deleteFile);
   // const restoreFile = useMutation(api.files.restoreFile);
   // const toggleFavorite = useMutation(api.files.toggleFavorite);
   const { toast } = useToast();

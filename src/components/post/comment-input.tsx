@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useAuth } from "@/providers/auth-provider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,7 @@ function CommentInput({ post, comment }: { post: IPost; comment?: IComment }) {
   const [loading, setLoading] = useState(false);
   const createComment = useMutation(api.comment.createComment);
   //We'll use react hook form tomorrow
-  const inputRef = useRef<HTMLInputElement>(null);
+  // const inputRef = useRef<HTMLInputElement>(null);
   const { register, handleSubmit } = useForm<IPostComment>();
   const handleComment = async (data: IPostComment) => {
     setLoading(true);

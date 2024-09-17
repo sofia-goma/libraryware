@@ -10,7 +10,6 @@ import { Dot, MessageCircleReply, Pencil, Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "../../providers/auth-provider";
 import { useToast } from "@/hooks/use-toast";
-import { deleteComment } from "../../../convex/comment";
 import {
   Dialog,
   DialogClose,
@@ -168,8 +167,8 @@ function Comments({ post }: { post: IPost }) {
               recursive === 0 ? "pl-4" : recursive === 1 ? "pl-11" : "pl-16",
               activeName === item._id || activeName.split(".")[0] === item._id
                 ? `text-[#277C78] font-semibold ${
-                    item.children?.length ? "bg-white" : "bg-transparent"
-                  }`
+                  item.children?.length ? "bg-white" : "bg-transparent"
+                }`
                 : "text-gray-500",
               classesActive,
             ].join(" ")}

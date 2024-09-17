@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { useAuth0, User } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "convex/react";
 import { Context, PropsWithChildren, useContext } from "react";
 import { Id } from "../../convex/_generated/dataModel";

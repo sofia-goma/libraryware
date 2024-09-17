@@ -1,4 +1,4 @@
 export default function ForumProvider() {
-    return <h1>Forum Provider</h1>;
-  }
+  return <h1>Forum Provider</h1>;
+}
   

@@ -27,8 +27,8 @@ export const teamMembersData: ITeam[] = [
     name: "Landry Bitege",
     job: "Software Engineer",
     githubLink: "https://github.com/land-bit",
-    linkedinLink: "hello",
-    twitterLink: "holl",
+    linkedinLink: "https://www.linkedin.com/in/landry-bitege",
+    twitterLink: "https://x.com/LandryBitege",
     imageSrc: "https://avatars.githubusercontent.com/u/141019256?v=4",
   },
 ];

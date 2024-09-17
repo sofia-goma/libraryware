@@ -10,9 +10,6 @@ export default function Home() {
       <Header />
       <main role="main">
         <Hero />
-        {/* <div className="flex items-center justify-center">
-          <Banner />
-        </div> */}
         <Features />
         <Team />
       </main>

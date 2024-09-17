@@ -56,8 +56,8 @@ export function FileCard({
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Something went wrong",
-        description: "Error happened while deleting your post",
+        title: "Something went wrong.",
+        description: "Error happened while deleting your collection.",
       });
     }
   };

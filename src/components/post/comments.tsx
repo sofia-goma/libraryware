@@ -73,9 +73,11 @@ function CommentUser({ item }: { item: IComment }) {
           {getFormattedInitials(user?.name || "A")}
         </AvatarFallback>
       </Avatar>
-      <span className="flex gap-0">
-        {user?.name} <Dot /> {socialDate(item._creationTime)}
-      </span>
+      <div className="flex flex-col sm:flex-row gap-0">
+        <span className="">{user?.name}</span>{" "}
+        <Dot className="hidden sm:block" />{" "}
+        <span className="">{socialDate(item._creationTime)}</span>
+      </div>
     </div>
   );
 }

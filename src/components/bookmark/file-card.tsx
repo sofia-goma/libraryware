@@ -6,13 +6,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import socialDate from "@/lib/social-date";
-import { StarIcon, StarHalf, FileText, Trash2 } from "lucide-react";
-import { Id, Doc } from "../../../convex/_generated/dataModel";
-import { FileTextIcon, GanttChartIcon, ImageIcon } from "lucide-react";
-import { ReactNode } from "react";
+import { FileText, Trash2 } from "lucide-react";
+import { Id } from "../../../convex/_generated/dataModel";
 import Image from "next/image";
-import { FileCardActions } from "./file-actions";
-import Link from "next/link";
 import PdfIcon from "../icons/pdf";
 import Word from "../icons/word";
 import CsvIcon from "../icons/csv";
@@ -38,7 +34,6 @@ export function FileCard({
   title,
   type,
   date,
-  openLibraryId,
   file,
 }: {
   file?: string;

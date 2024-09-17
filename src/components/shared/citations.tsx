@@ -46,7 +46,7 @@ const Citation = () => {
             key={index}
             style={{ backgroundColor: "background-color 0.3s" }}
             className={`w-3 h-3 rounded-full cursor-pointer ${currentIndex === index ? "bg-primary" : "bg-muted-foreground"
-              }`}
+            }`}
             onClick={() => handleDotClick(index)}
           />
         ))}

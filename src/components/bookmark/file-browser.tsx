@@ -9,8 +9,6 @@ import { Loading } from "./loading";
 import BookMarkedList from "../shared/book-marked-list";
 export function FileBrowser({
   userId,
-  favoritesOnly,
-  deletedOnly,
 }: {
   userId: Id<"users">;
   favoritesOnly?: boolean;
@@ -70,9 +68,9 @@ export function FileBrowser({
 
         <TabsContent value="grid">
           <div className="grid grid-cols-3 gap-4">
-          {bookmarkedBooks?.map((e) => (
-          <BookMarkedList key={e._id} bookId={e.bookId} />
-        ))}
+            {bookmarkedBooks?.map((e) => (
+              <BookMarkedList key={e._id} bookId={e.bookId} />
+            ))}
           </div>
         </TabsContent>
       </Tabs>

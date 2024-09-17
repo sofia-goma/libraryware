@@ -15,10 +15,10 @@ export default function Dashboard() {
 
   const { results, status, loadMore, isLoading } = search
     ? usePaginatedQuery(
-        api.search.searchBooks,
-        { searchQuery: search },
-        { initialNumItems: 10 }
-      )
+      api.search.searchBooks,
+      { searchQuery: search },
+      { initialNumItems: 10 }
+    )
     : usePaginatedQuery(api.book.getAllBooks, {}, { initialNumItems: 12 });
 
   return (

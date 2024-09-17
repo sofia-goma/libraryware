@@ -2,7 +2,6 @@ import React from "react";
 import { Id } from "../../../convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { FileCard } from "./file-card";
 
 type Props = { bookId: Id<"book"> };
 

@@ -1,8 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import Link from "next/link";
 import React from "react";
-import { Button } from "../ui/button";
-import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
 import { Id } from "../../../convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";

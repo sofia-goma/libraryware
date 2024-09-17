@@ -21,8 +21,6 @@ import { Loader2 } from "lucide-react"; // Import spinner icon
 
 export function PostPopup({
   title,
-  handleSubmit,
-  shape,
   bookId,
 }: {
   title: string;

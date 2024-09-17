@@ -84,9 +84,6 @@ export function FileBrowser({
         ))}
           </div>
         </TabsContent>
-        <TabsContent value="table">
-          {/* <DataTable columns={columns} data={bookmarkedBooks} /> */}
-        </TabsContent>
       </Tabs>
 
       {bookmarkedBooks?.length === 0 && <Placeholder />}

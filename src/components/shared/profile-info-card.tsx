@@ -18,7 +18,7 @@ function ProfileInfoCard({ user }: { user: any }) {
     userId: user.id as Id<"users">,
   });
   return (
-    <div className="w-full max-w-[380px] shadow-box border-t-4 border-solid border-primary rounded-lg">
+    <div className="w-full max-w-[380px] shadow-box border-t-4 border border-border rounded-lg border-t-primary">
       <div className="p-6">
         <div className="text-center">
           <Avatar className="inline-block w-32 h-32 static">

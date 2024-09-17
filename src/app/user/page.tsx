@@ -1,22 +1,30 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { usePaginatedQuery } from "convex/react";
+import { usePaginatedQuery, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import BookCard from "@/components/shared/book-card";
 import BookCardLoader from "@/components/shared/book-card-loader";
+import { useParams, useSearchParams } from "next/navigation";
 
 export default function Dashboard() {
-  const { results, status, loadMore, isLoading } = usePaginatedQuery(
-    api.book.getAllBooks,
-    {},
-    { initialNumItems: 12 }
-  );
+  const searchParams = useSearchParams();
+  const search = searchParams?.get("search") || "";
+
+  const { results, status, loadMore, isLoading } = search
+    ? usePaginatedQuery(
+        api.search.searchBooks,
+        { searchQuery: search },
+        { initialNumItems: 10 }
+      )
+    : usePaginatedQuery(api.book.getAllBooks, {}, { initialNumItems: 12 });
+
   return (
     <div className="flex justify-between items-start  h-screen gap-4">
       <div className="flex flex-col">
         <div className="mb-4">
           <h1 className="text-lg font-semibold md:text-2xl">
-            Recommended for you
+            {search ? `Search Result for ${search}` : "Recommended for you"}
           </h1>
         </div>
         <ScrollArea className="w-full h-[80vh] overflow-y-auto">

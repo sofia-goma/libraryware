@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import { BellIcon, CheckIcon } from "lucide-react";
+import { CheckIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
 import { useAuth } from "@/providers/auth-provider";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
@@ -89,7 +88,7 @@ export default function Notifications() {
         </CardHeader>
         <CardContent className="grid gap-4">
           {/* Push Notification toggle */}
-          <div className="flex items-center space-x-4 rounded-md border p-4">
+          {/* <div className="flex items-center space-x-4 rounded-md border p-4">
             <BellIcon />
             <div className="flex-1 space-y-1">
               <p className="text-sm font-medium leading-none">
@@ -100,7 +99,7 @@ export default function Notifications() {
               </p>
             </div>
             <Switch />
-          </div>
+          </div> */}
           <div className="">
             {notis && notis.length > 0 ? (
               <ScrollArea className="w-full h-[200px] overflow-y-auto">

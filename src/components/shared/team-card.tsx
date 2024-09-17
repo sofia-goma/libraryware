@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import getFormattedInitials from "@/lib/get-formatted-initials";
-import { LucideLinkedin, XIcon } from "lucide-react";
 import { GitHubIcon } from "../icons/github";
 import Twitter from "../icons/twitter";
 import Linkedin from "../icons/linkedin";
@@ -37,7 +36,7 @@ export default function TeamCard({
               target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
-              <Linkedin className="w-3 fill-foreground" />
+              <Linkedin className="w-3 fill-primary" />
             </a>
           )}
 
@@ -47,7 +46,7 @@ export default function TeamCard({
               target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
-              <Twitter className="w-3 fill-current" />
+              <Twitter className="w-3 fill-black" />
             </a>
           )}
         </div>

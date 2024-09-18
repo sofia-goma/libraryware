@@ -36,7 +36,7 @@ export default function TeamCard({
               target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
-              <Linkedin className="w-3 fill-primary" />
+              <Linkedin className="w-3 fill-foreground" />
             </a>
           )}
 
@@ -46,7 +46,7 @@ export default function TeamCard({
               target="_blank"
               className="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-muted hover:bg-secondary"
             >
-              <Twitter className="w-3 fill-black" />
+              <Twitter className="w-3 fill-foreground" />
             </a>
           )}
         </div>

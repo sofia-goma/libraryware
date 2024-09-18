@@ -9,6 +9,7 @@ import { BookmarkCheck, BookmarkIcon, BookOpenText } from "lucide-react";
 import Link from "next/link";
 import { PostPopup } from "./post-popup";
 import { useToast } from "@/hooks/use-toast";
+import { ScrollArea } from "../ui/scroll-area";
 
 type Props = {
   userId: Id<"users">;
@@ -123,7 +124,7 @@ export default function BookId({ userId, bookId }: Props) {
     );
   }
   return (
-    <>
+    <ScrollArea className="w-full h-[80vh] overflow-y-auto">
       <div className="flex flex-col md:flex-row justify-center md:gap-4 gap-12">
         <Image
           src={bookDetails?.coverUrl || "/cover_not_found.jpg"}
@@ -163,11 +164,8 @@ export default function BookId({ userId, bookId }: Props) {
           </Button>
         </Link>
         {/* post button */}
-        <PostPopup
-          title={bookDetails.title}
-          bookId={bookDetails._id}
-        />
+        <PostPopup title={bookDetails.title} bookId={bookDetails._id} />
       </div>
-    </>
+    </ScrollArea>
   );
 }

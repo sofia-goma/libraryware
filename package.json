@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "pre-commit": "pnpm lint --fix && git add -A ."
+    "pre-commit": "pnpm lint --fix"
   },
   "dependencies": {
     "@auth/core": "^0.34.2",

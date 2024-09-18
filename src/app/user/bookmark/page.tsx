@@ -9,14 +9,7 @@ export default function BookMark() {
 
   return (
     <ScrollArea className="w-full" style={{ height: "calc(100vh - 80px)" }}>
-      {/* <Bookmarked userId={user.id} /> */}
       <FileBrowser userId={user.id} />
     </ScrollArea>
   );
 }
-
-// I will use this code later
-
-// //       <ScrollArea className="w-full" style={{ height: "calc(100vh - 80px)" }}>
-// <Bookmarked userId={user.id} />
-// </ScrollArea>

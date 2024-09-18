@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import {
@@ -193,9 +194,9 @@ const PostBox = ({ post }: { post: IPost }) => {
             {isLiked ? (
               <ThumbsUp className="w-4 h-4 fill-current" />
             ) : (
-              <ThumbsUp className="w-4 h-4 " />
+              <ThumbsUp className="w-4 h-4" />
             )}{" "}
-            Like
+            <span className="hidden md:inline-block">Like</span>
           </Button>
           {userIdConnect.id == post.userId && (
             <>
@@ -205,7 +206,7 @@ const PostBox = ({ post }: { post: IPost }) => {
                     variant="link"
                     className="text-secondary-foreground flex justify-center items-center gap-1"
                   >
-                    <Pencil className="w-4 h-4" /> Edit
+                    <Pencil className="w-4 h-4" /> <span className="hidden md:inline-block">Edit</span>
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
@@ -237,7 +238,7 @@ const PostBox = ({ post }: { post: IPost }) => {
                     variant="link"
                     className="text-destructive flex justify-center items-center gap-1"
                   >
-                    <Trash2 className="w-4 h-4" /> Delete
+                    <Trash2 className="w-4 h-4" /> <span className="hidden md:inline-block">Delete</span>
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
@@ -267,7 +268,7 @@ const PostBox = ({ post }: { post: IPost }) => {
         <h1>
           <Drawer>
             <DrawerTrigger className="text-secondary-foreground flex justify-center items-center gap-1">
-              <MessagesSquare className="w-4 h-4" /> Comments (
+              <MessagesSquare className="w-4 h-4" /> <span className="hidden md:inline-block">Comments</span> (
               {allComents?.length || 0})
             </DrawerTrigger>
             <DrawerContent className="w-full md:w-3/4 mlg:w-1/2 md:left-[20%] mlg:left-[25%] p-4">

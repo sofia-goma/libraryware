@@ -86,12 +86,10 @@ function Comments({ post }: { post: IPost }) {
   const listRef = useRef<{ [key: string]: HTMLUListElement | null }>({});
   const [openedReplies, setOpenedReplies] = useState<OpenedReplies>({});
   const [activeName, setActiveName] = useState<string>("");
-  // To uncomments when posts exists in the database
   const comments = useQuery(api.comment.getCommentsByPost, {
     postId: post._id as Id<"post">,
   });
   const { user } = useAuth();
-  //Replace "commentsData" with "comments" in the comments above :)
   const nestedComments = useMemo(
     () => buildCommentTree(comments ?? []),
     [comments]
@@ -179,18 +177,15 @@ function Comments({ post }: { post: IPost }) {
                 <div className="">{item.body}</div>
               </div>
               {user.id == item.userId && (
-                // <div className="flex gap-6">
-                //   <Pencil />
-                //   <Trash2 onClick={deleteComment} />
-                // </div>
-                <div className="flex gap-2">
+                <div className="flex items-center">
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button
                         variant="link"
-                        className="text-secondary-foreground flex justify-center items-center gap-1"
+                        size="sm"
+                        className="text-secondary-foreground"
                       >
-                        <Pencil className="w-4 h-4" /> Edit
+                        <Pencil className="w-4 h-4" />
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
@@ -209,7 +204,7 @@ function Comments({ post }: { post: IPost }) {
                       </div>
                       <DialogFooter>
                         <DialogClose>
-                          <Button type="submit" onClick={editComment}>
+                          <Button className="w-full" type="submit" onClick={editComment}>
                             Save changes
                           </Button>
                         </DialogClose>
@@ -220,9 +215,10 @@ function Comments({ post }: { post: IPost }) {
                     <AlertDialogTrigger asChild>
                       <Button
                         variant="link"
-                        className="text-destructive flex justify-center items-center gap-1"
+                        size="sm"
+                        className="text-destructive"
                       >
-                        <Trash2 className="w-4 h-4" /> Delete
+                        <Trash2 className="w-4 h-4" />
                       </Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>

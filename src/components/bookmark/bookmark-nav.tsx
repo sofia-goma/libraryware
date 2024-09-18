@@ -9,37 +9,44 @@ export function BookmarkNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-4">
+    <nav className="flex items-center justify-between">
       <Link href="/user/bookmark">
         <Button
-          variant={"link"}
-          className={clsx("flex gap-2", {
+          variant={
+            pathname?.includes("/user/bookmark") ? "secondary" : "outline"
+          }
+          className={clsx("flex gap-2 mx-0", {
             "": pathname?.includes("/user/bookmark"),
           })}
         >
-          <FileIcon /> Bookmarks
+          <FileIcon /> <span className="hidden md:inline-block">Bookmarks</span>
         </Button>
       </Link>
 
       <Link href="/user/bookmark/collections">
         <Button
-          variant={"link"}
+          variant={
+            pathname?.includes("/user/bookmark/collections") ? "secondary" : "outline"
+          }
           className={clsx("flex gap-2", {
-            "underline": pathname?.includes("/user/bookmark/collections"),
+            underline: pathname?.includes("/user/bookmark/collections"),
           })}
         >
-          <StarIcon /> Collections
+          <StarIcon />{" "}
+          <span className="hidden md:inline-block">Collections</span>
         </Button>
       </Link>
 
       <Link href="/user/bookmark/trash">
         <Button
-          variant={"link"}
+          variant={
+            pathname?.includes("/user/bookmark/trash") ? "secondary" : "outline"
+          }
           className={clsx("flex gap-2", {
-            "underline": pathname?.includes("/user/bookmark/trash"),
+            underline: pathname?.includes("/user/bookmark/trash"),
           })}
         >
-          <TrashIcon /> Trash
+          <TrashIcon /> <span className="hidden md:inline-block">Trash</span>
         </Button>
       </Link>
     </nav>

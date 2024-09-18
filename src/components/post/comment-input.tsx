@@ -18,8 +18,6 @@ function CommentInput({ post, comment }: { post: IPost; comment?: IComment }) {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const createComment = useMutation(api.comment.createComment);
-  //We'll use react hook form tomorrow
-  // const inputRef = useRef<HTMLInputElement>(null);
   const { register, handleSubmit } = useForm<IPostComment>();
   const handleComment = async (data: IPostComment) => {
     setLoading(true);

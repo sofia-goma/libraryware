@@ -28,7 +28,6 @@ import { api } from "../../../convex/_generated/api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-  Forward,
   ThumbsUp,
   MessagesSquare,
   Pencil,
@@ -186,12 +185,6 @@ const PostBox = ({ post }: { post: IPost }) => {
 
       <div className="flex items-center justify-between mt-0 text-sm text-secondary-foreground">
         <div className="flex items-center gap-3">
-          <Button
-            variant="link"
-            className="text-secondary-foreground flex justify-center items-center gap-1"
-          >
-            <Forward className="w-4 h-4" /> Share
-          </Button>
           <Button
             variant="link"
             className="text-secondary-foreground flex justify-center items-center gap-1"

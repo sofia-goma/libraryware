@@ -2,7 +2,7 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { fileTypes } from "./schema";
 
-export const listCollections = query({
+export const list = query({
   args: { userId: v.id("users") },
   handler: async (ctx, { userId }) => {
     return await ctx.db
@@ -39,7 +39,7 @@ export const createCollection = mutation({
 export const moveToTrash = mutation({
   args: {
     userId: v.id("users"),
-    collectionId: v.id("collections"),
+    collectionId: v.id("collections"), // Use collectionId here
   },
   handler: async (ctx, { userId, collectionId }) => {
     const collection = await ctx.db
@@ -51,41 +51,44 @@ export const moveToTrash = mutation({
       throw new Error("Collection not found");
     }
 
-    // Move collection to trash
+    // Move to trash
     await ctx.db.insert("trash", {
       ...collection,
-      deletedAt: Date.now(), // Add deletion timestamp
+      deletedAt: Date.now(),
     });
 
-    // Remove collection from the active list
+    // Remove from collections
     await ctx.db.delete(collectionId);
   },
 });
+
+
 
 // restore from trash
 
 export const restoreFromTrash = mutation({
   args: {
     userId: v.id("users"),
-    collectionId: v.id("collections"),
+    storageId: v.id("_storage"), // Use collectionId
   },
-  handler: async (ctx, { userId, collectionId }) => {
+  handler: async (ctx, { userId, storageId }) => {
     const trashItem = await ctx.db
       .query("trash")
-      .filter((q) => q.eq(q.field("_id"), collectionId))
+      .filter((q) => q.eq(q.field("storageId"), storageId))
       .first();
 
     if (!trashItem) {
       throw new Error("Item not found in trash");
     }
 
-    // Restore the collection from trash
+    // Restore the collection with its original _id and update _creationTime
     await ctx.db.insert("collections", {
       ...trashItem,
-      restoredAt: Date.now(), // Optionally track when it was restored
+      // _id: trashItem._id,  // Ensure the original _id is preserved
+      // _creationTime: trashItem.deletedAt,  // Use the deleted time as the new creation time if desired
     });
 
-    // Remove it from trash
+    // Remove from trash
     await ctx.db.delete(trashItem._id);
   },
 });

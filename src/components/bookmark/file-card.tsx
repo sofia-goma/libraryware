@@ -27,7 +27,7 @@ import {
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { toast } from "@/hooks/use-toast";
-import { DownloadIcon } from "lucide-react";
+
 export function FileCard({
   id,
   userId,
@@ -48,13 +48,12 @@ export function FileCard({
 
   const moveToTrash = async () => {
     try {
-      await moveToTrashConvex({ userId: userId, storageId: id });
+      await moveToTrashConvex({ userId: userId, collectionId: id });
       toast({
         title: "Deleted Successfully",
         description: "You have deleted your post successfully.",
       });
     } catch (error) {
-   
       toast({
         variant: "destructive",
         title: "Something went wrong.",
@@ -69,7 +68,9 @@ export function FileCard({
         <CardTitle className="flex gap-2 text-2xl font-semibold">
           {title}
         </CardTitle>
-        <div className="absolute top-2 right-2"></div>
+        <div className="absolute top-2 right-2">
+          {/* <FileCardActions isFavorited={file.isFavorited} file={file} /> */}
+        </div>
       </CardHeader>
       <CardContent className="h-[200px] flex justify-center items-center">
         {type == "pdf" ? (
@@ -92,42 +93,34 @@ export function FileCard({
       </CardContent>
       <CardFooter className="flex justify-between">
         <div className="text-xs text-muted-foreground">{`Created : ${socialDate(date || 0)}`}</div>
-        <div className="flex">
-          <Button
-            variant="link"
-            className="text-destructive flex justify-center items-center gap-1"
-          >
-            <DownloadIcon className="w-6 h-6" />
-          </Button>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                variant="link"
-                className="text-destructive flex justify-center items-center gap-1"
-              >
-                <Trash2 className="w-6 h-6" />
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  {`You wanted to send the book "${title}" to the trash, this book will
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="link"
+              className="text-destructive flex justify-center items-center gap-1"
+            >
+              <Trash2 className="w-6 h-6" />
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                {`You wanted to send the book "${title}" to the trash, this book will
                 be permanently deleted in 15 days.`}
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter className="gap-6">
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction
-                  onClick={moveToTrash}
-                  className="bg-destructive text-destructive-foreground hover:bg-destructive"
-                >
-                  Delete
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </div>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="gap-6">
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={moveToTrash}
+                className="bg-destructive text-destructive-foreground hover:bg-destructive"
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </CardFooter>
     </Card>
   );

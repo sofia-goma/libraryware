@@ -68,9 +68,7 @@ const schema = defineSchema({
   like: defineTable({
     userId: v.id("users"),
     postId: v.id("post"),
-  })
-    .index("by_userId", ["userId", "postId"])
-    .index("by_postId", ["postId"]),
+  }).index("by_userId", ["userId", "postId"]).index("by_postId", ["postId"]),
 
   files: defineTable({
     name: v.string(),
@@ -79,21 +77,20 @@ const schema = defineSchema({
   }).index("by_fileId", ["fileId"]),
 
   collections: defineTable({
-    userId: s.id("users"), // Reference to the user who owns the collection
-    storageId: s.id("_storage"), // Reference to the storage where the file is located
-    collectionURL: s.string(), // URL or path to the collection resource
-    collectionType: s.string(), // Type of the collection (e.g., pdf, svg, word, text)
-    name: s.string(), // Name of the collection
-    createdAt: s.number(),
+    userId: v.id("users"),
+    storageId: v.id("_storage"),
+    collectionURL: v.string(),
+    collectionType: fileTypes,
+    name: v.string(),
   }).index("by_userId", ["userId"]),
 
   trash: defineTable({
-    userId: s.id("users"), // Reference to the user who owns the collection
-    storageId: s.id("_storage"), // Reference to the storage where the file is located
-    collectionURL: s.string(), // URL or path to the collection resource
-    collectionType: s.string(), // Type of the collection (e.g., pdf, svg, word, text)
-    name: s.string(), // Name of the collection
-    deletedAt: s.number(),
+    userId: v.id("users"),
+    storageId: v.id("_storage"),
+    collectionURL: v.string(),
+    collectionType: fileTypes,
+    name: v.string(),
+    deletedAt: v.any(),
   }).index("by_userId", ["userId"]),
 });
 

@@ -106,7 +106,7 @@ export default function BookCard({
           </span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="h-[200px] flex justify-center items-center">
+      <CardContent className="flex justify-center items-center">
         <Link href={href}>
           <Image
             src={`${cover ? `${cover}` : `/cover_not_found.jpg`}`}

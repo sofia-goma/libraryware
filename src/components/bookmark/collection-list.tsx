@@ -4,7 +4,6 @@ import { Loading } from "./loading";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Id } from "../../../convex/_generated/dataModel";
 import { Placeholder } from "./placeholder";
-import { UploadButton } from "./upload-button";
 import { FileCard } from "./file-card";
 
 export default function CollectionList({ user }: { user: any }) {

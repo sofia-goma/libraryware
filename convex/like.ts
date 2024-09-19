@@ -97,6 +97,6 @@ export const getLikeByPostId = query({
      .withIndex('by_postId', (q) => q.eq('postId', args.postId))
      .collect()
 
-    return likes
+    return likes.length;
   }
 })

@@ -9,6 +9,9 @@ export const createComment = mutation({
     parentId: v.optional(v.id("comment")),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const newComment = {
       postId: args.postId,
       userId: args.userId,
@@ -29,6 +32,9 @@ export const replyComment = mutation({
     parentId: v.optional(v.id("comment")),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const newComment = {
       postId: args.postId,
       userId: args.userId,

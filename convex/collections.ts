@@ -5,6 +5,9 @@ import { fileTypes } from "./schema";
 export const list = query({
   args: { userId: v.id("users") },
   handler: async (ctx, { userId }) => {
+    if (userId === null) {
+      throw new Error("Not signed in");
+    }
     return await ctx.db
       .query("collections")
       .filter((q) => q.eq(q.field("userId"), userId))
@@ -24,6 +27,9 @@ export const createCollection = mutation({
     ctx,
     { userId, storageId, collectionURL, collectionType, name }
   ) => {
+    if (userId === null) {
+      throw new Error("Not signed in");
+    }
     await ctx.db.insert("collections", {
       userId,
       storageId,
@@ -42,7 +48,10 @@ export const moveToTrash = mutation({
     storageId: v.id("_storage"),
     collectionId: v.id("collections")
   },
-  handler: async (ctx, { storageId, collectionId }) => {
+  handler: async (ctx, { userId, storageId, collectionId }) => {
+    if (userId === null) {
+      throw new Error("Not signed in");
+    }
     const collection = await ctx.db
       .query("collections")
       .filter((q) => q.eq(q.field("storageId"), storageId))
@@ -73,6 +82,9 @@ export const restoreFromTrash = mutation({
     storageId: v.id("_storage"), // Use collectionId
   },
   handler: async (ctx, { userId, storageId }) => {
+    if (userId === null) {
+      throw new Error("Not signed in");
+    }
     const trashItem = await ctx.db
       .query("trash")
       .filter((q) => q.eq(q.field("storageId"), storageId))

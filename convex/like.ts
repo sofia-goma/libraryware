@@ -8,6 +8,9 @@ export const createLike = mutation({
     postId: v.id("post"), // Changed from bookId to postId
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const existingLike = await ctx.db
       .query("like")
       .withIndex("by_userId", (q) =>
@@ -58,6 +61,9 @@ export const getLikesByUserId = query({
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const likes = await ctx.db
       .query("like")
       .withIndex("by_userId", (q) => q.eq("userId", args.userId))
@@ -74,6 +80,9 @@ export const isLike = query({
     postId: v.id("post"), // Changed from bookId to postId
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const like = await ctx.db
       .query("like")
       .withIndex("by_userId", (q) =>

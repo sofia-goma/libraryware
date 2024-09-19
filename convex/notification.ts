@@ -7,6 +7,9 @@ export const createNotification = mutation({
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const newNotification = {
       message: args.message,
       isRead: false,
@@ -56,6 +59,9 @@ export const getNotifications = query({
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const notifications = await ctx.db
       .query("notification")
       .filter((q) => q.eq(q.field("isRead"), false))
@@ -81,6 +87,9 @@ export const markAllNotificationAsRead = mutation({
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const unReadNotifications = await ctx.db
       .query("notification")
       .filter((q) => q.eq(q.field("isRead"), false))

@@ -11,6 +11,9 @@ export const createPost = mutation({
     pictureId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const newPost = {
       userId: args.userId,
       bookId: args.bookId,
@@ -89,6 +92,9 @@ export const getPostsByBookId = query({
 export const getPostsByUserId = query({
   args: { userId: v.id("users") },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const posts = await ctx.db
       .query("post")
       .withIndex("by_userId", (q) => q.eq("userId", args.userId))

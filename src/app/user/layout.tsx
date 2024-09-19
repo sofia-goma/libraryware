@@ -3,14 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import getFormattedInitials from "@/lib/get-formatted-initials";
 import { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  Bell,
-  Home,
-  Menu,
-  InboxIcon,
-  Bookmark,
-  User,
-} from "lucide-react";
+import { Bell, Home, Menu, InboxIcon, Bookmark, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +26,9 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import SearchField from "@/components/shared/search-field";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const links = [
   { name: "Dashboard", href: ["/user"], icon: <Home className="h-4 w-4" /> },
@@ -81,18 +77,20 @@ function UserLayout({ children }: { children: ReactNode }) {
   const updatedLinks = links.map((link) =>
     link.name === "Notifications"
       ? {
-        ...link,
-        badge: (
-          <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-            {unreadCount}
-          </Badge>
-        ),
-      }
+          ...link,
+          badge: (
+            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+              {unreadCount}
+            </Badge>
+          ),
+        }
       : link
   );
 
   return (
-    <div className="grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <div
+      className={`grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] ${inter.className}`}
+    >
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">

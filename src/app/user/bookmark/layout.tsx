@@ -1,6 +1,10 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { BookmarkNav } from "@/components/bookmark/bookmark-nav";
+
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "LibraryWare",
   description:
@@ -13,9 +17,9 @@ export default function LoginLayout({
   children: ReactNode;
 }>) {
   return (
-    <>
+    <div className={inter.className}>
       <BookmarkNav />
       <div>{children}</div>
-    </>
+    </div>
   );
 }

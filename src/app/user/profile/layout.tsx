@@ -1,14 +1,16 @@
 "use client";
 import React, { ReactNode } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Inter } from "next/font/google";
 
+const inter = Inter({ subsets: ["latin"] });
 function ProfileLayout({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
   return (
-    <ScrollArea className="w-full h-[80vh] overflow-y-auto">
+    <ScrollArea className={`w-full h-[80vh] overflow-y-auto ${inter.className}`}>
       <div className="flex flex-col mx-3 md:flex-row gap-2">{children}</div>
     </ScrollArea>
   );

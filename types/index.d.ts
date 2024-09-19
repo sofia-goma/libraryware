@@ -1,5 +1,3 @@
-// import { Id } from "../convex/_generated/dataModel";
-
 // team card -> for contributors to the librarywave project
 interface ITeam {
   name: string;

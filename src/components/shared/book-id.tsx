@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import { Id } from "../../../convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -29,9 +28,6 @@ export default function BookId({ userId, bookId }: Props) {
     userId: userId,
     bookId: bookId,
   });
-
-  const createPostConvex = useMutation(api.post.createPost);
-  const createNotiConvex = useMutation(api.notification.createNotification);
 
   const bookmark = async () => {
     if (!isBookmarked) {
@@ -70,51 +66,6 @@ export default function BookId({ userId, bookId }: Props) {
       }
     }
   };
-
-  // const createPostfunction = async (content: string) => {
-  //   try {
-  //     // Call the Convex mutation to create the post
-  //     await createPostConvex({
-  //       userId: userId,
-  //       bookId: bookId,
-  //       title: bookDetails?.title ? bookDetails.title : "Title to update",
-  //       body: content,
-  //     });
-
-  //     await createNotiConvex({
-  //       userId: userId,
-  //       message: `New post created ${bookDetails?.title ? "for " + bookDetails?.title : ""}`,
-  //     });
-
-  //     toast({
-  //       title: "Post Created",
-  //       description: "Your post has been created successfully and is now live.",
-  //     });
-  //   } catch {
-  //     toast({
-  //       variant: "destructive",
-  //       title: "Something went wrong",
-  //       description: "Failed to create the post! Please try again.",
-  //     });
-  //   }
-  //   if (isBookmarked) {
-  //     try {
-  //       await deleteBookmark({
-  //         bookmarkId: isBookmarked._id,
-  //       });
-  //       toast({
-  //         title: "Bookmark removed",
-  //         description: "You have successfully deleted bookmark.",
-  //       });
-  //     } catch {
-  //       toast({
-  //         variant: "destructive",
-  //         title: "Something went wrong",
-  //         description: "Failed to delete bookmark! Please try again.",
-  //       });
-  //     }
-  //   }
-  // };
 
   if (!bookDetails) {
     return (

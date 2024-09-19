@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuth } from "@/providers/auth-provider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,17 +9,27 @@ import { useMutation } from "convex/react";
 import { SendHorizonal } from "lucide-react";
 import FormLoading from "../shared/form-loading";
 import { useForm } from "react-hook-form";
+import { useToast } from "@/hooks/use-toast";
 
 interface IPostComment {
   body: string;
 }
 
 function CommentInput({ post, comment }: { post: IPost; comment?: IComment }) {
+  const { toast } = useToast();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const createComment = useMutation(api.comment.createComment);
-  const { register, handleSubmit } = useForm<IPostComment>();
+  const { register, handleSubmit, reset } = useForm<IPostComment>();
   const handleComment = async (data: IPostComment) => {
+    const { body } = data;
+    if (body.trim() === "" || body.trim().length < 3) {
+      toast({
+        variant: "destructive",
+        description: "Please enter something in the field!",
+      });
+      return;
+    }
     setLoading(true);
     try {
       await createComment({
@@ -28,7 +38,16 @@ function CommentInput({ post, comment }: { post: IPost; comment?: IComment }) {
         body: data.body,
         parentId: comment ? (comment._id as Id<"comment">) : undefined,
       });
+      reset();
+      toast({
+        description: "Your comment has been posted successfully",
+      });
     } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to post comment. Please try again later.",
+      });
     } finally {
       setLoading(false);
     }
@@ -36,14 +55,9 @@ function CommentInput({ post, comment }: { post: IPost; comment?: IComment }) {
   return (
     <div className="relative">
       <form onSubmit={handleSubmit(handleComment)}>
-        <Input
-          placeholder="Type a comment"
-          // ref={inputRef}
-          {...register("body")}
-        />
+        <Input placeholder="Type a comment" {...register("body")} />
         <Button
           type="submit"
-          // onClick={handleComment}
           className="p-2 absolute right-0 top-0 bg-primary rounded-tl-none rounded-bl-none "
         >
           {loading ? <FormLoading /> : <SendHorizonal className="w-6 h-6" />}

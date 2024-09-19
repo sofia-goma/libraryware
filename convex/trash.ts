@@ -5,6 +5,9 @@ import { v } from "convex/values";
 export const list = query({
   args: { userId: v.id("users") },
   handler: async (ctx, { userId }) => {
+    if (userId === null) {
+      throw new Error("Not signed in");
+    }
     return await ctx.db
       .query("trash")
       .filter((q) => q.eq(q.field("userId"), userId))

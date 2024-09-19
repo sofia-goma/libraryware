@@ -126,6 +126,7 @@ export default function BookCard({
         </Link>
         <PostPopup
           bookId={id}
+          picture={cover || ''}
           handleSubmit={createPostfunction}
           title={title}
         />

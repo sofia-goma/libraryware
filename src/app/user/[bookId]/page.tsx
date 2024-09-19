@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { useRouter } from "next/navigation";
-import Loading from "@/components/shared/loading";
+import { Loading } from "@/components/bookmark/loading";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/providers/auth-provider";

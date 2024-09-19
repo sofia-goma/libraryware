@@ -1,5 +1,3 @@
-// bookmarks.ts
-
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
@@ -9,6 +7,9 @@ export const createBookmark = mutation({
     bookId: v.id("book"),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const existingBookmark = await ctx.db
       .query("bookmark")
       .withIndex("by_userId", (q) =>
@@ -56,6 +57,9 @@ export const getBookmarksByUserId = query({
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const bookmarks = await ctx.db
       .query("bookmark")
       .withIndex("by_userId", (q) => q.eq("userId", args.userId))
@@ -71,6 +75,9 @@ export const isBookmark = query({
     bookId: v.id("book"),
   },
   handler: async (ctx, args) => {
+    if (args.userId === null) {
+      throw new Error("Not signed in");
+    }
     const bookmark = await ctx.db
       .query("bookmark")
       .withIndex("by_userId", (q) =>

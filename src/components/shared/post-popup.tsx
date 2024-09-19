@@ -17,16 +17,18 @@ import { Button } from "@/components/ui/button";
 import { Id } from "../../../convex/_generated/dataModel";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/providers/auth-provider";
-import { Loader2 } from "lucide-react"; // Import spinner icon
+import { Loader2 } from "lucide-react";
 
 export function PostPopup({
   title,
   bookId,
+  picture
 }: {
   title: string;
   handleSubmit?: (content: string) => void;
   shape?: boolean;
   bookId?: string;
+  picture: string;
 }) {
   const { toast } = useToast();
   const { user } = useAuth();
@@ -36,27 +38,57 @@ export function PostPopup({
   const createFile = useMutation(api.files.createFile);
   const imageInput = useRef<HTMLInputElement>(null);
 
-  const [postContent, setPostContent] = useState(""); // State to store the input value
+  const [postContent, setPostContent] = useState("");
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [loading, setLoading] = useState(false); // Loading state
-  const [open, setOpen] = useState(false); // Dialog open state
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    setLoading(true); // Start loading
+    setLoading(true);
 
     try {
       if (
         postContent.trim() === "" ||
         !postContent ||
-        postContent.length < 25
+        postContent.length < 15
       ) {
         toast({
           variant: "destructive",
           title: "Content Required",
-          description: "Please enter a content with at least 25 characters.",
+          description: "Please enter a content with at least 15 characters.",
         });
         setLoading(false);
+        return;
+      }
+
+      if (
+        !selectedImage ||
+        selectedImage === null ||
+        selectedImage === undefined
+      ) {
+        // Create post
+        await createPostConvex({
+          userId: user.id as Id<"users">,
+          bookId: bookId as Id<"book">,
+          title: title ? title : "Title to update",
+          body: postContent,
+          picture: picture ?? "",
+          pictureId: null || "",
+        });
+
+        // Create notification
+        await createNotiConvex({
+          userId: user.id as Id<"users">,
+          message: `New post created ${title ? "for " + title : ""}`,
+        });
+
+        toast({
+          title: "Post Created",
+          description:
+            "Your post has been created successfully and is now live.",
+        });
+        setOpen(false);
         return;
       }
 
@@ -99,16 +131,15 @@ export function PostPopup({
 
       setSelectedImage(null);
       imageInput.current!.value = "";
-      setOpen(false); // Close dialog on success
-    } catch (error: any) {
- 
+      setOpen(false);
+    } catch {
       toast({
         variant: "destructive",
         title: "Something went wrong!",
         description: "Your file could not be uploaded. Please try again.",
       });
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
@@ -139,7 +170,7 @@ export function PostPopup({
             placeholder="Share your thoughts"
             value={postContent}
             onChange={(e) => setPostContent(e.target.value)}
-            disabled={loading} // Disable textarea while loading
+            disabled={loading}
           />
           <Button type="submit" disabled={loading}>
             {loading ? <Loader2 className="animate-spin" /> : "POST TO FORUM"}

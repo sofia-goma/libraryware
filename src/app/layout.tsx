@@ -4,8 +4,10 @@ import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import OAuthProvider from "@/providers/oauth-provider";
 import AuthProvider from "@/providers/auth-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
+const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "LibraryWare",
   description:
@@ -19,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={inter.className}>
         <OAuthProvider>
           <ThemeProvider
             attribute="class"

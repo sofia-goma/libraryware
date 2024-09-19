@@ -8,24 +8,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import socialDate from "@/lib/social-date";
-import { Download, FileText, Trash2, Loader2 } from "lucide-react";
+import { Download, FileText, Loader2 } from "lucide-react";
 import { Id } from "../../../convex/_generated/dataModel";
 import Image from "next/image";
 import PdfIcon from "../icons/pdf";
 import Word from "../icons/word";
 import CsvIcon from "../icons/csv";
 import { Button } from "../ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../ui/alert-dialog";
+
+
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { toast } from "@/hooks/use-toast";
@@ -103,7 +94,7 @@ export function FileCard({
       </CardHeader>
       <CardContent className="h-[200px] flex justify-center items-center">
         {type == "pdf" ? (
-          <PdfIcon className="w-[150px] hover:scale-105 transition-all" />
+          <PdfIcon className="w-[150px] hover:scale-105 transition-all fill-primary stroke-primary" />
         ) : type == "image" ? (
           <Image
             src={file || ""}
@@ -113,13 +104,13 @@ export function FileCard({
             height={100}
           />
         ) : type == "word" ? (
-          <Word className="w-[150px] hover:scale-105 transition-all fill-primary" />
+          <Word className="w-[150px] hover:scale-105 transition-all stroke-primary" />
         ) : type == "csv" ? (
-          <CsvIcon className="w-[150px] hover:scale-105 transition-all fill-primary" />
+          <CsvIcon className="w-[150px] hover:scale-105 transition-all stroke-primary" />
         ) : (
           <FileText
             size={150}
-            className="hover:scale-105 transition-all fill-primary"
+            className="hover:scale-105 transition-all stroke-primary"
           />
         )}
       </CardContent>

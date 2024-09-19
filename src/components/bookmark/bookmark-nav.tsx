@@ -1,10 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
-import { FileIcon, StarIcon, TrashIcon } from "lucide-react";
+import { FileIcon, StarIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { UploadButton } from "./upload-button";
 export function BookmarkNav() {
   const pathname = usePathname();
 
@@ -32,7 +32,7 @@ export function BookmarkNav() {
           <span className="hidden md:inline-block">Collections</span>
         </Button>
       </Link>
-
+      <UploadButton />
       {/* <Link href="/user/bookmark/trash">
         <Button
           variant={

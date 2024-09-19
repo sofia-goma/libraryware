@@ -128,9 +128,9 @@ export function UploadButton() {
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="mb-8">Upload your File Here</DialogTitle>
-          <DialogDescription>
-            This file will be accessible by anyone in your organization
-          </DialogDescription>
+          {/* <DialogDescription>
+            This file will 
+          </DialogDescription> */}
         </DialogHeader>
 
         <div>

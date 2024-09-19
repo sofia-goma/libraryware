@@ -14,9 +14,9 @@ export default function CollectionList({ user }: { user: any }) {
   const isLoading = collectionsList === undefined;
   return (
     <>
-      <div className="flex justify-end items-center mb-8">
+      {/* <div className="flex justify-end items-center mb-8">
         <UploadButton />
-      </div>
+      </div> */}
 
       <Tabs defaultValue="grid">
         {isLoading && <Loading title="collections items" />}
@@ -38,8 +38,8 @@ export default function CollectionList({ user }: { user: any }) {
           </div>
         </TabsContent>
       </Tabs>
-
       {collectionsList?.length === 0 && <Placeholder />}
+      <div className="mb-24"></div>
     </>
   );
 }

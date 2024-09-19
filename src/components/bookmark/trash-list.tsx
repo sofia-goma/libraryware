@@ -13,12 +13,6 @@ export default function TrashList({ user }: { user: any }) {
   const isLoading = trashList === undefined;
   return (
     <>
-      <h1>Trash List for {user.name}</h1>
-      {/* <div className="flex justify-between items-center mb-8">
-        <SearchBar query={query} setQuery={setQuery} />
-        <UploadButton />
-      </div> */}
-
       <Tabs defaultValue="grid">
         <div className="flex justify-between items-center"></div>
 
@@ -31,12 +25,9 @@ export default function TrashList({ user }: { user: any }) {
             ))} */}
           </div>
         </TabsContent>
-        <TabsContent value="table">
-          {/* <DataTable columns={columns} data={trashList} /> */}
-        </TabsContent>
       </Tabs>
 
-      {trashList?.length === 0 && <Placeholder />}
+      {trashList?.length === 0 && <Placeholder><p className="text-center">You don't have any items in the trash</p></Placeholder>}
     </>
   );
 }

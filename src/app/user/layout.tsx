@@ -11,8 +11,6 @@ import {
   Bookmark,
   User,
 } from "lucide-react";
-
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,7 +23,7 @@ import React from "react";
 import Logo from "@/components/shared/logo";
 import NavLinks from "@/components/shared/navlinks";
 import ModeToggle from "@/components/shared/mode-toggle";
-import Loading from "@/components/shared/loading";
+import { Loading } from "@/components/bookmark/loading";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/providers/auth-provider";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
@@ -92,8 +90,6 @@ function UserLayout({ children }: { children: ReactNode }) {
       }
       : link
   );
-
-  // const handleSearch = () => {}; for searching books in the db
 
   return (
     <div className="grid h-screen overflow-hidden w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">

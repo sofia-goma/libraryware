@@ -22,7 +22,7 @@ export default function Dashboard() {
     : usePaginatedQuery(api.book.getAllBooks, {}, { initialNumItems: 12 });
 
   return (
-    <div className="">
+    <>
       <div className="flex flex-col">
         <div className="mb-4">
           <h1 className="text-lg font-semibold md:text-2xl">
@@ -62,6 +62,6 @@ export default function Dashboard() {
           </Tabs>
         </ScrollArea>
       </div>
-    </div>
+    </>
   );
 }

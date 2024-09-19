@@ -71,50 +71,50 @@ export default function BookId({ userId, bookId }: Props) {
     }
   };
 
-  const createPostfunction = async (content: string) => {
-    try {
-      // Call the Convex mutation to create the post
-      await createPostConvex({
-        userId: userId,
-        bookId: bookId,
-        title: bookDetails?.title ? bookDetails.title : "Title to update",
-        body: content,
-      });
+  // const createPostfunction = async (content: string) => {
+  //   try {
+  //     // Call the Convex mutation to create the post
+  //     await createPostConvex({
+  //       userId: userId,
+  //       bookId: bookId,
+  //       title: bookDetails?.title ? bookDetails.title : "Title to update",
+  //       body: content,
+  //     });
 
-      await createNotiConvex({
-        userId: userId,
-        message: `New post created ${bookDetails?.title ? "for " + bookDetails?.title : ""}`,
-      });
+  //     await createNotiConvex({
+  //       userId: userId,
+  //       message: `New post created ${bookDetails?.title ? "for " + bookDetails?.title : ""}`,
+  //     });
 
-      toast({
-        title: "Post Created",
-        description: "Your post has been created successfully and is now live.",
-      });
-    } catch {
-      toast({
-        variant: "destructive",
-        title: "Something went wrong",
-        description: "Failed to create the post! Please try again.",
-      });
-    }
-    if (isBookmarked) {
-      try {
-        await deleteBookmark({
-          bookmarkId: isBookmarked._id,
-        });
-        toast({
-          title: "Bookmark removed",
-          description: "You have successfully deleted bookmark.",
-        });
-      } catch {
-        toast({
-          variant: "destructive",
-          title: "Something went wrong",
-          description: "Failed to delete bookmark! Please try again.",
-        });
-      }
-    }
-  };
+  //     toast({
+  //       title: "Post Created",
+  //       description: "Your post has been created successfully and is now live.",
+  //     });
+  //   } catch {
+  //     toast({
+  //       variant: "destructive",
+  //       title: "Something went wrong",
+  //       description: "Failed to create the post! Please try again.",
+  //     });
+  //   }
+  //   if (isBookmarked) {
+  //     try {
+  //       await deleteBookmark({
+  //         bookmarkId: isBookmarked._id,
+  //       });
+  //       toast({
+  //         title: "Bookmark removed",
+  //         description: "You have successfully deleted bookmark.",
+  //       });
+  //     } catch {
+  //       toast({
+  //         variant: "destructive",
+  //         title: "Something went wrong",
+  //         description: "Failed to delete bookmark! Please try again.",
+  //       });
+  //     }
+  //   }
+  // };
 
   if (!bookDetails) {
     return (

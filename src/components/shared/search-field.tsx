@@ -23,7 +23,7 @@ const SearchField: React.FC = () => {
         <form onSubmit={handleSearch}>
           <Input
             type="search"
-            placeholder="Search your favorite book..."
+            placeholder="Search books..."
             className="w-full appearance-none bg-background pr-9 shadow-none"
             value={query}
             onChange={(e) => setQuery(e.target.value)}

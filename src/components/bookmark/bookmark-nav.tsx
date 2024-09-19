@@ -9,12 +9,10 @@ export function BookmarkNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center justify-between">
+    <nav className="flex items-center gap-4">
       <Link href="/user/bookmark">
         <Button
-          variant={
-            pathname?.includes("/user/bookmark") ? "secondary" : "outline"
-          }
+          variant={"link"}
           className={clsx("flex gap-2 mx-0", {
             "": pathname?.includes("/user/bookmark"),
           })}
@@ -25,9 +23,7 @@ export function BookmarkNav() {
 
       <Link href="/user/bookmark/collections">
         <Button
-          variant={
-            pathname?.includes("/user/bookmark/collections") ? "secondary" : "outline"
-          }
+          variant={"link"}
           className={clsx("flex gap-2", {
             underline: pathname?.includes("/user/bookmark/collections"),
           })}
@@ -37,7 +33,7 @@ export function BookmarkNav() {
         </Button>
       </Link>
 
-      <Link href="/user/bookmark/trash">
+      {/* <Link href="/user/bookmark/trash">
         <Button
           variant={
             pathname?.includes("/user/bookmark/trash") ? "secondary" : "outline"
@@ -48,7 +44,7 @@ export function BookmarkNav() {
         >
           <TrashIcon /> <span className="hidden md:inline-block">Trash</span>
         </Button>
-      </Link>
+      </Link> */}
     </nav>
   );
 }

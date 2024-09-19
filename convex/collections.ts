@@ -39,12 +39,13 @@ export const createCollection = mutation({
 export const moveToTrash = mutation({
   args: {
     userId: v.id("users"),
-    collectionId: v.id("collections"), // Use collectionId here
+    storageId: v.id("_storage"),
+    collectionId: v.id("collections")
   },
-  handler: async (ctx, { userId, collectionId }) => {
+  handler: async (ctx, { storageId, collectionId }) => {
     const collection = await ctx.db
       .query("collections")
-      .filter((q) => q.eq(q.field("_id"), collectionId))
+      .filter((q) => q.eq(q.field("storageId"), storageId))
       .first();
 
     if (!collection) {
@@ -58,7 +59,7 @@ export const moveToTrash = mutation({
     });
 
     // Remove from collections
-    await ctx.db.delete(collectionId);
+    await ctx.db.delete(collectionId)
   },
 });
 
@@ -84,7 +85,7 @@ export const restoreFromTrash = mutation({
     // Restore the collection with its original _id and update _creationTime
     await ctx.db.insert("collections", {
       ...trashItem,
-      // _id: trashItem._id,  // Ensure the original _id is preserved
+      // _id: trashItem._id, 
       // _creationTime: trashItem.deletedAt,  // Use the deleted time as the new creation time if desired
     });
 

@@ -32,6 +32,7 @@ export default function CollectionList({ user }: { user: any }) {
                 date={e._creationTime}
                 userId={user.id}
                 id={e.storageId}
+                collectionId={e._id}
               />
             ))}
           </div>

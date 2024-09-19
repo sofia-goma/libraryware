@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-
 import { CheckIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,14 +17,6 @@ import { useMutation, useQuery } from "convex/react";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import socialDate from "@/lib/social-date";
-
-type Notification = {
-  _id: string;
-  _creationTime: number;
-  userId: string;
-  message: string;
-  isRead: boolean;
-};
 
 export default function Notifications() {
   const { user } = useAuth();

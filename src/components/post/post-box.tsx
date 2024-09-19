@@ -54,7 +54,10 @@ import {
   AlertDialogTitle,
 } from "@radix-ui/react-alert-dialog";
 
+
+
 const PostBox = ({ post }: { post: IPost }) => {
+  const likeByPostId = useQuery(api.like.getLikeByPostId, { postId: post._id as Id<"post">});
   const { toast } = useToast();
 
   const [editMode, setEditMode] = useState(post.body);
@@ -196,7 +199,7 @@ const PostBox = ({ post }: { post: IPost }) => {
             ) : (
               <ThumbsUp className="w-4 h-4" />
             )}{" "}
-            <span className="hidden md:inline-block">Like</span>
+            <span className="hidden md:inline-block">Like</span> ({likeByPostId})
           </Button>
           {userIdConnect.id == post.userId && (
             <>

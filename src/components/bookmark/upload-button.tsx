@@ -14,7 +14,6 @@ import { api } from "../../../convex/_generated/api";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,

@@ -77,13 +77,13 @@ function UserLayout({ children }: { children: ReactNode }) {
   const updatedLinks = links.map((link) =>
     link.name === "Notifications"
       ? {
-          ...link,
-          badge: (
-            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-              {unreadCount}
-            </Badge>
-          ),
-        }
+        ...link,
+        badge: (
+          <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+            {unreadCount}
+          </Badge>
+        ),
+      }
       : link
   );
 

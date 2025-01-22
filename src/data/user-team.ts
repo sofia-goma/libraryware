@@ -16,12 +16,13 @@ export const teamMembersData: ITeam[] = [
     imageSrc: "https://avatars.githubusercontent.com/u/142086785?v=4",
   },
   {
-    name: "Blessing Tutka",
-    job: "Software Developer",
+    name: "Benedicte Tuteka",
+    job: "Software Engineer",
     githubLink: "https://github.com/blessingtutka",
-    linkedinLink: "https://www.linkedin.com/in/blessing-tutka-5184802b2/",
+    linkedinLink:
+      "https://www.linkedin.com/in/b%C3%A9n%C3%A9dicte-tuteka-mukuta-5184802b2/",
     twitterLink: "https://x.com/Blessingtutka",
-    imageSrc: "/blessing-tutka.png",
+    imageSrc: "/blessing-tutka.jpg",
   },
   {
     name: "Landry Bitege",

@@ -16,7 +16,7 @@ export const teamMembersData: ITeam[] = [
     imageSrc: "https://avatars.githubusercontent.com/u/142086785?v=4",
   },
   {
-    name: "Benedicte Tutka",
+    name: "Benedicte Tuteka",
     job: "Software Engineer",
     githubLink: "https://github.com/blessingtutka",
     linkedinLink:
